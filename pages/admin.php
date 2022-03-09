@@ -5,7 +5,7 @@ if (empty($_SESSION['user'])) {
     header('location: ./connexion.php');
 }
 
-if ($_SESSION['user']['roles'] != 'admin') {
+if ($_SESSION['user']['roles'] != 'admin' OR $_SESSION['user']['roles'] != 'boutiquier') {
     header('location: ./profile.php');
 }
 $title = "Liste des produits";
@@ -19,6 +19,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/rapports.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'setting') {
     require('./inc/settings.php');
+} elseif (isset($_GET['url']) and $_GET['url'] === 'users') {
+    require('./inc/users.php');
 } else {
     require('./inc/dashboard.php');
 }
