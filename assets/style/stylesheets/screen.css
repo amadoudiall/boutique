@@ -1,0 +1,237 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+/* line 1, ../sass/_header.scss */
+header {
+  margin: 0;
+  padding: 0;
+}
+/* line 5, ../sass/_header.scss */
+header nav {
+  height: 60px;
+  line-height: 58px;
+  background: #006d77;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+/* line 16, ../sass/_header.scss */
+header nav .logo {
+  flex-grow: 2;
+  height: 58px;
+  line-height: 56px;
+}
+/* line 21, ../sass/_header.scss */
+header nav .logo img {
+  width: 170px;
+}
+/* line 26, ../sass/_header.scss */
+header nav #search {
+  flex-grow: 4;
+  margin-top: 3px;
+}
+/* line 30, ../sass/_header.scss */
+header nav #search input {
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: black;
+}
+/* line 37, ../sass/_header.scss */
+header nav ul {
+  flex-grow: 4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+/* line 44, ../sass/_header.scss */
+header nav ul li {
+  flex-direction: end;
+  list-style-type: none;
+  margin-left: 20px;
+  font-size: 1.2em;
+}
+/* line 51, ../sass/_header.scss */
+header nav ul li a {
+  position: relative;
+  padding: 5px;
+  border-radius: 4px;
+}
+/* line 56, ../sass/_header.scss */
+header nav ul li a:after {
+  content: "";
+  position: absolute;
+  bottom: -.1em;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: center;
+  background: #fff;
+  transform: scaleX(0);
+  transition: 300ms ease;
+}
+/* line 70, ../sass/_header.scss */
+header nav ul li a:hover:after {
+  transform: scaleX(1);
+}
+/* line 81, ../sass/_header.scss */
+header nav ul .dropdown_parent a:after {
+  width: 110%;
+}
+/* line 86, ../sass/_header.scss */
+header nav ul .dropdown_parent .dropdown_enfant {
+  display: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  background: #014e55;
+}
+/* line 93, ../sass/_header.scss */
+header nav ul .dropdown_parent .dropdown_enfant li {
+  font-size: .9em;
+  display: block;
+  flex-direction: start;
+  padding: 3px;
+  margin: 0;
+}
+/* line 101, ../sass/_header.scss */
+header nav ul .dropdown_parent .dropdown_enfant li a:after {
+  left: 0;
+}
+/* line 111, ../sass/_header.scss */
+header nav ul .dropdown_parent:hover .dropdown_enfant {
+  display: block;
+  z-index: 5;
+}
+/* line 117, ../sass/_header.scss */
+header nav ul .dropdown_parent:after {
+  content: "▼";
+  font-size: .7em;
+}
+/* line 123, ../sass/_header.scss */
+header nav ul .panier {
+  font-size: 1.6em;
+  margin-left: 0;
+}
+/* line 128, ../sass/_header.scss */
+header nav ul .panier a:hover {
+  background: #014e55;
+}
+/* line 131, ../sass/_header.scss */
+header nav ul .panier a:hover:after {
+  transform: scaleX(0);
+}
+/* line 138, ../sass/_header.scss */
+header nav ul .dropdown_parent {
+  display: block;
+}
+
+/* line 148, ../sass/_header.scss */
+.btn-ev {
+  background: #e29578;
+  border: 1px solid #e29578;
+}
+
+/* line 153, ../sass/_header.scss */
+.btn {
+  background: #006d77;
+  color: #fff;
+  font-size: 1.2em;
+  border-radius: 4px;
+  padding: 6px;
+  text-align: center;
+}
+
+/* line 1, ../sass/_section_primaire.scss */
+.section-primaire {
+  background: #fff;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+}
+
+/* line 1, ../sass/_product_card.scss */
+.products {
+  width: 100%;
+  display: flex;
+}
+/* line 5, ../sass/_product_card.scss */
+.products .product {
+  position: relative;
+  border-radius: 10px;
+  width: 16.666%;
+  margin: 5px;
+}
+/* line 11, ../sass/_product_card.scss */
+.products .product .promo,
+.products .product .like {
+  position: absolute;
+  top: 10px;
+}
+/* line 17, ../sass/_product_card.scss */
+.products .product .promo {
+  left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background: #e29578;
+  color: #fff;
+}
+/* line 25, ../sass/_product_card.scss */
+.products .product .like {
+  right: 10px;
+  background: #ffddd2;
+  padding: 5px;
+  border-radius: 50%;
+}
+/* line 32, ../sass/_product_card.scss */
+.products .product img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+/* line 38, ../sass/_product_card.scss */
+.products .product .detaille {
+  width: 100%;
+}
+/* line 41, ../sass/_product_card.scss */
+.products .product .detaille .title-price {
+  display: flex;
+  padding: 5px;
+}
+/* line 45, ../sass/_product_card.scss */
+.products .product .detaille .title-price h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1em;
+  flex-grow: 8;
+  word-wrap: break-word;
+  font-weight: 500;
+}
+/* line 54, ../sass/_product_card.scss */
+.products .product .detaille .title-price span {
+  font-size: 1.2em;
+  flex-grow: 2;
+}
+/* line 60, ../sass/_product_card.scss */
+.products .product .detaille .review-buy {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+/* line 67, ../sass/_product_card.scss */
+.products .product:hover {
+  width: 17%;
+  margin: 2.5px;
+}
+
+/* line 11, ../sass/screen.scss */
+body {
+  background: #edf6f9;
+}
