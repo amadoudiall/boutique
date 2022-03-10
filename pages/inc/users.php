@@ -13,8 +13,8 @@ Autoloader::register();
 ?>
 
 <div class="product_list">
-    <div class="table">
-        <table>
+    <div class="table-responsive">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Prénom</th>
@@ -41,8 +41,11 @@ Autoloader::register();
                         <td><?= $user['email'] ?></td>
                         <td><?= $user['roles'] ?></td>
                         <td><?= $user['created_at'] ?></td>
-                        <td><a href="../pages/admin.php?url=edit_user" class="btn rounded-1 green text-green light-4"><i class="bi bi-pencil"></i></a></td>
-                        <td><a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4"><i class="bi bi-trash"></i></a></td>
+                        <td>
+                            <a href="../pages/admin.php?url=edit_user" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
+                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
+                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

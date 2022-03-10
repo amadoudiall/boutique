@@ -5,7 +5,7 @@ if (empty($_SESSION['user'])) {
     header('location: ./connexion.php');
 }
 
-if ($_SESSION['user']['roles'] != 'admin' OR $_SESSION['user']['roles'] != 'boutiquier') {
+if ($_SESSION['user']['roles'] != 'admin') {
     header('location: ./profile.php');
 }
 $title = "Liste des produits";

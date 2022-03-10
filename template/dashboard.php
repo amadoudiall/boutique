@@ -73,8 +73,8 @@
         <div class="sidenav-header">
             <img class="sidenav-logo dropshadow-1" src="../assets/images/logo/logo2.png" alt="Logo" />
         </div>
-        <a href="../pages/admin.php" class="sidenav-link <?php if (empty($_GET['url'])) {echo 'active';} ?>"><i class="bi bi-house"></i> Tableau de bord</a>
-        <a href="../pages/admin.php?url=users" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'users') {echo 'active';} ?>"><i class="bi bi-file-earmark"></i> Commandes</a>
+        <a href="../pages/admin.php" class="sidenav-link <?php if (empty($_GET['url'])) {echo 'active'; } ?>"><i class="bi bi-house"></i> Tableau de bord</a>
+        <a href="../pages/admin.php?url=users" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'users') { echo 'active'; } ?>"><i class="bi bi-people-fill"></i> Utilisateurs</a>
         <a href="../pages/admin.php?url=commande" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'commande') {echo 'active';} ?>"><i class="bi bi-file-earmark"></i> Commandes</a>
         <a href="../pages/admin.php?url=product" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'product') {echo 'active';} ?>"><i class="bi bi-cart"></i> Produits</a>
         <a href="../pages/admin.php?url=rapport" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'rapport') {echo 'active';} ?>"><i class="bi bi-graph-up"></i> Rapport</a>

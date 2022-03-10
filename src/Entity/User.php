@@ -205,10 +205,8 @@ class User
 
     public function getUser()
     {
-        $bddcontent = 'SELECT * FROM "User"';
-        $bddstatement = $this->getDb()->prepare($bddcontent);
-        $bddstatement->execute();
-        return $bddstatement->fetchAll();
+        $users = $this->getDb()->query('SELECT * FROM User');
+        return $users->fetchAll();
     }
 
     public function flushUser()
