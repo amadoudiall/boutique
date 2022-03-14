@@ -10,15 +10,18 @@ class User
     public string $prenom;
     public string $age;
     public string $adresse;
-    public string $telephone;
-    public string $role;
+    public string $tel;
+    public string $roles;
     public string $email;
     public string $password;
-    public \DateTime $created_at;
+    public string $created_at;
+    public string $is_active;
+
+    
 
     /**
      * Get the value of nom
-     */
+     */ 
     public function getNom()
     {
         return $this->nom;
@@ -28,7 +31,7 @@ class User
      * Set the value of nom
      *
      * @return  self
-     */
+     */ 
     public function setNom($nom)
     {
         $this->nom = $nom;
@@ -38,7 +41,7 @@ class User
 
     /**
      * Get the value of prenom
-     */
+     */ 
     public function getPrenom()
     {
         return $this->prenom;
@@ -48,7 +51,7 @@ class User
      * Set the value of prenom
      *
      * @return  self
-     */
+     */ 
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
@@ -58,7 +61,7 @@ class User
 
     /**
      * Get the value of age
-     */
+     */ 
     public function getAge()
     {
         return $this->age;
@@ -68,7 +71,7 @@ class User
      * Set the value of age
      *
      * @return  self
-     */
+     */ 
     public function setAge($age)
     {
         $this->age = $age;
@@ -78,7 +81,7 @@ class User
 
     /**
      * Get the value of adresse
-     */
+     */ 
     public function getAdresse()
     {
         return $this->adresse;
@@ -88,7 +91,7 @@ class User
      * Set the value of adresse
      *
      * @return  self
-     */
+     */ 
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
@@ -97,48 +100,48 @@ class User
     }
 
     /**
-     * Get the value of telephone
-     */
-    public function getTelephone()
+     * Get the value of tel
+     */ 
+    public function getTel()
     {
-        return $this->telephone;
+        return $this->tel;
     }
 
     /**
-     * Set the value of telephone
+     * Set the value of tel
      *
      * @return  self
-     */
-    public function setTelephone($telephone)
+     */ 
+    public function setTel($tel)
     {
-        $this->telephone = $telephone;
+        $this->tel = $tel;
 
         return $this;
     }
 
     /**
-     * Get the value of role
-     */
-    public function getRole()
+     * Get the value of roles
+     */ 
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
     /**
-     * Set the value of role
+     * Set the value of roles
      *
      * @return  self
-     */
-    public function setRole($role)
+     */ 
+    public function setRoles($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
      * Get the value of email
-     */
+     */ 
     public function getEmail()
     {
         return $this->email;
@@ -148,7 +151,7 @@ class User
      * Set the value of email
      *
      * @return  self
-     */
+     */ 
     public function setEmail($email)
     {
         $this->email = $email;
@@ -158,7 +161,7 @@ class User
 
     /**
      * Get the value of password
-     */
+     */ 
     public function getPassword()
     {
         return $this->password;
@@ -168,7 +171,7 @@ class User
      * Set the value of password
      *
      * @return  self
-     */
+     */ 
     public function setPassword($password)
     {
         $this->password = $password;
@@ -177,22 +180,41 @@ class User
     }
 
     /**
-     * Get the value of createdAt
-     */
-    public function getCreatedAt()
+     * Get the value of created_at
+     */ 
+    public function getCreated_at()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * Set the value of createdAt
+     * Set the value of created_at
      *
      * @return  self
-     */
-    public function setCreatedAt($createdAt)
+     */ 
+    public function setCreated_at($created_at)
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of is_active
+     */ 
+    public function getIs_active()
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * Set the value of is_active
+     *
+     * @return  self
+     */ 
+    public function setIs_active($is_active)
+    {
+        $this->is_active = $is_active;
         return $this;
     }
 
@@ -203,7 +225,7 @@ class User
         return $this->database;
     }
 
-    public function getUser()
+    public function getUsers()
     {
         $users = $this->getDb()->query('SELECT * FROM User');
         return $users->fetchAll();
@@ -211,23 +233,31 @@ class User
 
     public function flushUser()
     {
-        $addUser = $this->getDb()->prepare('INSERT INTO user(nom, prenom, age, adresse, tel, roles, email, pwd, created_at) VALUES(:nom, :prenom, :age, :adresse, :tel, :roles, :email, :pwd, :created_at)');
+        $addUser = $this->getDb()->prepare('INSERT INTO User(nom, prenom, age, adresse, tel, roles, email, pwd, created_at, is_active) VALUES(:nom, :prenom, :age, :adresse, :tel, :roles, :email, :pwd, :created_at, :is_active)');
         $addUser->execute([
             'nom' => $this->nom,
             'prenom' => $this->prenom,
             'age' => $this->age,
             'adresse' => $this->adresse,
-            'tel' => $this->telephone,
-            'roles' => $this->role,
+            'tel' => $this->tel,
+            'roles' => $this->roles,
             'email' => $this->email,
             'pwd' => $this->password,
-            'created_at' => $this->createdAt
+            'created_at' => $this->created_at,
+            'is_active' => $this->is_active
         ]);
     }
 
-    public function getUserByLogin($username, $password)
+    public function getUserByUnique($email, $tel)
     {
-        $statement = $this->getDb()->prepare('SELECT * FROM user WHERE email = ? OR tel = ?');
+        $statement = $this->getDb()->prepare('SELECT * FROM User WHERE email = ? OR tel = ?');
+        $statement->execute(array($email, $tel));
+        return $statement->fetch();
+    }
+
+    public function getUserByLogin($username)
+    {
+        $statement = $this->getDb()->prepare('SELECT * FROM User WHERE email = ? OR tel = ?');
         $statement->execute(array($username, $username));
         return $statement->fetch();
     }

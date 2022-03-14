@@ -39,5 +39,6 @@ Autoloader::register();
                 <?php endforeach ?>
             </tbody>
         </table>
+        <a href="../pages/admin.php?url=addProduct" class="btn primary">Ajouter un produit</a>
     </div>
 </div>

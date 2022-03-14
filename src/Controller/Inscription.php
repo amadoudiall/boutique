@@ -10,47 +10,67 @@ class Inscription
     protected $erreur;
     protected $success;
 
-    public function Subscrib()
-    {
-        if (
-            isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['age'])
-            and isset($_POST['adresse']) and isset($_POST['tel']) and isset($_POST['pwd']) 
-            and isset($_POST['pwdc']) and !empty($_POST['nom']) and !empty($_POST['prenom'])
-            and !empty($_POST['age']) and !empty($_POST['adresse']) and !empty($_POST['tel'])
-            and !empty($_POST['pwd']) and !empty($_POST['pwdc'])
-        ) {
+    public function Subscrib(){
+        // Verifier si la formulaire a été remplis
+        if(isset($_POST['nom']) AND !empty($_POST['nom']) 
+        AND isset($_POST['prenom']) AND !empty($_POST['prenom'])
+        AND isset($_POST['age']) AND !empty($_POST['age'])
+        AND isset($_POST['adresse']) AND !empty($_POST['adresse'])
+        AND isset($_POST['tel']) AND !empty($_POST['tel'])
+        AND isset($_POST['email']) AND !empty($_POST['email'])
+        AND isset($_POST['pwd']) AND !empty($_POST['pwd'])
+        AND isset($_POST['pwdc']) AND !empty($_POST['pwdc'])
+        ){
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $age = htmlspecialchars($_POST['age']);
             $adresse = htmlspecialchars($_POST['adresse']);
             $tel = htmlspecialchars($_POST['tel']);
             $email = htmlspecialchars($_POST['email']);
-            $pwd = $_POST['pwd'];
+            $pwd = htmlspecialchars($_POST['pwd']);
+            $pwdc = htmlspecialchars($_POST['pwdc']);
 
-            if ($pwd == $_POST['pwdc']) {
-                $user = new User();
-                $hashedpwd = sha1($pwd);
-                $date = new \DateTime();
-                $role = "client";
-                $created_at = $date->format('Y-m-d H:i:s');
-                $user->setNom($nom)
-                    ->setPrenom($prenom)
-                    ->setAge($age)
-                    ->setAdresse($adresse)
-                    ->setTelephone($tel)
-                    ->setRole($role)
-                    ->setEmail($email)
-                    ->setPassword($hashedpwd)
-                    ->setCreatedAt($created_at);
-                $user->flushUser();
+            if($pwd === $pwdc){
 
-                $success = "Inscription Réussit !";
-                header('location: ../index.php?seccess=' . $success);
-            } else {
-                $this->setErreur('Le mot de passe ne correspond pas !');
+                $users = new User();
+                $result = $users->getUserByUnique($email, $tel);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                if($result == null){
+                    $hashedPassword = sha1($pwd);
+                    $date = new \Datetime;
+                    $created_at = $date->format('Y-m-d H:i:s');
+                    $users->setNom($nom)
+                            ->setPrenom($prenom)
+                            ->setAge($age)
+                            ->setAdresse($adresse)
+                            ->setTel($tel)
+                            ->setRoles('client')
+                            ->setEmail($email)
+                            ->setPassword($hashedPassword)
+                            ->setCreated_at($created_at)
+                            ->setIs_active(2);
+                        $users->flushUser();
+
+                        $_SESSION['user'] = $result;
+                        //header('location: /');
+                }else{
+                    
+                    $this->setErreur(' ayez déja un compte !');
+
+                    if($result['email'] === $email){
+                        $this->setErreur('Il semble que vous vous êtes déja inscrit. votre adresse mail est associé a un compte !');
+                    }
+
+                    if($result['tel'] === $tel){
+                        $this->setErreur('Il semble que vous vous êtes déja inscrit. votre numéro de téléphone est associé a un compte !');
+                    }
+                }
+            }else{
+                $this->setErreur('Les mots de passe saisit ne correspondent pas !');
             }
-        } else {
-            $this->setErreur('Veuillez remplire tout les champs !');
+
+
+        }else{
+            $this->setErreur('Tout les champs sont obligatoire !');
         }
     }
 

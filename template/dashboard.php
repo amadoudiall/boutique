@@ -53,7 +53,7 @@
                             <a href="#">S'identifier</a>
                             <ul class="dropdown_enfant">
                                 <li>
-                                    <a href="../pages/inscription.php">S'inscrire</a>
+                                    <a href="../pages/Inscription.php">S'inscrire</a>
                                 </li>
                                 <li>
                                     <a href="../pages/connexion.php">Se connecter</a>
