@@ -80,7 +80,7 @@
         <a href="../pages/admin.php?url=rapport" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'rapport') {echo 'active';} ?>"><i class="bi bi-graph-up"></i> Rapport</a>
         <a href="../pages/admin.php?url=setting" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'setting') {echo 'active';} ?>"><i class="bi bi-gear"></i> Général</a>
     </div>
-    <main>
+    <main class="container">
         <?= $content ?>
     </main>
 

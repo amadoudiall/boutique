@@ -41,4 +41,10 @@ class Form
     {
         echo '<button class="btn btn-primary" type="submit" name="' . $name . '">' . $value . '</button>';
     }
+
+    public function textarea($name, $placehold){
+        return $this->surround(
+            '<textarea class="form-control" name="'. $name .'" id="" cols="15" rows="5" placeholder="'. $placehold .'" value="' . $this->getValue($name) .'"></textarea>'
+        );
+    }
 }

@@ -1,13 +1,6 @@
 <?php
-use \App\Bdd\Bdd;
 use \App\Entity\Product;
-use \App\Autoloader;
-
-
-require('../src/Autoload/Autoloader.php');
-Autoloader::register();
 ?>
-
 <div class="product_list">
     <div class="table">
         <table>
@@ -21,6 +14,7 @@ Autoloader::register();
                     <th>Date d'expiration</th>
                     <th>Numéro de lot</th>
                     <th>Code d'article</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +29,11 @@ Autoloader::register();
                         <td><?= $product['date_expiration'] ?></td>
                         <td><?= Product::SUFFIX_LOT, $product['lot_numero'] ?></td>
                         <td><?= Product::SUFFIX_CODE, $product['code'] ?></td>
+                        <td>
+                            <a href="../pages/admin.php?url=edit_user" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
+                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
+                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

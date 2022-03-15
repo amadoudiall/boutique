@@ -10,7 +10,6 @@ if ($_SESSION['user']['roles'] != 'admin') {
 }
 
 use \App\Bdd\Bdd;
-use \App\Entity\User;
 use \App\Entity\Product;
 use \App\Controller\Inscription;
 use \App\HTML\bootstrapForm;
@@ -19,7 +18,6 @@ use \App\Autoloader;
 require('../src/Autoload/Autoloader.php');
 Autoloader::register();
 
-$inscription = new addProduct();
 
 $title = "Liste des produits";
 ob_start();

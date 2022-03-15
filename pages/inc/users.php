@@ -2,14 +2,8 @@
 if ($_SESSION['user']['roles'] != 'admin') {
     header('location: ./profile.php');
 }
-
-use \App\Bdd\Bdd;
 use \App\Entity\User;
-use \App\Autoloader;
 
-
-require('../src/Autoload/Autoloader.php');
-Autoloader::register();
 ?>
 
 <div class="product_list">
@@ -30,7 +24,7 @@ Autoloader::register();
             </thead>
             <tbody>
                 <?php $getUser = new User();
-                $users = $getUser->getUser();
+                $users = $getUser->getUsers();
                 foreach ($users as $key => $user) : ?>
                     <tr>
                         <td><?= $user['prenom'] ?></td>
