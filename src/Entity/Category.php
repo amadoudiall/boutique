@@ -4,16 +4,16 @@ use App\Bdd\Bdd;
 class Category
 {
     //Nom de la categorie
-    public string $nom;
+    public string $category;
     //Description de la categorie
     public string $description;
 
     /**
      * Get the value of nom
      */ 
-    public function getNom()
+    public function getCategory()
     {
-        return $this->nom;
+        return $this->category;
     }
 
     /**
@@ -21,9 +21,9 @@ class Category
      *
      * @return  self
      */ 
-    public function setNom($nom)
+    public function setCategory($category)
     {
-        $this->nom = $nom;
+        $this->category = $category;
 
         return $this;
     }
@@ -59,5 +59,14 @@ class Category
     {
         $users = $this->getDb()->query('SELECT * FROM Category');
         return $users->fetchAll();
+    }
+
+    public function flushCategory()
+    {
+        $addUser = $this->getDb()->prepare('INSERT INTO Category(category, descriptions) VALUES(:category, :descriptions)');
+        $addUser->execute([
+            'category' => $this->category,
+            'descriptions' => $this->description
+        ]);
     }
 }

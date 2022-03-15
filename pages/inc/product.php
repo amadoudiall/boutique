@@ -2,6 +2,8 @@
 use \App\Entity\Product;
 ?>
 <div class="product_list">
+        <a href="../pages/admin.php?url=addCategory" class="btn primary">Gèrer les catégories</a>
+        <a href="../pages/admin.php?url=addProduct" class="btn primary">Ajouter un produit</a>
     <div class="table">
         <table>
             <thead>
@@ -38,6 +40,5 @@ use \App\Entity\Product;
                 <?php endforeach ?>
             </tbody>
         </table>
-        <a href="../pages/admin.php?url=addProduct" class="btn primary">Ajouter un produit</a>
     </div>
 </div>

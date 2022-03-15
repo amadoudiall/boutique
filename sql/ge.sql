@@ -22,7 +22,7 @@ CREATE TABLE `User`(
 CREATE TABLE `Category`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `category` VARCHAR(255),
-    `desc` TEXT
+    `descriptions` TEXT
 );
 
 -- Creation de la table product

@@ -34,6 +34,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/users.php');
 }elseif (isset($_GET['url']) and $_GET['url'] === 'addProduct') {
     require('./inc/addProduct.php');
+}elseif (isset($_GET['url']) and $_GET['url'] === 'addCategory') {
+    require('./inc/addCategory.php');
 } else {
     require('./inc/dashboard.php');
 }
