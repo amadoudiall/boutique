@@ -13,7 +13,7 @@ if(isset($_POST['addProduct'])){
 <div class="addProduct maint">
     <div class="form">
 
-        <?php $form = new bootstrapForm($_POST);
+        <?php $form = new bootstrapForm($_POST, $_FILES);
                 $categorys = new Category();
                 $getCategorys = $categorys->getCategorys();
         $erreur = $product->getErreur();
@@ -32,7 +32,7 @@ if(isset($_POST['addProduct'])){
                 }
                 echo '</select>';
                 // Fin du selecte.
-                echo $form->input('file', 'img', 'Iamage');
+                echo $form->inputFile('img', 'Ajouter une image du produit');
                 echo $form->input('number', 'stocka', 'Stock Actuel');
                 echo $form->input('number', 'stockm', 'Stock min');
                 echo $form->textarea('desc', 'Veuillez décrire au maximum votre produit...');

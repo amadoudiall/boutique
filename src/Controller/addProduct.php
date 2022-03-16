@@ -11,7 +11,7 @@ class addProduct{
         $arr = explode('.', $imageName);
         $ext = $arr[count($arr)-1];
 
-        if(move_uploaded_file($imagePath, "../assets/images/".$imageName)){
+        if(move_uploaded_file($imagePath, "../assets/images/Product/".$imageName)){
             return $imageName;
         }
         return "";

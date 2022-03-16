@@ -13,7 +13,7 @@ class bootstrapForm extends Form
     public function input($type, $name, $phld)
     {
         return $this->surround(
-            '<br><input class="form-control" type="' . $type . '" name="' . $name . '" id="' . $name . '" value="' . $this->getValue($name) . '"><label for="' . $name . '" class="mb-2" >' . $phld . '</label>'
+            '<br><input class="form-control" type="' . $type . '" name="' . $name . '" id="' . $name . '" value="' . $this->getDataValue($name) . '"><label for="' . $name . '" class="mb-2" >' . $phld . '</label>'
         );
     }
 
