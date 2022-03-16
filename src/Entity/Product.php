@@ -10,7 +10,7 @@ class Product
 {
     public string $nom;
     public float $price;
-    public Category $category;
+    public string $category;
     public string $img;
     public string $desc;
     public int $stock_actuel;
@@ -20,14 +20,14 @@ class Product
     public int $promo;
     public string $updatedAt;
     public string $createdAt;
-    public User $user;
+    public string $user;
 
     //se suffix permet d'afficher la devise devant le prix a l'affichage
     const SUFFIX_DEVISE = " FCFA";
     const SUFFIX_LOT = "";
     const SUFFIX_CODE = "";
 
-    public static function getProduct()
+    public static function getProducts()
     {
         $connect = new Bdd();
         $bddcontent = 'SELECT * FROM Product LEFT JOIN Category ON Category.id = Product.Category_id';

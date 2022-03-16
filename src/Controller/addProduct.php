@@ -1,18 +1,32 @@
 <?php
 namespace App\Controller;
-
+use App\Entity\Product;
 class addProduct{
     public $erreur;
     public $success;
 
+    function cha($longueur = 10)
+        {
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $longueurMax = strlen($caracteres);
+            $chaineAleatoire = '';
+            for ($i = 0; $i < $longueur; $i++)
+            {
+                $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+            }
+                return $chaineAleatoire;
+        }
+
     public function uploadImage($imageInfos){
         $imageName = $imageInfos['name'];
         $imagePath = $imageInfos['tmp_name'];
-        $arr = explode('.', $imageName);
-        $ext = $arr[count($arr)-1];
 
-        if(move_uploaded_file($imagePath, "../assets/images/Product/".$imageName)){
-            return $imageName;
+        // Un nom unique pour chaque image
+        $imageDefaultName = $this->cha(15);
+        $imageDefaultName .= $imageName;
+
+        if(move_uploaded_file($imagePath, "../assets/images/Product/".$imageDefaultName)){
+            return $imageDefaultName;
         }
         return "";
     }
@@ -28,10 +42,38 @@ class addProduct{
             $price = htmlspecialchars($_POST['price']);
             $category = htmlspecialchars($_POST['category']);
             $image = $_FILES['img'];
+            $desc = htmlspecialchars($_POST['desc']);
             $stocka = htmlspecialchars($_POST['stocka']);
             $stockm = htmlspecialchars($_POST['stockm']);
+            $expiration = '2000-01-01';
 
-            $this->uploadImage($image);
+            if(isset($_POST['expiration']) and !empty($_POST['expiration'])){
+                $expiration = $_POST['expiration'];
+            }
+
+            $imageName = $this->uploadImage($image);
+
+            $product = new Product();
+            $user = $_SESSION['user']['id'];
+
+            $now = new \Datetime;
+            $createdAt = $now->format('Y-m-d H:i:s');
+            $updatedAt = $now->format('Y-m-d H:i:s');
+
+            $product->setNom($nom)
+                    ->setPrice($price)
+                    ->setCategory($category)
+                    ->setImg($imageName)
+                    ->setDesc($desc)
+                    ->setStock_actuel($stocka)
+                    ->setStock_min($stockm)
+                    ->setDate_expiration($expiration)
+                    ->setIs_promo(0)
+                    ->setPromo(0)
+                    ->setUpdatedAt($updatedAt)
+                    ->setCreatedAt($createdAt)
+                    ->setUser($user);
+            $product->flushProduct();
 
             $this->setSuccess('Tout c\'est bien passée !');
         }else{

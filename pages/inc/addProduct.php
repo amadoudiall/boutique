@@ -35,6 +35,7 @@ if(isset($_POST['addProduct'])){
                 echo $form->inputFile('img', 'Ajouter une image du produit');
                 echo $form->input('number', 'stocka', 'Stock Actuel');
                 echo $form->input('number', 'stockm', 'Stock min');
+                echo $form->input('date', 'expiration', 'Date d\'expiration');
                 echo $form->textarea('desc', 'Veuillez décrire au maximum votre produit...');
                 echo $form->submit('addProduct', 'Ajouter');
             ?>
