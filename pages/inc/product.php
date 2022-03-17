@@ -20,7 +20,7 @@ use \App\Entity\Product;
                 </tr>
             </thead>
             <tbody>
-                <?php $products = Product::getProduct();
+                <?php $products = Product::getProducts();
                 foreach ($products as $key => $product) : ?>
                     <tr>
                         <td><img src="<?= $product['img'] ?>" alt=""></td>

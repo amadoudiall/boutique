@@ -74,7 +74,6 @@ class addProduct{
                     ->setCreatedAt($createdAt)
                     ->setUser($user);
             $product->flushProduct();
-
             $this->setSuccess('Tout c\'est bien passée !');
         }else{
             $this->setErreur('Tout les champs sonts obligatoire !');

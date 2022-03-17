@@ -20,7 +20,7 @@ ob_start();
 <section class="section-primaire shadow-1">
 
     <div class="products">
-        <?php $products = Product::getProduct();
+        <?php $products = Product::getProducts();
         foreach ($products as $key => $product) : ?>
             <div class="product shadow-1">
 
