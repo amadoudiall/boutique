@@ -231,7 +231,55 @@ header nav ul .dropdown_parent {
   margin: 2.5px;
 }
 
-/* line 11, ../sass/screen.scss */
+/* line 1, ../sass/_admin.scss */
+.content {
+  margin: 20px;
+}
+
+/* line 7, ../sass/_admin.scss */
+.dashboard .title-marked {
+  margin: 5px;
+}
+/* line 9, ../sass/_admin.scss */
+.dashboard .title-marked span {
+  padding: 3px;
+  font-size: .8em;
+}
+/* line 13, ../sass/_admin.scss */
+.dashboard .title-marked .vente-note {
+  color: #1b6d1b;
+  padding: 2px;
+  font-size: .8em;
+  background: #befabe;
+  border-radius: 3px;
+}
+/* line 22, ../sass/_admin.scss */
+.dashboard .item {
+  margin: 5px;
+  padding: 10px;
+  color: #3f3e3e;
+}
+/* line 27, ../sass/_admin.scss */
+.dashboard .item div, .dashboard .item .nombre {
+  display: block;
+}
+/* line 30, ../sass/_admin.scss */
+.dashboard .item .nombre {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 2em;
+  font-weight: 500;
+  border-radius: 50%;
+  text-align: center;
+  color: #3f3e3e;
+}
+/* line 42, ../sass/_admin.scss */
+.dashboard .table-infos {
+  margin: 5px;
+}
+
+/* line 12, ../sass/screen.scss */
 body {
   background: #edf6f9;
 }

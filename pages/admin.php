@@ -19,7 +19,7 @@ require('../src/Autoload/Autoloader.php');
 Autoloader::register();
 
 
-$title = "Liste des produits";
+$title = "Admin";
 ob_start();
 
 if (isset($_GET['url']) and $_GET['url'] === 'product') {

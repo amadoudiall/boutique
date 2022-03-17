@@ -146,8 +146,9 @@ class Panier{
         
         $addProduct = $this->getDb()->prepare('INSERT INTO Panier_product(Panier_id, Product_id, quantity) VALUES(:Panier_id, :Product_id, :quantity)');
         $addProduct->execute([
-            'Panier_id' => $this->userId,
-            'Product_id' => $this->montant
+            'Panier_id' => $this->panierId,
+            'Product_id' => $this->productId,
+            'quantity' => $this->quantity
         ]);
     }
     

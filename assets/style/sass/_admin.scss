@@ -1,0 +1,45 @@
+.content{
+  margin: 20px;
+}
+
+.dashboard{
+    
+    .title-marked{
+        margin: 5px;
+        span{
+            padding: 3px;
+            font-size: .8em;
+        }
+        .vente-note{
+            color: $green;
+            padding: 2px;
+            font-size: .8em;
+            background: $greenLight;
+            border-radius: 3px;
+        }
+    }
+    
+    .item{
+        margin: 5px;
+        padding: 10px;
+        color: $blackLight;
+        
+        div, .nombre{
+            display: block;
+        }
+        .nombre{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 2em;
+            font-weight: 500;
+            border-radius: 50%;
+            text-align: center;
+            color: $blackLight;
+        }
+    }
+    
+    .table-infos{
+        margin: 5px;
+    }
+}
