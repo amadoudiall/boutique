@@ -278,6 +278,19 @@ header nav ul .dropdown_parent {
 .dashboard .table-infos {
   margin: 5px;
 }
+/* line 46, ../sass/_admin.scss */
+.dashboard .table-infos table tr {
+  height: 20px;
+}
+/* line 48, ../sass/_admin.scss */
+.dashboard .table-infos table tr td {
+  padding-left: 10px;
+  font-size: .9em;
+}
+/* line 51, ../sass/_admin.scss */
+.dashboard .table-infos table tr td img {
+  height: 19px;
+}
 
 /* line 12, ../sass/screen.scss */
 body {

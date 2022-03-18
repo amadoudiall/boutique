@@ -41,5 +41,18 @@
     
     .table-infos{
         margin: 5px;
+        
+        table{
+            tr{
+                height: 20px;
+                td{
+                    padding-left: 10px;
+                    font-size: .9em;
+                    img{
+                        height: 19px;
+                    }
+                }
+            }
+        }
     }
 }
