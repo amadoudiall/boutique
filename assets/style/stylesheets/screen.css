@@ -144,7 +144,6 @@ header nav ul .dropdown_parent {
   color: #fff;
   font-size: 1.2em;
   border-radius: 4px;
-  padding: 6px;
   text-align: center;
 }
 
@@ -290,6 +289,11 @@ header nav ul .dropdown_parent {
 /* line 51, ../sass/_admin.scss */
 .dashboard .table-infos table tr td img {
   height: 19px;
+}
+/* line 58, ../sass/_admin.scss */
+.dashboard .table-infos table tfoot a {
+  font-size: .8em;
+  float: right;
 }
 
 /* line 12, ../sass/screen.scss */
