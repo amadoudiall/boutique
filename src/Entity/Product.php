@@ -27,26 +27,6 @@ class Product
     const SUFFIX_LOT = "";
     const SUFFIX_CODE = "";
 
-    public static function getProducts()
-    {
-        $connect = new Bdd();
-        $bddcontent = 'SELECT * FROM Product LEFT JOIN Category ON Category.id = Product.Category_id';
-        $bddstatement = $connect->connect()->prepare($bddcontent);
-        $bddstatement->execute();
-        $products = $bddstatement->fetchAll();
-        return $products;
-    }
-
-    public static function getProductById($id)
-    {
-        $connect = new Bdd();
-        $bddcontent = 'SELECT * FROM Product LEFT JOIN Category ON Category.id = Product.Category_id';
-        $bddstatement = $connect->connect()->prepare($bddcontent);
-        $bddstatement->execute();
-        $products = $bddstatement->fetchAll();
-        return $products;
-    }
-
     /**
      * Get the value of nom
      */ 
@@ -313,6 +293,26 @@ class Product
         $bdd = new Bdd();
         $this->database = $bdd->connect();
         return $this->database;
+    }
+    
+    public static function getProducts()
+    {
+        $connect = new Bdd();
+        $bddcontent = 'SELECT *, Product.id as idProduct FROM Product LEFT JOIN Category ON Category.id = Product.Category_id';
+        $bddstatement = $connect->connect()->prepare($bddcontent);
+        $bddstatement->execute();
+        $products = $bddstatement->fetchAll();
+        return $products;
+    }
+
+    public static function getProductById($id)
+    {
+        $connect = new Bdd();
+        $bddcontent = 'SELECT *, Product.id as idProduct FROM Product LEFT JOIN Category ON Category.id = Product.Category_id WHERE Product.id = ?';
+        $bddstatement = $connect->connect()->prepare($bddcontent);
+        $bddstatement->execute(array($id));
+        $products = $bddstatement->fetch();
+        return $products;
     }
 
     public function flushProduct()

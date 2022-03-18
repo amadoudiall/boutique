@@ -14,8 +14,6 @@ use \App\Entity\Product;
                     <th>Catégorie</th>
                     <th>Stock Actuel</th>
                     <th>Date d'expiration</th>
-                    <th>Numéro de lot</th>
-                    <th>Code d'article</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -29,10 +27,8 @@ use \App\Entity\Product;
                         <td><?= $product['category'] ?></td>
                         <td><?= $product['stock_actuel'] ?></td>
                         <td><?= $product['date_expiration'] ?></td>
-                        <td><?= Product::SUFFIX_LOT, $product['lot_numero'] ?></td>
-                        <td><?= Product::SUFFIX_CODE, $product['code'] ?></td>
                         <td>
-                            <a href="../pages/admin.php?url=edit_user" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
+                            <a href="../pages/admin.php?url=editProduct&id=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
                             <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
                             <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
                         </td>

@@ -1,22 +1,44 @@
 <?php
+
 $title = "Ajouter un produit";
 use App\HTML\bootstrapForm;
 use App\Entity\Product;
 use App\Controller\addProduct;
 use App\Entity\Category;
 
-$product = new addProduct();
+$categorys = new Category();
+$addProduct = new addProduct();
+
+$getCategorys = $categorys->getCategorys();
+
+
 if(isset($_POST['addProduct'])){
-    $product->add();
+    $addProduct->add();
+}
+
+if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
+    $id = $_GET['id'];
+    $submitValue = "Mettre à jour";
+    $submitName = "editProduct";
+    $getProduct = new Product();
+    $product = $getProduct->getProductById($id);
+    
+    if($_SESSION['user']['id'] != $product['User_id']){
+        header('location: /');
+    }
+    $request = $product;
+    
+}elseif(isset($_GET['url']) and $_GET['url'] === "addProduct"){
+    $request = $_POST;
+    $submitValue = "Ajouter";
+    $submitName = "addProduct";
 }
 ?>
-<div class="addProduct maint">
-    <div class="form">
+<div class="content maint">
+    <div class="addProduct form">
 
-        <?php $form = new bootstrapForm($_POST, $_FILES);
-                $categorys = new Category();
-                $getCategorys = $categorys->getCategorys();
-        $erreur = $product->getErreur();
+        <?php $form = new bootstrapForm($request);
+        $erreur = $addProduct->getErreur();
         if (isset($erreur)) {
             echo $erreur;
         }?>
@@ -28,16 +50,17 @@ if(isset($_POST['addProduct'])){
                 echo '<select name="category" class="form-control rounded-1" id="select">';
                 echo  '<option>Catégorie...</option>';
                 foreach ($getCategorys as $key => $category) {
-                    echo '<option value="'.$category['id'].'">'.$category['category'].'</option>';
+                    if(isset($product['Category_id']) and $category['id'] === $product['Category_id']){$selected = 'selected';}else{$selected = "";}
+                    echo '<option value="'.$category['id'].'"'.$selected.'>'.$category['category'].'</option>';
                 }
                 echo '</select>';
                 // Fin du selecte.
                 echo $form->inputFile('img', 'Ajouter une image du produit');
-                echo $form->input('number', 'stocka', 'Stock Actuel');
-                echo $form->input('number', 'stockm', 'Stock min');
-                echo $form->input('date', 'expiration', 'Date d\'expiration');
-                echo $form->textarea('desc', 'Veuillez décrire au maximum votre produit...');
-                echo $form->submit('addProduct', 'Ajouter');
+                echo $form->input('number', 'stock_actuel', 'Stock Actuel');
+                echo $form->input('number', 'stock_min', 'Stock min');
+                echo $form->input('date', 'date_expiration', 'Date d\'expiration');
+                echo $form->textarea('descr', 'Veuillez décrire au maximum votre produit...');
+                echo $form->submit($submitName, $submitValue);
             ?>
         </form>
     </div>

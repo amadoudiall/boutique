@@ -9,10 +9,9 @@ class Form
     protected $file = array();
     public $surround = 'div';
 
-    public function __construct($data = array(), $file = null)
+    public function __construct($data = array())
     {
         $this->data = $data;
-        $this->file = $file;
     }
 
     protected function surround($html)
@@ -23,11 +22,6 @@ class Form
     protected function getDataValue($index)
     {
         return isset($this->data[$index]) ? $this->data[$index] : null;
-    }
-
-    protected function getFileValue($index)
-    {
-        return isset($this->file[$index]['name']) ? $this->file[$index] : null;
     }
 
     public function input($type, $name, $phld)
@@ -56,7 +50,7 @@ class Form
 
     public function textarea($name, $placehold){
         return $this->surround(
-            '<textarea class="form-control" name="'. $name .'" id="" cols="15" rows="5" placeholder="'. $placehold .'" value="' . $this->getDataValue($name) .'"></textarea>'
+            '<textarea class="form-control" name="'. $name .'" id="" cols="15" rows="5" placeholder="'. $placehold .'">' . $this->getDataValue($name) .'</textarea>'
         );
     }
 }

@@ -42,13 +42,13 @@ class addProduct{
             $price = htmlspecialchars($_POST['price']);
             $category = htmlspecialchars($_POST['category']);
             $image = $_FILES['img'];
-            $desc = htmlspecialchars($_POST['desc']);
-            $stocka = htmlspecialchars($_POST['stocka']);
-            $stockm = htmlspecialchars($_POST['stockm']);
+            $desc = htmlspecialchars($_POST['descr']);
+            $stocka = htmlspecialchars($_POST['stock_actuel']);
+            $stockm = htmlspecialchars($_POST['stock_min']);
             $expiration = '2000-01-01';
 
-            if(isset($_POST['expiration']) and !empty($_POST['expiration'])){
-                $expiration = $_POST['expiration'];
+            if(isset($_POST['date_expiration']) and !empty($_POST['date_expiration'])){
+                $expiration = $_POST['date_expiration'];
             }
 
             $imageName = $this->uploadImage($image);

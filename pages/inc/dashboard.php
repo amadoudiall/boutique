@@ -78,6 +78,12 @@ $products = $getProducts->getProducts();
                         </tr>
                     <?php endforeach ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><a href="../pages/admin.php?url=product" class="btn btn-primary">Gérer les produits</a></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
         <div class="new-product table-infos white rounded-1 shadow-1">
@@ -101,6 +107,12 @@ $products = $getProducts->getProducts();
                         </tr>
                     <?php endforeach ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><a href="../pages/admin.php?url=users" class="btn btn-primary">Gérer les utilisateurs</a></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

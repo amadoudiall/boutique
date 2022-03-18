@@ -34,7 +34,7 @@ ob_start();
                     </div>
                     <div class="review-buy">
                         <span><i class="bi bi-star-half"></i>3.8</span>
-                        <a href="#" class="btn btn-primary">Acheter</a>
+                        <a href="./pages/product.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
                     </div>
                 </div>
 
