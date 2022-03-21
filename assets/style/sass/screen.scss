@@ -2,12 +2,16 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
- @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+*{
+    box-sizing: border-box;
+}
 @import "variables";
 @import "header";
 @import "section_primaire";
 @import "product_card";
 @import "admin";
+@import "profile";
 
 body{
     background: $gray;

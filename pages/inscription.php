@@ -39,10 +39,8 @@ ob_start();
             <?php
             echo $form->input('text', 'nom', 'Nom');
             echo $form->input('text', 'prenom', 'Prénom');
-            echo $form->input('number', 'age', 'Âge');
             echo $form->input('text', 'adresse', 'Adresse');
             echo $form->input('tel', 'tel', 'Téléphone');
-            echo $form->input('email', 'email', 'E-mail');
             echo $form->inputPassword('pwd', 'Nouveau mot de passe');
             echo $form->inputPassword('pwdc', 'Confirmer le mot de passe');
             echo $form->submit('inscription', 'S\'inscrire');

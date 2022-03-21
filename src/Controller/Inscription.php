@@ -14,37 +14,31 @@ class Inscription
         // Verifier si la formulaire a été remplis
         if(isset($_POST['nom']) AND !empty($_POST['nom']) 
         AND isset($_POST['prenom']) AND !empty($_POST['prenom'])
-        AND isset($_POST['age']) AND !empty($_POST['age'])
         AND isset($_POST['adresse']) AND !empty($_POST['adresse'])
         AND isset($_POST['tel']) AND !empty($_POST['tel'])
-        AND isset($_POST['email']) AND !empty($_POST['email'])
         AND isset($_POST['pwd']) AND !empty($_POST['pwd'])
         AND isset($_POST['pwdc']) AND !empty($_POST['pwdc'])
         ){
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
-            $age = htmlspecialchars($_POST['age']);
             $adresse = htmlspecialchars($_POST['adresse']);
             $tel = htmlspecialchars($_POST['tel']);
-            $email = htmlspecialchars($_POST['email']);
             $pwd = htmlspecialchars($_POST['pwd']);
             $pwdc = htmlspecialchars($_POST['pwdc']);
 
             if($pwd === $pwdc){
 
                 $users = new User();
-                $result = $users->getUserByUnique($email, $tel);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                $result = $users->getUserByUnique($tel);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                 if($result == null){
                     $hashedPassword = sha1($pwd);
                     $date = new \Datetime;
                     $created_at = $date->format('Y-m-d H:i:s');
                     $users->setNom($nom)
                             ->setPrenom($prenom)
-                            ->setAge($age)
                             ->setAdresse($adresse)
                             ->setTel($tel)
                             ->setRoles('client')
-                            ->setEmail($email)
                             ->setPassword($hashedPassword)
                             ->setCreated_at($created_at)
                             ->setIs_active(2);

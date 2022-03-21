@@ -4,6 +4,11 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+/* line 6, ../sass/screen.scss */
+* {
+  box-sizing: border-box;
+}
+
 /* line 1, ../sass/_header.scss */
 header {
   margin: 0;
@@ -296,7 +301,86 @@ header nav ul .dropdown_parent {
   float: right;
 }
 
-/* line 12, ../sass/screen.scss */
+/* line 2, ../sass/_profile.scss */
+.profile .grille {
+  padding: 10px;
+}
+/* line 5, ../sass/_profile.scss */
+.profile .grille .personal-infos {
+  border: 1px solid #edf6f9;
+  padding: 5px;
+  text-align: center;
+}
+/* line 10, ../sass/_profile.scss */
+.profile .grille .personal-infos img {
+  width: 80%;
+  border-radius: 50%;
+}
+/* line 15, ../sass/_profile.scss */
+.profile .grille .personal-infos h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 5px;
+}
+/* line 20, ../sass/_profile.scss */
+.profile .grille .personal-infos h3 {
+  margin: 2px;
+  font-size: .9em;
+  font-weight: 300;
+  color: #3f3e3e;
+}
+/* line 27, ../sass/_profile.scss */
+.profile .grille .personal-infos .infos-complement {
+  text-align: left;
+  font-size: .9em;
+}
+/* line 31, ../sass/_profile.scss */
+.profile .grille .personal-infos .infos-complement em {
+  color: #3f3e3e;
+}
+/* line 38, ../sass/_profile.scss */
+.profile .grille .profile-infos ul {
+  width: 98%;
+  margin: auto;
+  border-bottom: 1px solid #edf6f9;
+}
+/* line 43, ../sass/_profile.scss */
+.profile .grille .profile-infos ul li {
+  display: inline-block;
+  padding: 5px;
+  list-style-type: none;
+  border: 2px solid #fff;
+}
+/* line 49, ../sass/_profile.scss */
+.profile .grille .profile-infos ul li a {
+  color: #3f3e3e;
+}
+/* line 53, ../sass/_profile.scss */
+.profile .grille .profile-infos ul li:hover {
+  border-bottom: 2px solid #3f3e3e;
+}
+/* line 59, ../sass/_profile.scss */
+.profile .grille .profile-infos .profile-detaille {
+  padding: 10px;
+}
+/* line 61, ../sass/_profile.scss */
+.profile .grille .profile-infos .profile-detaille h2 {
+  margin: 5px;
+  font-size: 1em;
+  font-weight: 400;
+}
+/* line 67, ../sass/_profile.scss */
+.profile .grille .profile-infos .profile-detaille p {
+  font-size: .9em;
+  color: #3f3e3e;
+}
+/* line 72, ../sass/_profile.scss */
+.profile .grille .profile-infos .profile-detaille form {
+  width: 50%;
+  margin: auto;
+}
+
+/* line 16, ../sass/screen.scss */
 body {
   background: #edf6f9;
 }

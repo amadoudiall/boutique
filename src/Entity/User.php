@@ -237,21 +237,21 @@ class User
         $addUser->execute([
             'nom' => $this->nom,
             'prenom' => $this->prenom,
-            'age' => $this->age,
+            'age' => null,
             'adresse' => $this->adresse,
             'tel' => $this->tel,
             'roles' => $this->roles,
-            'email' => $this->email,
+            'email' => null,
             'pwd' => $this->password,
             'created_at' => $this->created_at,
             'is_active' => $this->is_active
         ]);
     }
 
-    public function getUserByUnique($email, $tel)
+    public function getUserByUnique($tel)
     {
-        $statement = $this->getDb()->prepare('SELECT * FROM User WHERE email = ? OR tel = ?');
-        $statement->execute(array($email, $tel));
+        $statement = $this->getDb()->prepare('SELECT * FROM User WHERE tel = ?');
+        $statement->execute(array($tel));
         return $statement->fetch();
     }
 
