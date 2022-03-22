@@ -69,7 +69,7 @@
     <main class="container mt-3">
         <div class="profile">
             <div class="grix xs4 grille white rounded-1">
-                <div class="personal-infos white rounded-1"> 
+                <div class="personal-infos white"> 
                        <img src="https://i.pravatar.cc/150?u=<?= $_SESSION['user']['id'] ?>" alt="avatar">
                         <h2><?= $_SESSION['user']['prenom'], ' ', $_SESSION['user']['nom'] ?></h2>
                         <h3><?= $_SESSION['user']['tel'] ?></h3>
@@ -83,6 +83,9 @@
                 
                 <div class="col-xs4 col-md3 profile-infos white rounded-1">
                     <ul>
+                        <li>
+                            <a href="../pages/profile.php"><i class="bi bi-speedometer2"></i> Aperçue</a>
+                        </li>
                         <li>
                             <a href="../pages/profile.php?url=myCommande"><i class="bi bi-bag"></i> Mes commandes</a>
                         </li>

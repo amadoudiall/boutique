@@ -45,23 +45,14 @@ CREATE TABLE `Product`(
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
 
--- Panier
+-- Panier product
 CREATE TABLE `Panier`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `User_id` INT,
-    `montant` FLOAT,
-    CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
-);
-
--- Panier product
-CREATE TABLE `Panier_product`(
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `Panier_id` INT,
     `Product_id` INT,
     `quantity` INT,
-    CONSTRAINT FOREIGN KEY (`Product_id`) REFERENCES `Product`(`id`),
-    CONSTRAINT FOREIGN KEY (`Panier_id`) REFERENCES `Panier`(`id`)
-
+    `montant` FLOAT,
+    CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
 
 CREATE TABLE `Commande`(
