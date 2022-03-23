@@ -13,6 +13,15 @@ class Panier{
     public $productId;
     public $quantity;
     
+    public function __construct(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        if(!isset($_SESSION['panier'])){
+            $_SESSION['panier'] = array();
+        }
+    }
+    
     // la bdd
     public function getDb()
     {
@@ -147,9 +156,16 @@ class Panier{
         ]);
     }
     
-    public function addPanier($productId, $userId){
-        $_SESSION['panier'] = array();
-        
+    public function update($quantity, $id){
+        try {
+            $updatePanier = $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$id."'");
+        } catch (\Throwable $th) {
+            echo "La requete ne s'est pas passé comme prévue !". $th;
+        }
+    }
+    
+    public function addPanier($productId, $userId){ 
+          
         $getProduct = new Product();
         $product = $getProduct->getProductById($productId);
         
@@ -157,27 +173,36 @@ class Panier{
         if ($product != null) {
             
             // Si le produit ne se trouve pas déjà dans le panier
-            if(isset($_SESSION['panier']['id']) and $_SESSION['panier']['id'] === $productId ){
+            if(isset($_SESSION['panier'][$productId])){
                 // si oui on incremente la quantity
-                $_SESSION['panier']['quantity'] = $_SESSION['panier']['quantity']+1;
+                $_SESSION['panier'][$productId]++;
+                $quantity = $_SESSION['panier'][$productId];
+                
+                $this->update($quantity, $productId);
                 
             }else{
                 // sinon on l'ajoute.
-                $_SESSION['panier']['id'] = $product['id'];
-                $_SESSION['panier']['prix'] = $product['price'];
-                $_SESSION['panier']['quantity'] = 1;
+                $_SESSION['panier'][$productId] = 1;
                 
                 $this->setUserId($userId)
                     ->setProductId($productId)
                     ->setQuantity(1)
                     ->setMontant($product['price']);
                 $this->flushPanier();
-                
-                var_dump($_SESSION['panier']);
             }
         }else{
             echo "Desolé ce produit n'est plus disponible !";
         }
+    }
+    
+    public function dellete($productId){
+        unset($_SESSION['panier'][$productId]);
+        
+        try {
+            $updatePanier = $this->getDb()->query("DELETE FROM Panier WHERE Product_id = '".$productId."'");
+        } catch (\Throwable $th) {
+            echo "La requete ne s'est pas passé comme prévue !". $th;
+        }        
     }
     
     

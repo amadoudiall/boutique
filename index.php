@@ -5,10 +5,12 @@ use \App\Entity\Product;
 use \App\HTML\bootstrapForm;
 use \App\Autoloader;
 
-session_start();
+if(!isset($_SESSION)){
+    session_start();  
+}
 
 if (empty($_SESSION['user'])) {
-    session_destroy();
+    unset($_SESSION['user']);
 }
 
 require('./src/Autoload/Autoloader.php');
@@ -34,7 +36,7 @@ ob_start();
                     </div>
                     <div class="review-buy">
                         <span><i class="bi bi-star-half"></i>3.8</span>
-                        <a href="./pages/addPanier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
+                        <a href="./pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
                     </div>
                 </div>
 

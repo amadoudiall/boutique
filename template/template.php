@@ -29,7 +29,7 @@
             </form>
             <ul>
                 <li class="panier">
-                    <a href="#"> <i class="bi bi-cart2"></i> </a>
+                    <a href="../pages/panier.php"> <i class="bi bi-cart2"></i> </a>
                 </li>
                 <li class="dropdown_parent">
                     <?php if (isset($_SESSION['user']) and !empty($_SESSION['user'])) : ?>
