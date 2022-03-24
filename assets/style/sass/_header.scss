@@ -123,7 +123,7 @@ header {
             .panier {
                 font-size: 1.6em;
                 margin-left: 0;
-
+                position: relative;
                 a {
                     &:hover {
                         background: $primaryDark;
@@ -133,12 +133,24 @@ header {
                         }
                     }
                 }
+                
+                .badge{
+                    position: absolute;
+                    text-align: center;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 14px;
+                    padding: 0;
+                    top: 10px;
+                    right: -5px;
+                    font-size: .6em;
+                    background: $pinksecond;
+                    border-radius: 50%;
+                }
             }
 
             .dropdown_parent {
                 display: block;
-
-
             }
         }
     }

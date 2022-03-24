@@ -123,6 +123,7 @@ header nav ul .dropdown_parent:after {
 header nav ul .panier {
   font-size: 1.6em;
   margin-left: 0;
+  position: relative;
 }
 /* line 128, ../sass/_header.scss */
 header nav ul .panier a:hover {
@@ -132,18 +133,32 @@ header nav ul .panier a:hover {
 header nav ul .panier a:hover:after {
   transform: scaleX(0);
 }
-/* line 138, ../sass/_header.scss */
+/* line 137, ../sass/_header.scss */
+header nav ul .panier .badge {
+  position: absolute;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  line-height: 14px;
+  padding: 0;
+  top: 10px;
+  right: -5px;
+  font-size: .6em;
+  background: #e29578;
+  border-radius: 50%;
+}
+/* line 152, ../sass/_header.scss */
 header nav ul .dropdown_parent {
   display: block;
 }
 
-/* line 148, ../sass/_header.scss */
+/* line 160, ../sass/_header.scss */
 .btn-ev {
   background: #e29578;
   border: 1px solid #e29578;
 }
 
-/* line 153, ../sass/_header.scss */
+/* line 165, ../sass/_header.scss */
 .btn {
   background: #006d77;
   color: #fff;
