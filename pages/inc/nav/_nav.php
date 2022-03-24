@@ -12,7 +12,12 @@
     </form>
     <ul>
         <li class="panier">
-            <a href="../pages/panier.php"> <i class="bi bi-cart2"></i> </a>
+            <a href="../pages/panier.php">
+                <i class="bi bi-cart2"></i>
+            </a>
+                <?php if(isset($_SESSION['panier'])):?>
+                    <span class="badge"><?= count($_SESSION['panier']); ?></span>
+                <?php endif ?>
         </li>
         <li class="dropdown_parent">
             <?php if (isset($_SESSION['user']) and !empty($_SESSION['user'])) : ?>

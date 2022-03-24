@@ -18,11 +18,11 @@ if(isset($_GET['product']) AND !empty($_GET['product'])){
     if(!isset($_SESSION['user'])){
         $userId = null;
         
-        if(!isset($_SESSION['panier']['id'])){     
-            $_SESSION['panier']['id'] = rand(10000, 99000);
-            $sessionId = $_SESSION['panier']['id'];
+        if(!isset($_SESSION['sessionId'])){     
+            $_SESSION['sessionId'] = rand(10000, 99000);
+            $sessionId = $_SESSION['sessionId'];
         }else{
-            $sessionId = $_SESSION['panier']['id'];
+            $sessionId = $_SESSION['sessionId'];
         }
     }else{
         $userId = $_SESSION['user']['id'];
@@ -38,7 +38,7 @@ if(isset($_GET['del'])){
     
     if(!isset($_SESSION['user'])){
         $userId = null;
-        $sessionId = $_SESSION['panier']['id'];
+        $sessionId = $_SESSION['sessionId'];
 
     }else{
         $userId = $_SESSION['user']['id'];
@@ -53,14 +53,14 @@ if(empty($_SESSION['panier'])){
     $products = array();
 }else{
     // $productPanier = array_keys($_SESSION['panier']);
-    $productPanier = $_SESSION['panier']['id'];
+    $sessionId = $_SESSION['sessionId'];
     
     
     if(isset($_SESSION['user'])){    
         $userId = $_SESSION['user']['id'];
         $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE Panier.User_id IN('.$userId.') ');
     }else{
-        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE session_id IN('.$productPanier.') ');
+        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE session_id IN('.$sessionId.') ');
     }
 }
 $title = "Panier";

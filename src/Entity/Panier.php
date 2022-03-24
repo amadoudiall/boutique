@@ -251,7 +251,7 @@ class Panier{
     }
     
     public function isCnnected($userId, $sessionId){
-        if(isset($_SESSION['panier']['id']) and !empty($_SESSION['panier']['id'])){
+        if(isset($_SESSION['sessionId']) and !empty($_SESSION['sessionId'])){
             if(isset($_SESSION['user']) and !empty($_SESSION['user'])){
                 try {
                     $this->getDb()->query("UPDATE Panier SET user_id = '".$userId."' WHERE session_id = '".$sessionId."'");
