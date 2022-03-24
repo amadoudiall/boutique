@@ -11,6 +11,7 @@ class Panier{
     // Panier_product
     public $panierId;
     public $productId;
+    public $sessionId;
     public $quantity;
     
     public function __construct(){
@@ -111,6 +112,26 @@ class Panier{
 
         return $this;
     }
+    
+    /**
+     * Get the value of sessionId
+     */ 
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
+     * Set the value of sessionId
+     *
+     * @return  self
+     */ 
+    public function setSessionId($sessionId)
+    {
+        $this->sessionId = $sessionId;
+
+        return $this;
+    }
 
     /**
      * Get the value of quantity
@@ -147,24 +168,34 @@ class Panier{
     
     public function flushPanier()
     {
-        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, quantity, montant) VALUES(:User_id, :Product_id, :quantity, :montant)');
+        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, session_id, quantity, montant) VALUES(:User_id, :Product_id, :session_id, :quantity, :montant)');
         $addProduct->execute([
             'User_id' => $this->userId,
             'Product_id' => $this->productId,
+            'session_id' => $this->sessionId,
             'quantity' => $this->quantity,
             'montant' => $this->montant
         ]);
     }
     
-    public function update($quantity, $id){
-        try {
-            $updatePanier = $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$id."'");
-        } catch (\Throwable $th) {
-            echo "La requete ne s'est pas passé comme prévue !". $th;
+    public function update($quantity, $productId, $userId, $sessionId){
+        if($userId != null){
+             try {
+                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$productId."' AND user_id= '".$sessionId."' ");
+            } catch (\Throwable $th) {
+                echo "La requete ne s'est pas passé comme prévue !". $th;
+            }    
+        }elseif($sessionId != null){
+            
+            try {
+                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$productId."' AND session_id= '".$sessionId."' ");
+            } catch (\Throwable $th) {
+                echo "La requete ne s'est pas passé comme prévue sans vous identifier !". $th;
+            }        
         }
     }
     
-    public function addPanier($productId, $userId){ 
+    public function addPanier($productId, $userId, $sessionId){ 
           
         $getProduct = new Product();
         $product = $getProduct->getProductById($productId);
@@ -178,7 +209,9 @@ class Panier{
                 $_SESSION['panier'][$productId]++;
                 $quantity = $_SESSION['panier'][$productId];
                 
-                $this->update($quantity, $productId);
+                $this->update($quantity, $productId, $userId, $sessionId);
+                
+                header('location: HTTP_REFERER');
                 
             }else{
                 // sinon on l'ajoute.
@@ -186,24 +219,47 @@ class Panier{
                 
                 $this->setUserId($userId)
                     ->setProductId($productId)
+                    ->setSessionId($sessionId)
                     ->setQuantity(1)
                     ->setMontant($product['price']);
                 $this->flushPanier();
+                
+                header('location: HTTP_REFERER');
             }
         }else{
             echo "Desolé ce produit n'est plus disponible !";
         }
     }
     
-    public function dellete($productId){
+    public function dellete($productId, $userId, $sessionId){
         unset($_SESSION['panier'][$productId]);
         
-        try {
-            $updatePanier = $this->getDb()->query("DELETE FROM Panier WHERE Product_id = '".$productId."'");
-        } catch (\Throwable $th) {
-            echo "La requete ne s'est pas passé comme prévue !". $th;
-        }        
+        if($userId != null){
+             try {
+                $this->getDb()->query("DELETE FROM Panier WHERE Product_id = '".$productId."' AND user_id='".$userId."' ");
+            } catch (\Throwable $th) {
+                echo "La requete ne s'est pas passé comme prévue !". $th;
+            }    
+        }elseif($sessionId != null){
+            
+            try {
+                $this->getDb()->query("DELETE FROM Panier WHERE Product_id = '".$productId."' AND session_id= '".$sessionId."' ");
+            } catch (\Throwable $th) {
+                echo "La requete ne s'est pas passé comme prévue sans vous identifier !". $th;
+            }        
+        }
     }
     
+    public function isCnnected($userId, $sessionId){
+        if(isset($_SESSION['panier']['id']) and !empty($_SESSION['panier']['id'])){
+            if(isset($_SESSION['user']) and !empty($_SESSION['user'])){
+                try {
+                    $this->getDb()->query("UPDATE Panier SET user_id = '".$userId."' WHERE session_id = '".$sessionId."'");
+                } catch (\Throwable $th) {
+                    echo "La requete ne s'est pas passé comme prévue au moment de la connexion !". $th;
+                }
+            }
+        }
+    }
     
 }

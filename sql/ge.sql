@@ -50,6 +50,7 @@ CREATE TABLE `Panier`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `User_id` INT,
     `Product_id` INT,
+    `session_id` VARCHAR(100),
     `quantity` INT,
     `montant` FLOAT,
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)

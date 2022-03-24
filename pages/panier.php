@@ -14,22 +14,54 @@ $getPanier = new Panier;
 
 if(isset($_GET['product']) AND !empty($_GET['product'])){
     $productId = $_GET['product'];
-    $userId = $_SESSION['user']['id'];
+     
+    if(!isset($_SESSION['user'])){
+        $userId = null;
         
-    $getPanier->addPanier($productId, $userId);
-    header('location: HTTP_REFERER');
+        if(!isset($_SESSION['panier']['id'])){     
+            $_SESSION['panier']['id'] = rand(10000, 99000);
+            $sessionId = $_SESSION['panier']['id'];
+        }else{
+            $sessionId = $_SESSION['panier']['id'];
+        }
+    }else{
+        $userId = $_SESSION['user']['id'];
+        $sessionId = null;
+    }
+        
+    $getPanier->addPanier($productId, $userId, $sessionId);
+    // header('location: HTTP_REFERER');
 }
 
 if(isset($_GET['del'])){
-    $getPanier->dellete($_GET['del']);
+    $productId = $_GET['del'];
+    
+    if(!isset($_SESSION['user'])){
+        $userId = null;
+        $sessionId = $_SESSION['panier']['id'];
+
+    }else{
+        $userId = $_SESSION['user']['id'];
+        $sessionId = null;
+    }
+    
+    $getPanier->dellete($productId, $userId, $sessionId);
 }
 
-if(!isset($_SESSION['panier'])){
+if(empty($_SESSION['panier'])){
     echo "Votre panier est vide !";
     $products = array();
 }else{
-    $productPanier = array_keys($_SESSION['panier']);
-    $products = $Bd->query('SELECT * FROM Product WHERE id IN('.implode(',', $productPanier).')');
+    // $productPanier = array_keys($_SESSION['panier']);
+    $productPanier = $_SESSION['panier']['id'];
+    
+    
+    if(isset($_SESSION['user'])){    
+        $userId = $_SESSION['user']['id'];
+        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE Panier.User_id IN('.$userId.') ');
+    }else{
+        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE session_id IN('.$productPanier.') ');
+    }
 }
 $title = "Panier";
 ob_start();
@@ -46,24 +78,24 @@ ob_start();
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <form action="" method="post">
+            <form action="" method="post">
+                <tbody>
                     <?php foreach ($products as $key => $product) :?>
-                    <tr>
-                        <td><img src="../assets/images/Product<?= $product['img'] ?>" alt=""></td>
-                        
-                        <td><?= $product['nom'] ?></td>
-                        
-                        <td><input type="number" name="quantity[<?= $product['id'] ?>]" id="" value="<?= $_SESSION['panier'][$product['id']] ?>"></td>
-                        
-                        <td><?= number_format($product['price'], 0, '', ' '), Product::SUFFIX_DEVISE; ?></td>
-                        
-                        <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="dellete btn red light-3 text-red"><i class="bi bi-trash"></i></a></td>
-                    </tr>
-                <?php endforeach ?>
+                        <tr>
+                            <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt=""></td>
+                            
+                            <td><?= $product['nom'] ?></td>
+                            
+                            <td><input type="number" name="quantity[<?= $product['id'] ?>]" id="" value="<?= $product['quantity'] ?>"></td>
+                            
+                            <td><?= number_format($product['price'], 0, '', ' '), Product::SUFFIX_DEVISE; ?></td>
+                            
+                            <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="dellete btn red light-3 text-red"><i class="bi bi-trash"></i></a></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
                 <button type="submit">Recalculer</button>
-                </form>
-            </tbody>
+            </form>
         </table>
     </div>
 </div>
