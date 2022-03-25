@@ -52,7 +52,6 @@ CREATE TABLE `Panier`(
     `Product_id` INT,
     `session_id` VARCHAR(100),
     `quantity` INT,
-    `pcice` FLOAT,
     `montant` FLOAT,
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
