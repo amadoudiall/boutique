@@ -29,7 +29,7 @@ if(isset($_GET['product']) AND !empty($_GET['product'])){
         $sessionId = null;
     }
         
-    $getPanier->addPanier($productId, $userId, $sessionId);
+    $getPanier->addPanier($productId, $userId, $sessionId, $montant);
     // header('location: HTTP_REFERER');
 }
 
@@ -56,7 +56,7 @@ if(empty($_SESSION['panier'])){
     $sessionId = $_SESSION['sessionId'];
     
     
-    if(isset($_SESSION['user'])){    
+    if(isset($_SESSION['user']) and !empty($_SESSION['user'])){    
         $userId = $_SESSION['user']['id'];
         $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE Panier.User_id IN('.$userId.') ');
     }else{

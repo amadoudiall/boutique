@@ -49,8 +49,8 @@ class Connection
                         $sessionId = null;
                         
                         // Verifier si le panier existe déjà;
-                        if(isset($_SESSION['panier']['id'])){
-                            $sessionId = $_SESSION['panier']['id'];
+                        if(isset($_SESSION['sessionId'])){
+                            $sessionId = $_SESSION['sessionId'];
                         }
                         // Récupérer l'instance du panier;
                         $panier = new Panier();
@@ -58,7 +58,7 @@ class Connection
                         // Mettre à jour le panier pour charger $userId;
                         $panier->isCnnected($userId, $sessionId);
 
-                        header('location: /');
+                        header('location: HTTP_REFERER');
                     } else {
                         $this->setErreur('Mot de passe incorecte !');
                     }

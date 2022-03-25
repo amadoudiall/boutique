@@ -1,3 +1,11 @@
+<?php 
+if(isset($_SESSION) and isset($_SESSION['sessionId'])){
+    $sessionId = $_SESSION['sessionId'];
+}else{
+    $_SESSION['sessionId'] = rand(10000, 99000);
+    $sessionId = $_SESSION['sessionId'];
+} 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 

@@ -13,6 +13,7 @@ class Panier{
     public $productId;
     public $sessionId;
     public $quantity;
+    public $price;
     
     public function __construct(){
         if(!isset($_SESSION)){
@@ -132,6 +133,26 @@ class Panier{
 
         return $this;
     }
+    
+     /**
+     * Get the value of price
+     */ 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     *
+     * @return  self
+     */ 
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
 
     /**
      * Get the value of quantity
@@ -166,36 +187,44 @@ class Panier{
         return $products->fetchAll();
     }
     
+    public function getProductPanierBySessionId($sessionId)
+    {
+        $products = $this->getDb()->prepare('SELECT * FROM Panier WHERE session_id= ?');
+        $products->execute(array($sessionId));
+        return $products->fetchAll();
+    }
+    
     public function flushPanier()
     {
-        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, session_id, quantity, montant) VALUES(:User_id, :Product_id, :session_id, :quantity, :montant)');
+        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, session_id, quantity, price, montant) VALUES(:User_id, :Product_id, :session_id, :quantity, :price, :montant)');
         $addProduct->execute([
             'User_id' => $this->userId,
             'Product_id' => $this->productId,
             'session_id' => $this->sessionId,
             'quantity' => $this->quantity,
+            'price' => $this->price,
             'montant' => $this->montant
         ]);
     }
     
-    public function update($quantity, $productId, $userId, $sessionId){
+    public function update($quantity, $productId, $userId, $sessionId, $montant){
         if($userId != null){
              try {
-                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$productId."' AND user_id= '".$sessionId."' ");
+                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' montant = '".$montant."' WHERE Product_id = '".$productId."' AND user_id= '".$userId."' ");
             } catch (\Throwable $th) {
                 echo "La requete ne s'est pas passé comme prévue !". $th;
             }    
         }elseif($sessionId != null){
             
             try {
-                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' WHERE Product_id = '".$productId."' AND session_id= '".$sessionId."' ");
+                $this->getDb()->query("UPDATE Panier SET quantity = '".$quantity."' montant = '".$montant."' WHERE Product_id = '".$productId."' AND session_id= '".$sessionId."' ");
             } catch (\Throwable $th) {
                 echo "La requete ne s'est pas passé comme prévue sans vous identifier !". $th;
             }        
         }
     }
     
-    public function addPanier($productId, $userId, $sessionId){ 
+    public function addPanier($productId, $userId, $sessionId, $montant){ 
           
         $getProduct = new Product();
         $product = $getProduct->getProductById($productId);
@@ -209,7 +238,7 @@ class Panier{
                 $_SESSION['panier'][$productId]++;
                 $quantity = $_SESSION['panier'][$productId];
                 
-                $this->update($quantity, $productId, $userId, $sessionId);
+                $this->update($quantity, $productId, $userId, $sessionId, $montant);
                 
                 header('location: HTTP_REFERER');
                 
@@ -221,6 +250,7 @@ class Panier{
                     ->setProductId($productId)
                     ->setSessionId($sessionId)
                     ->setQuantity(1)
+                    ->setPrice($product['price'])
                     ->setMontant($product['price']);
                 $this->flushPanier();
                 
@@ -253,10 +283,17 @@ class Panier{
     public function isCnnected($userId, $sessionId){
         if(isset($_SESSION['sessionId']) and !empty($_SESSION['sessionId'])){
             if(isset($_SESSION['user']) and !empty($_SESSION['user'])){
-                try {
-                    $this->getDb()->query("UPDATE Panier SET user_id = '".$userId."' WHERE session_id = '".$sessionId."'");
-                } catch (\Throwable $th) {
-                    echo "La requete ne s'est pas passé comme prévue au moment de la connexion !". $th;
+                $user_product_panier = $this->getProductPanierBySessionId($sessionId);
+                foreach ($user_product_panier as $key => $product) {
+                    
+                    if($product['user_id'] === null and $_SESSION['sessionId'] === $product['session_id']){
+                        
+                        try {
+                            $this->getDb()->query("UPDATE Panier SET user_id = '".$userId."' WHERE session_id = '".$sessionId."'");
+                        } catch (\Throwable $th) {
+                            echo "La requete ne s'est pas passé comme prévue au moment de la connexion !". $th;
+                        }
+                    }
                 }
             }
         }
