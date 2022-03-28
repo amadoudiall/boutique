@@ -60,6 +60,10 @@ CREATE TABLE `Commande`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `User_id` INT,
     `createdAt` DATE,
+    `chipedAt` DATE,
+    `status` ENUM('en cours', 'en attente', 'livré'),
+    `montant` FLOAT,
+    `adresse` VARCHAR(255),
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
 
@@ -68,7 +72,8 @@ CREATE TABLE `Commande_product`(
     `Commande_id` INT,
     `Product_id`INT,
     `quantity` INT,
-    `montant` FLOAT,
+    `priceU` FLOAT,
+    `priceT` FLOAT,
     CONSTRAINT FOREIGN KEY (`Commande_id`) REFERENCES `Commande`(`id`),
     CONSTRAINT FOREIGN KEY (`Product_id`) REFERENCES `Product`(`id`)
 );

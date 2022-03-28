@@ -29,10 +29,10 @@ ob_start();
         <div class="col-xs2 col-md2 profile-infos rounded-1">
             <div class="caroulix" id="example-caroulix" data-ax="caroulix" data-ax-caroulix-autoplay-enabled="true" data-caroulix-indicators-enabled="true">
               <div class="caroulix-arrow caroulix-prev">
-                <span class="iconify-inline font-s5" data-icon="mdi:chevron-left"></span>
+                <span class="bi bi-chevron-left" data-icon="mdi:chevron-left"></span>
               </div>
               <div class="caroulix-arrow caroulix-next">
-                <span class="iconify-inline font-s5" data-icon="mdi:chevron-right"></span>
+                <span class="bi bi-chevron-right" data-icon="mdi:chevron-right"></span>
               </div>
               <div class="caroulix-item">
                 <img src="https://picsum.photos/800/450?random=1" alt="img1" />
