@@ -206,6 +206,17 @@ class Panier{
         ]);
     }
     
+    public function getUserProductPanier(){
+        // $productPanier = array_keys($_SESSION['panier']);
+        $sessionId = $_SESSION['sessionId'];
+        if(isset($_SESSION['user']) and !empty($_SESSION['user'])){    
+            $userId = $_SESSION['user']['id'];
+            $this->getDb()->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE Panier.User_id IN('.$userId.') ');
+        }else{
+            $this->getDb()->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE session_id IN('.$sessionId.') ');
+        }
+    }
+    
     public function update($quantity, $productId, $userId, $sessionId, $montant){
         if($userId != null){
              try {
@@ -267,10 +278,6 @@ class Panier{
             $total += $product['montant'];
         }
         return $total;
-    }
-    
-    public function recalc($nquantity = array(), $productId, $userId, $sessionId, $montant){
-        
     }
     
     public function isCnnected($userId, $sessionId){

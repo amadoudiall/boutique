@@ -15,7 +15,7 @@
             <a href="../pages/panier.php">
                 <i class="bi bi-cart2"></i>
             </a>
-                <?php if(isset($_SESSION['panier'])):?>
+                <?php if(isset($_SESSION['panier']) AND count($_SESSION['panier']) > 0):?>
                     <span class="badge"><?= count($_SESSION['panier']); ?></span>
                 <?php endif ?>
         </li>

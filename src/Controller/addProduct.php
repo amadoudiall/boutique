@@ -35,8 +35,8 @@ class addProduct{
 
         if(isset($_POST['nom']) and !empty($_POST['nom']) and isset($_POST['price']) and !empty($_POST['price'])
             and isset($_POST['category']) and !empty($_POST['category']) and isset($_FILES['img']) and !empty($_FILES['img'])
-            and isset($_POST['stocka']) and !empty($_POST['stocka']) and isset($_POST['stockm']) and !empty($_POST['stockm'])
-            and isset($_POST['desc']) and !empty($_POST['desc'])
+            and isset($_POST['stock_actuel']) and !empty($_POST['stock_actuel']) and isset($_POST['stock_min']) and !empty($_POST['stock_min'])
+            and isset($_POST['descr']) and !empty($_POST['descr'])
         ){
             $nom = htmlspecialchars($_POST['nom']);
             $price = htmlspecialchars($_POST['price']);
@@ -45,7 +45,7 @@ class addProduct{
             $desc = htmlspecialchars($_POST['descr']);
             $stocka = htmlspecialchars($_POST['stock_actuel']);
             $stockm = htmlspecialchars($_POST['stock_min']);
-            $expiration = '2000-01-01';
+            $expiration = '';
 
             if(isset($_POST['date_expiration']) and !empty($_POST['date_expiration'])){
                 $expiration = $_POST['date_expiration'];
