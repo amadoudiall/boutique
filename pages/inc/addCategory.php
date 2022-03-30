@@ -21,6 +21,7 @@ if(isset($_POST['addCategory'])){
             <?php
                 echo $form->input('text', 'nom', 'Nom de la catégorie');
                 echo $form->textarea('desc', 'Déscription de la catégorie...');
+                echo $form->input('text', 'icon', 'Icone de la catégorie');
                 echo $form->submit('addCategory', 'Ajouter');
             ?>
         </form>

@@ -13,7 +13,7 @@ if(isset($_GET['c']) and !empty($_GET['c'])){
 
 if($productCommande != null): ?>
  <div class="commandeProduct">
-    <div class="table">
+    <div class="table table-liste-infos">
         <table class="table">
             <thead>
                 <tr>
@@ -29,10 +29,10 @@ if($productCommande != null): ?>
                 <?php foreach($productCommande as $product): ?>
                     <tr>
                         <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
-                        <td><?= $product['nom'] ?></td>
+                        <td><a href="/pages/product.php?product=<?= $product['id'] ?>"><?= $product['nom'] ?></a></td>
                         <td><?= $product['quantity'] ?></td>
-                        <td><?= $product['priceU'] ?> €</td>
-                        <td><?= $product['priceT'] ?> €</td>
+                        <td><?= $product['priceU'] ?> <span class="suffix">FCFA</span></td>
+                        <td><?= $product['priceT'] ?> <span class="suffix">FCFA</span></td>
                         <td><a href="../pages/product.php?product=<?= $product['id'] ?>">Detaille</a></td>
                     </tr>
                 <?php endforeach ?>

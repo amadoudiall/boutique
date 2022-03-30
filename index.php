@@ -2,9 +2,15 @@
 
 use \App\Bdd\Bdd;
 use \App\Entity\Product;
+use \App\Entity\Category;
 use \App\HTML\bootstrapForm;
 use \App\Autoloader;
 
+require('./src/Autoload/Autoloader.php');
+Autoloader::registerHome();
+
+$getCategory = new Category();
+$categorys = $getCategory->getCategorys();
 if(!isset($_SESSION)){
     session_start();  
 }
@@ -12,9 +18,6 @@ if(!isset($_SESSION)){
 if (empty($_SESSION['user'])) {
     unset($_SESSION['user']);
 }
-
-require('./src/Autoload/Autoloader.php');
-Autoloader::registerHome();
 
 $title = "Accueil";
 ob_start();
@@ -24,6 +27,12 @@ ob_start();
     <div class="grix xs4 grille white rounded-1">
         <div class="sidebar-infos white"> 
             <h2 class="category">Catégories</h2>
+            <?php
+            foreach ($categorys as $key => $category): ?>
+              <div class="c-item">
+                <a href="./pages/category.php?category=<?= $category['id'] ?>" title="<?= $category['desc'] ?>"><?= $category['icon'] ?> <?= $category['category'] ?></a>
+              </div>
+            <?php endforeach ?>
         </div>
                 
         <div class="col-xs2 col-md2 profile-infos rounded-1">

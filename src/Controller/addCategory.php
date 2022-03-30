@@ -7,14 +7,17 @@ class addCategory{
 
     public function add(){
         if(isset($_POST['nom']) and !empty($_POST['nom'])
-            and isset($_POST['desc']) and !empty($_POST['desc'])){
+            and isset($_POST['desc']) and !empty($_POST['desc'])
+            and isset($_POST['icon']) and !empty($_POST['icon'])){
             $nom = htmlspecialchars($_POST['nom']);
             $desc = htmlspecialchars($_POST['desc']);
+            $icon = $_POST['icon'];
 
             $category = new Category();
 
             $category->setCategory($nom)
-                    ->setDescription($desc);
+                    ->setDescription($desc)
+                    ->setIcon($icon);
             $category->flushCategory();
 
         }else{

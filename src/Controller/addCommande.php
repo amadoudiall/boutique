@@ -12,7 +12,7 @@ class addCommande{
         if(!empty($_SESSION['panier'])){
             
             if(!empty($_SESSION['user'])){
-                 $userId = $_SESSION['user']['id'];
+                $userId = $_SESSION['user']['id'];
                  
                 $createdAt = new \DateTime();
                 $createdAt = $createdAt->format('Y-m-d H:i:s');
@@ -20,7 +20,7 @@ class addCommande{
                 $panier = new Panier();
                 $commande = new Commande();
             
-                $products = $panier->getUserProductPanier($userId, $_SESSION['sessionId']);
+                $products = $panier->getProductPanierByUserId($userId, $_SESSION['sessionId']);
                 $commande->setUserId($userId);
                 $commande->setCreatedAt($createdAt);
                 $commande->setChipedAt($chipedAt);
@@ -28,11 +28,9 @@ class addCommande{
                 $commande->setMontant($panier->total($products));
                 $commande->setAdresse($_SESSION['user']['adresse']);
                 $commande->flushCommande();
-                
+                                
                 // lastInsertId() retourne l'id de la dernière commande insérée
                 $lasteCommandeId = $commande->getLastCommandeId();
-                
-                var_dump($commande->getLastCommandeId());
             
                 foreach($products as $product){
                     $commande->setCommandeId($lasteCommandeId);

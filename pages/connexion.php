@@ -13,12 +13,12 @@ $login = new Connection();
 
 if (isset($_POST['connection'])) {
     $login->Login();
-    //header("Location: {$_SERVER['HTTP_REFERER']}");
+    header("Location: /");
 }
 
 if(isset($_GET['logout'])){
     $login->Logout();
-    //header("Location: {$_SERVER['HTTP_REFERER']}");
+    header("Location: /");
 }
 $title = "Connexion";
 ob_start();

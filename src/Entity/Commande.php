@@ -253,10 +253,10 @@ class Commande{
         return $this;
     }
     
-    // getALLCommande
+    // getALLCommande uniquement pour le backOfice
     public function getAllCommande()
     {
-        $result = $this->getDb()->query("SELECT * FROM commande");
+        $result = $this->getDb()->query("SELECT * FROM Commande");
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
@@ -264,7 +264,7 @@ class Commande{
     // getALLCommandeByUserId
     public function getAllCommandeByUserId($userId)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM commande WHERE User_id = ?");
+        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE User_id = ? ORDER BY id DESC");
         $result->execute([$userId]);
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
@@ -273,7 +273,7 @@ class Commande{
     // getProductByCommandeId and by userId
     public function getProductByCommandeId($userId, $commandeId)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM commande_product LEFT JOIN Product ON commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  commande_product.Commande_id = ? AND Commande.User_id = ?");
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  Commande_product.Commande_id = ? AND Commande.User_id = ?");
         $result->execute(array($commandeId, $userId));
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
@@ -282,7 +282,7 @@ class Commande{
     // Create Commande
     public function flushCommande()
     {
-        $result = $this->getDb()->prepare("INSERT INTO commande (User_id, createdAt, chipedAt, status, montant, adresse) VALUES (:userId, :createdAt, :chipedAt, :status, :montant, :adresse)");
+        $result = $this->getDb()->prepare("INSERT INTO Commande (User_id, createdAt, chipedAt, status, montant, adresse) VALUES (:userId, :createdAt, :chipedAt, :status, :montant, :adresse)");
         $result->execute([
             'userId' => $this->userId,
             'createdAt' => $this->createdAt,
@@ -290,7 +290,7 @@ class Commande{
             'status' => $this->status,
             'montant' => $this->montant,
             'adresse' => $this->adresse
-        ]);
+        ]);; 
     }
     
     // update Commande
@@ -304,7 +304,7 @@ class Commande{
             $chipedAt = null;
         }
         
-        $result = $this->getDb()->prepare("UPDATE commande SET chipedAt = :chipedAt, status = :status, WHERE id = :commandeId");
+        $result = $this->getDb()->prepare("UPDATE Commande SET chipedAt = :chipedAt, status = :status, WHERE id = :commandeId");
         $result->execute([
             'chipedAt' => $chipedAt,
             'status' => $status,
@@ -316,7 +316,7 @@ class Commande{
     // le id de la dernière commande créée
     public function getLastCommandeId()
     {
-        $result = $this->getDb()->prepare("SELECT * FROM commande WHERE createdAt = ?");
+        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE createdAt = ?");
         $result->execute([$this->createdAt]);
         $commande = $result->fetch();
         return $commande['id'];
@@ -325,7 +325,7 @@ class Commande{
     // getCommandeByStatus uniquement pour le backoffice
     public function getCommandeByStatus($status)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM commande WHERE status = ?");
+        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE status = ?");
         $result->execute([$status]);
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
@@ -334,7 +334,7 @@ class Commande{
     // getUserCommandeByStatus pour le front
     public function getUserCommandeByStatus($userId, $status)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM commande WHERE User_id = ? AND status = ?");
+        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE User_id = ? AND status = ?");
         $result->execute([$userId, $status]);
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
@@ -343,7 +343,7 @@ class Commande{
     // Create product in Commande
     public function flushCommandeProduct()
     {
-        $result = $this->getDb()->prepare("INSERT INTO commande_product (commande_id, product_id, quantity, priceU, priceT) VALUES (:commandeId, :productId, :quantity, :priceU, :priceT)");
+        $result = $this->getDb()->prepare("INSERT INTO Commande_product (commande_id, product_id, quantity, priceU, priceT) VALUES (:commandeId, :productId, :quantity, :priceU, :priceT)");
         $result->execute([
             'commandeId' => $this->commandeId,
             'productId' => $this->productId,

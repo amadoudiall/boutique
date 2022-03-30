@@ -18,7 +18,7 @@ if(isset($_GET['commande']) and !empty($_GET['commande'])){
     header('location: ../pages/profile.php?url=myCommande');
 }
 
-if(isset($_POST['panier']['quantity'])){
+if(isset($_POST['panier']['quantity']) AND $_POST['panier']['quantity'] > 0){
     
     $sessionId = $_SESSION['sessionId'];
     if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])){
@@ -26,7 +26,7 @@ if(isset($_POST['panier']['quantity'])){
     }else{
         $userId = null;
     }
-    
+    $productInPanier = $getPanier->getProductPanierByUserId($userId, $sessionId);
     foreach ($_SESSION['panier'] as $productId => $panier) {
         if(isset($_POST['panier']['quantity'][$productId])){
             $_SESSION['panier'][$productId] = $_POST['panier']['quantity'][$productId];
@@ -115,7 +115,7 @@ if($products != null):
     <div class="grix xs4 grille white rounded-1">
                 
         <div class="col-xs4 col-md3 profile-infos white rounded-1">
-            <div class="table">
+            <div class="table-liste-infos">
                 <table>
                     <thead>
                         <tr>
@@ -131,35 +131,39 @@ if($products != null):
                         <tbody>
                             <?php foreach ($products as $key => $product) : $_SESSION['product']['price'][$product['id']] = $product['price'] ?>
                                 <tr>
-                                    <td><img width="30px" src="../assets/images/Product/<?= $product['img'] ?>" alt=""></td>
+                                    <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt=""></td>
                             
-                                    <td><?= $product['nom'] ?></td>
+                                    <td><a href="/pages/product.php?product=<?= $product['id'] ?>"><?= $product['nom'] ?></a></td>
                             
                                     <td><input type="number" name="panier[quantity][<?= $product['id'] ?>]" id="" value="<?= $product['quantity'] ?>"></td>
                             
-                                    <td><?= number_format($product['price'], 0, '', ' '), Product::SUFFIX_DEVISE; ?></td>
+                                    <td><?= number_format($product['price'], 0, '', ' ') ?><span class="suffix"><?= Product::SUFFIX_DEVISE ?></span></td>
                             
-                                    <td><?= number_format($product['montant'], 0, '', ' '), Product::SUFFIX_DEVISE; ?></td>
+                                    <td><?= number_format($product['montant'], 0, '', ' ') ?><span class="suffix"><?= Product::SUFFIX_DEVISE ?></span></td>
                             
-                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-trash"></i></span></a></td>
+                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-x"></i></span></a></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3"><p>Une fois votre commande validée notre equipe vous contactera</p></td>
-                                <td>TOTAL :</td>
-                                <td><?= number_format($getPanier->total($products), 0, '', ' '), Product::SUFFIX_DEVISE; ?></td>
+                                <td class="tot">TOTAL :</td>
+                                <td><span><?= number_format($getPanier->total($products), 0, '', ' ') ?></span><span class="suffix"><?= Product::SUFFIX_DEVISE ?></span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
                                 <td>
                                     <button class="btn shadow-1 rounded-1 btn-outline text-blue" type="submit"><span class="btn-outline-text">Recalculer</span></button><br>
+                                </td>
+                                <td>
+                                    <a href="./panier.php?videPanier=1" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text">Vider le panier</span></a>
                                 </td>
                             </tr>
                         </tfoot>
                     </form>
                 </table>
-                <div class="deleteCarte">
-                    <a href="./panier.php?videPanier=1" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text">Vider le panier</span></a>
-                </div>
             </div>
         </div>
         

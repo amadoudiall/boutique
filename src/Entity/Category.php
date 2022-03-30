@@ -7,6 +7,9 @@ class Category
     public string $category;
     //Description de la categorie
     public string $description;
+    
+    // Icon de la categorie
+    public string $icon;
 
     /**
      * Get the value of nom
@@ -47,6 +50,18 @@ class Category
 
         return $this;
     }
+    
+    // Getter and Setter for icon
+    // Getter for icon
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+    // Setter for icon
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+    }
 
     public function getDb()
     {
@@ -63,10 +78,11 @@ class Category
 
     public function flushCategory()
     {
-        $addUser = $this->getDb()->prepare('INSERT INTO Category(category, descriptions) VALUES(:category, :descriptions)');
+        $addUser = $this->getDb()->prepare('INSERT INTO Category(category, descriptions, icon) VALUES(:category, :descriptions, :icon)');
         $addUser->execute([
             'category' => $this->category,
-            'descriptions' => $this->description
+            'descriptions' => $this->description,
+            'icon' => $this->icon
         ]);
     }
 }

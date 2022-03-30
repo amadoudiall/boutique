@@ -229,7 +229,7 @@ class Panier{
     // Update panier
     public function update($quantity, $productId, $userId, $sessionId, $montant){
         try {
-            $this->getDb()->prepare("UPDATE Panier SET quantity = ?, montant = ? WHERE Product_id = ? AND Panier.User_id= ? OR Panier.session_id = ? ")->execute(array($quantity, $montant, $productId, $userId, $sessionId));
+            $this->getDb()->prepare("UPDATE Panier SET quantity = ?, montant = ? WHERE Product_id = ? AND Panier.User_id= ? OR Panier.Product_id = ? AND Panier.session_id = ? ")->execute(array($quantity, $montant, $productId, $userId, $productId, $sessionId));
         } catch (\Throwable $th) {
             echo "La requete ne s'est pas passé comme prévue !". $th;
         }

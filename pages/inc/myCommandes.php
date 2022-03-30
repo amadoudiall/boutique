@@ -6,7 +6,7 @@ $commandes = $getCommandes->getAllCommandeByUserId($_SESSION['user']['id']);
  ?>
 <div class="profile-detaille">
     <?php if($commandes != null): ?>
-    <div class="table">
+    <div class="table table-liste-infos">
         <table class="table">
             <thead>
                 <tr>
