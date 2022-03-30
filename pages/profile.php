@@ -2,11 +2,9 @@
 session_start();
 
 if (empty($_SESSION['user'])) {
-    header('location: ./connexion.php');
-}
-
-if ($_SESSION['user']['roles'] != 'client') {
-    header('location: ./admin.php');
+    header('location: ../pages/connexion.php');
+}elseif($_SESSION['user']['roles'] != 'client'){
+    header('location: ../pages/admin.php');
 }
 
 use \App\Autoloader;
@@ -24,6 +22,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'editProfile') {
     require('./inc/myCommandes.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'wishList') {
     require('./inc/wishList.php');
+} elseif (isset($_GET['url']) and $_GET['url'] === 'detailleCommande') {
+        require('./inc/commandeDetaille.php');
 } else {
     require('./inc/profile/profile.php');
 }

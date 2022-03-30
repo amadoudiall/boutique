@@ -2,12 +2,11 @@
 session_start();
 
 if (empty($_SESSION['user'])) {
-    header('location: ./connexion.php');
+    header('location: ./pages/connexion.php');
+}elseif($_SESSION['user']['roles'] == 'client'){
+    header('location: ./pages/profile.php');
 }
 
-if ($_SESSION['user']['roles'] != 'admin') {
-    header('location: ./profile.php');
-}
 
 use \App\Bdd\Bdd;
 use \App\Entity\Product;

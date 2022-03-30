@@ -58,7 +58,6 @@ class Connection
                         // Mettre à jour le panier pour charger $userId;
                         $panier->isCnnected($userId, $sessionId);
 
-                        header('location: HTTP_REFERER');
                     } else {
                         $this->setErreur('Mot de passe incorecte !');
                     }

@@ -4,6 +4,7 @@ session_start();
 use \App\Bdd\Bdd;
 use \App\Entity\Product;
 use \App\Entity\Panier;
+use \App\Controller\addCommande;
 use \App\Autoloader;
 
 require('../src/Autoload/Autoloader.php');
@@ -11,13 +12,18 @@ Autoloader::register();
 $Bd = new Bdd();
 $getPanier = new Panier;
 
+if(isset($_GET['commande']) and !empty($_GET['commande'])){
+    $commande = new addCommande;
+    $commande->add();
+    header('location: ../pages/profile.php?url=myCommande');
+}
+
 if(isset($_POST['panier']['quantity'])){
     
-    if(isset($_SESSION['user']['id'])){
+    $sessionId = $_SESSION['sessionId'];
+    if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])){
         $userId = $_SESSION['user']['id'];
-        $sessionId = null;
     }else{
-        $sessionId = $_SESSION['sessionId'];
         $userId = null;
     }
     
@@ -32,34 +38,39 @@ if(isset($_POST['panier']['quantity'])){
 
 if(isset($_GET['product']) AND !empty($_GET['product'])){
     $productId = $_GET['product'];
+    $montant = null;
      
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user']) OR empty($_SESSION['user'])){
         $userId = null;
         
         if(!isset($_SESSION['sessionId'])){     
-            $_SESSION['sessionId'] = rand(10000, 99000);
+            $_SESSION['sessionId'] = $_SERVER['REMOTE_ADDR'];
             $sessionId = $_SESSION['sessionId'];
         }else{
             $sessionId = $_SESSION['sessionId'];
         }
     }else{
         $userId = $_SESSION['user']['id'];
-        $sessionId = null;
+        
+        if(!isset($_SESSION['sessionId'])){     
+            $_SESSION['sessionId'] = $_SERVER['REMOTE_ADDR'];
+            $sessionId = $_SESSION['sessionId'];
+        }else{
+            $sessionId = $_SESSION['sessionId'];
+        }
     }
         
     $getPanier->addPanier($productId, $userId, $sessionId, $montant);
-    // header('location: HTTP_REFERER');
+    header('location: HTTP_REFERER');
 }
 if(isset($_GET['del'])){
     $productId = $_GET['del'];
     
-    if(!isset($_SESSION['user'])){
+    $sessionId = $_SESSION['sessionId'];
+    if(!isset($_SESSION['user']) AND empty($_SESSION['user'])){
         $userId = null;
-        $sessionId = $_SESSION['sessionId'];
-
     }else{
         $userId = $_SESSION['user']['id'];
-        $sessionId = null;
     }
     
     $getPanier->dellete($productId, $userId, $sessionId);
@@ -83,13 +94,14 @@ if(empty($_SESSION['panier'])){
     // $productPanier = array_keys($_SESSION['panier']);
     $sessionId = $_SESSION['sessionId'];
     
-    
-    if(isset($_SESSION['user']) and !empty($_SESSION['user'])){    
+    if(isset($_SESSION['user'])){
         $userId = $_SESSION['user']['id'];
-        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE Panier.User_id IN('.$userId.') ');
     }else{
-        $products = $Bd->query('SELECT * FROM Panier LEFT JOIN Product ON Product.id = Panier.Product_id WHERE session_id IN('.$sessionId.') ');
+        $userId = null;
     }
+    
+    $products = $getPanier->getUserProductPanier($userId, $sessionId);
+
 }
 
 $title = "Panier";
@@ -153,12 +165,12 @@ if($products != null):
         
         <div class="panier-infos white"> 
             <h2>Resumé du panier</h2>
-            <h3>Vous avez <?= count($_SESSION['panier']); ?> produit dans le panier</h3>
+            <h3>Vous avez <?= count($products); ?> produit dans le panier</h3>
             <p class="livraison-infos">
                 <span>Livraison gratuit à partire de 90 000 F d'achat</span>
                 livrée en moin de 48h.
             </p>
-            <a href="#" class="btn btn-secondary">Finaliser la commande</a>
+            <a href="../pages/panier.php?commande=1" class="btn btn-secondary">Finaliser la commande</a>
         </div>
     </div>
 </div>

@@ -31,6 +31,7 @@ if(isset($_SESSION) and isset($_SESSION['sessionId'])){
 
     <!-- Axentix JS minified version -->
     <script src="https://kit.fontawesome.com/33342bcb44.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

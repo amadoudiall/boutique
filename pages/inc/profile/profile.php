@@ -1,12 +1,25 @@
+<?php
+use App\Entity\Commande;
+use App\Entity\Panier;
+
+$getCommande = new Commande();
+$getPanier = new Panier();
+
+$commandes = $getCommande->getAllCommandeByUserId($_SESSION['user']['id']);
+$commandeEnCours = $getCommande->getUserCommandeByStatus($_SESSION['user']['id'], 'en cours');
+$commandeValidee = $getCommande->getUserCommandeByStatus($_SESSION['user']['id'], 'livré');
+$panier = $getPanier->getUserProductPanier($_SESSION['user']['id'], $_SESSION['sessionId']);
+?>
+
 <div class="profile-detaille">
     <div class="profile-home dashboard grix xs2">
         <div class="newusers item rounded-1 white">
             <div class="title-marked">
                 <span class="rounded-1">Dans votre panier</span>
             </div>
-            <span class="nombre">5 <em>produits</em></span>
+            <span class="nombre"><?= count($panier) ?><em> Produits</em></span>
             <div class="title-marked-b">
-                <a href="../pages/profile.php?url=panier" class="">Voire le panier</a>
+                <a href="../pages/profile.php?url=panier" class="">Finaliser la commande</a>
             </div>
         </div>
         
@@ -14,9 +27,9 @@
             <div class="title-marked">
                 <span class="rounded-1">Commandes en cours</span>
             </div>
-            <span class="nombre">2 <em>Commandes</em></span>
+            <span class="nombre"><?= count($commandeEnCours) ?><em> Commandes en cours</em></span>
             <div class="title-marked-b">
-                <a href="../pages/profile.php?url=myCommandes" class="">Voire les détailles</a>
+                <a href="../pages/profile.php?url=myCommande" class="">Voire mes commandes</a>
             </div>
         </div>
         
@@ -24,7 +37,7 @@
             <div class="title-marked">
                 <span class="rounded-1">Commandes validées</span>
             </div>
-            <span class="nombre">1 <em>Commandes</em></span>
+            <span class="nombre"><?= count($commandeValidee) ?> <em> Commandes livré</em></span>
             <div class="title-marked-b">
                 <a href="../pages/profile.php?url=panier" class="">Voire les détailles</a>
             </div>
@@ -40,5 +53,5 @@
             </div>
         </div>
     </div>
-    <a href="../pages/profile.php?url=myCommandes" class="btn toHome"> <i class="bi bi-arrow-left"></i> Continuer mes achats</a>
+    <a href="/" class="btn toHome"> <i class="bi bi-arrow-left"></i> Continuer mes achats</a>
 </div>
