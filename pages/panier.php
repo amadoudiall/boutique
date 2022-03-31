@@ -42,22 +42,10 @@ if(isset($_GET['product']) AND !empty($_GET['product'])){
      
     if(!isset($_SESSION['user']) OR empty($_SESSION['user'])){
         $userId = null;
-        
-        if(!isset($_SESSION['sessionId'])){     
-            $_SESSION['sessionId'] = $_SERVER['REMOTE_ADDR'];
-            $sessionId = $_SESSION['sessionId'];
-        }else{
-            $sessionId = $_SESSION['sessionId'];
-        }
+        $sessionId = $_SESSION['sessionId'];
     }else{
         $userId = $_SESSION['user']['id'];
-        
-        if(!isset($_SESSION['sessionId'])){     
-            $_SESSION['sessionId'] = $_SERVER['REMOTE_ADDR'];
-            $sessionId = $_SESSION['sessionId'];
-        }else{
-            $sessionId = $_SESSION['sessionId'];
-        }
+        $sessionId = $_SESSION['sessionId'];
     }
         
     $getPanier->addPanier($productId, $userId, $sessionId, $montant);
@@ -114,7 +102,7 @@ if($products != null):
 <div class="panier mt-3">
     <div class="grix xs4 grille white rounded-1">
                 
-        <div class="col-xs4 col-md3 profile-infos white rounded-1">
+        <div class="col-xs4 col-md3 profile-infos">
             <div class="table-liste-infos">
                 <table>
                     <thead>
@@ -122,7 +110,7 @@ if($products != null):
                             <th>#</th>
                             <th>NOM</th>
                             <th>QUANTITE</th>
-                            <th>PIX U</th>
+                            <th>PIX UNITAIRE</th>
                             <th>PRIX TOTAL</th>
                             <th>ACTION</th>
                         </tr>
@@ -141,7 +129,7 @@ if($products != null):
                             
                                     <td><?= number_format($product['montant'], 0, '', ' ') ?><span class="suffix"><?= Product::SUFFIX_DEVISE ?></span></td>
                             
-                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-x"></i></span></a></td>
+                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-x"></i> Supprimer</span></a></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -167,16 +155,45 @@ if($products != null):
             </div>
         </div>
         
-        <div class="panier-infos white"> 
+        <div class="panier-infos row-sm1 row-md1 singleSide"> 
             <h2>Resumé du panier</h2>
             <h3>Vous avez <?= count($products); ?> produit dans le panier</h3>
             <p class="livraison-infos">
                 <span>Livraison gratuit à partire de 90 000 F d'achat</span>
                 livrée en moin de 48h.
             </p>
-            <a href="../pages/panier.php?commande=1" class="btn btn-secondary">Finaliser la commande</a>
+            <div class="btn-lib">
+                <a href="../pages/panier.php?commande=1" class="btn btn-secondary">Finaliser la commande</a>
+            </div>
         </div>
     </div>
+    <section class="primary-section recently primarySection mt-3 white rounded-1">
+        <header>
+            <h1>Vues récements</h1>
+            <a href="#">Voire plus</a>
+        </header>
+        <div class="products">
+            <?php $products = Product::getProducts();
+            foreach ($products as $key => $product) : ?>
+                <div class="product shadow-1">
+
+                    <span class="promo">-20%</span>
+                    <span class="like"><a href="#"><i class="bi bi-heart"></i></a></span>
+                    <a href="#"><img src="../assets/images/Product/<?= $product['img'] ?>" alt="produit"></a>
+                    <div class="detaille">
+                        <div class="title-price">
+                            <h3><a href="#"><?= $product['nom'] ?></a></h3>
+                            <span><?= $product['price'] ?></span>
+                        </div>
+                        <div class="review-buy">
+                            <span><i class="bi bi-star-half"></i>3.8</span>
+                            <a href="./pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </section>
 </div>
 <?php 
 else :

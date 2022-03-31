@@ -1,0 +1,33 @@
+.singleSide{
+    padding: 10px;
+    border-left: 1px solid $blackLighter;
+    h2{
+        margin: 5px;
+        padding: 0;
+        padding-bottom: 10px;
+        font-size: 1.1em;
+        font-weight: 400;
+        color: $blackLight;
+        border-bottom: 1px solid $gray;
+    }
+    h3{
+        font-size: .9em;
+        font-weight: 500;
+        color: $pinksecond;
+    }
+    p{
+        padding: 5px;
+        background: $gray;
+        border-left: 3px solid $primary;
+        font-size: .8em;
+        
+        span{
+            color: $green;
+            font-style: italic;
+        }
+    }
+    .btn-lib{
+        width: 100%;
+        text-align: center;
+    }
+}

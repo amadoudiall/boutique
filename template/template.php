@@ -1,10 +1,10 @@
 <?php 
-if(isset($_SESSION) and isset($_SESSION['sessionId'])){
+if(!isset($_SESSION['sessionId'])){     
+    $_SESSION['sessionId'] = $_SERVER['REMOTE_ADDR'];
     $sessionId = $_SESSION['sessionId'];
 }else{
-    $_SESSION['sessionId'] = rand(10000, 99000);
     $sessionId = $_SESSION['sessionId'];
-} 
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,9 +14,9 @@ if(isset($_SESSION) and isset($_SESSION['sessionId'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Axentix CSS minified version -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@2.0.0/dist/axentix.min.css">
+    <link rel="stylesheet" href="../assets/axentix/axentix.min.css">
     <link href="../assets/style/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/axentix@2.0.0/dist/axentix.min.js"></script>
+    <script src="../assets/axentix/axentix.min.js"></script>
 
     <title>Diapali | <?= $title ?></title>
 </head>
@@ -30,7 +30,6 @@ if(isset($_SESSION) and isset($_SESSION['sessionId'])){
     </main>
 
     <!-- Axentix JS minified version -->
-    <script src="https://kit.fontawesome.com/33342bcb44.js" crossorigin="anonymous"></script>
     <script src="../assets/js/main.js"></script>
 </body>
 
