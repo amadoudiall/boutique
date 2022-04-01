@@ -23,7 +23,9 @@ ob_start();
 
 if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/product.php');
-} elseif (isset($_GET['url']) and $_GET['url'] === 'commande') {
+} elseif (isset($_GET['url']) and $_GET['url'] === 'myCommande') {
+    require('./inc/myCommandes.php');
+} elseif (isset($_GET['url']) and $_GET['url'] === 'userCommande') {
     require('./inc/commandes.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'rapport') {
     require('./inc/rapports.php');
