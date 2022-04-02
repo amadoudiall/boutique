@@ -26,8 +26,8 @@
         </div>
         <a href="../pages/admin.php" class="sidenav-link <?php if (empty($_GET['url'])) {echo 'active'; } ?>"><i class="bi bi-house"></i> Tableau de bord</a>
         <a href="../pages/admin.php?url=users" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'users') { echo 'active'; } ?>"><i class="bi bi-people-fill"></i> Utilisateurs</a>
-        <a href="../pages/admin.php?url=myCommande" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'myCommande') {echo 'active';} ?>"><i class="bi bi-file-earmark"></i>Mes commandes</a>
-        <a href="../pages/admin.php?url=userCommande" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'userCommande') {echo 'active';} ?>"><i class="bi bi-file-earmark"></i>Commandes clients</a>
+        <a href="../pages/admin.php?url=myCommande" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'myCommande') {echo 'active';} ?>"><i class="bi bi-archive-fill"></i> Mes commandes</a>
+        <a href="../pages/admin.php?url=userCommande" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'userCommande') {echo 'active';} ?>"><i class="bi bi-file-earmark"></i> Commandes clients</a>
         <a href="../pages/admin.php?url=product" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'product') {echo 'active';} ?>"><i class="bi bi-cart"></i> Produits</a>
         <a href="../pages/admin.php?url=rapport" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'rapport') {echo 'active';} ?>"><i class="bi bi-graph-up"></i> Rapport</a>
         <a href="../pages/admin.php?url=setting" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'setting') {echo 'active';} ?>"><i class="bi bi-gear"></i> Général</a>

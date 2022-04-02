@@ -25,6 +25,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/product.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'myCommande') {
     require('./inc/myCommandes.php');
+} elseif (isset($_GET['url']) and $_GET['url'] === 'detailleCommande') {
+    require('./inc/commandeDetaille.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'userCommande') {
     require('./inc/commandes.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'rapport') {

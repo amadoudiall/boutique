@@ -498,21 +498,24 @@ header nav ul .dropdown_parent {
   padding: .2em;
   font-size: .9em;
   border: none;
+}
+/* line 59, ../sass/_specialTable.scss */
+.table-liste-infos table tbody tr td .supp {
   background: #fff;
 }
-/* line 65, ../sass/_specialTable.scss */
+/* line 67, ../sass/_specialTable.scss */
 .table-liste-infos table tfoot td {
   font-size: .9em;
 }
-/* line 68, ../sass/_specialTable.scss */
+/* line 70, ../sass/_specialTable.scss */
 .table-liste-infos table tfoot p {
   font-size: .8em;
 }
-/* line 71, ../sass/_specialTable.scss */
+/* line 73, ../sass/_specialTable.scss */
 .table-liste-infos table tfoot .tot {
   text-align: right;
 }
-/* line 75, ../sass/_specialTable.scss */
+/* line 77, ../sass/_specialTable.scss */
 .table-liste-infos table tfoot .btn {
   font-size: .9em;
   padding: .3em;

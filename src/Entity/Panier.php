@@ -223,7 +223,7 @@ class Panier{
         $products = $this->getDb()->prepare('SELECT * FROM Panier WHERE User_id = ? AND Product_id=? OR session_id = ? AND Product_id = ?');
         $products->execute(array($userId, $productId, $sessionId, $productId));
         
-        return $products;
+        return $products->fetch();
     }
     
     // Update panier
@@ -243,10 +243,22 @@ class Panier{
         // Si le produit en question existe
         if ($product != null) {
             $existProduct = $this->productExistForUser($sessionId, $userId, $productId);
+            $panier = $this->getProductPanierByUserId($userId, $sessionId);
             // Si le produit ne se trouve pas déjà dans le panier
-            if(isset($_SESSION['panier'][$productId]) AND $existProduct == true){
+            if($existProduct == true){
                 // si oui on incremente la quantity
-                $_SESSION['panier'][$productId]++;
+                if(!isset($_SESSION['panier']) AND !isset($_SESSION['panier'][$productId]) OR empty($_SESSION['panier'])){
+                    $_SESSION['panier'] = array();
+                                        
+                    foreach ($panier as $key => $product) {
+                        $_SESSION['panier'][$product['Product_id']] = ($product['quantity'] + 1);
+                    }
+                    
+                }else{    
+                    $_SESSION['panier'][$productId]= ($existProduct['quantity'] + 1);
+                }
+
+                
                 $montant = ($product['price'] * $_SESSION['panier'][$productId]);
                 $quantity = $_SESSION['panier'][$productId];
                 

@@ -3,6 +3,13 @@ use App\Entity\Commande;
 
 $getCommandes = new Commande();
 $commandes = $getCommandes->getAllCommandeByUserId($_SESSION['user']['id']);
+$lien = '';
+
+if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'boutiquier'){
+    $lien = '../pages/admin.php';
+}else{
+    $lien = '../pages/profile.php';
+}
  ?>
 <div class="profile-detaille">
     <?php if($commandes != null): ?>
@@ -28,7 +35,7 @@ $commandes = $getCommandes->getAllCommandeByUserId($_SESSION['user']['id']);
                         <td><?= $commande['status'] ?></td>
                         <td><?= $commande['montant'] ?> €</td>
                         <td><?= $commande['adresse'] ?></td>
-                        <td><a href="../pages/profile.php?url=detailleCommande&c=<?= $commande['id'] ?>">Detailles</a></td>
+                        <td><a href="<?= $lien ?>?url=detailleCommande&c=<?= $commande['id'] ?>">Detailles</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

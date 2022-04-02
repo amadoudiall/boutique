@@ -13,7 +13,6 @@ $login = new Connection();
 
 if (isset($_POST['connection'])) {
     $login->Login();
-    header("Location: /");
 }
 
 if(isset($_GET['logout'])){

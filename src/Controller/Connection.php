@@ -39,7 +39,7 @@ class Connection
                 if ($result['email'] == $username or $result['tel'] == $username) {
                     
                     // Verifier si le mot de passe correspond à celui du formulaire;
-                    if ($result['pwd'] === $pwd) {
+                    if ($result['pwd'] == $pwd) {
                         
                         // Initialiser la session['user'];
                         $_SESSION['user'] = $result;
@@ -57,7 +57,8 @@ class Connection
                         
                         // Mettre à jour le panier pour charger $userId;
                         $panier->isCnnected($userId, $sessionId);
-
+                        
+                        header("Location: HTTP_REFERER");
                     } else {
                         $this->setErreur('Mot de passe incorecte !');
                     }

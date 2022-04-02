@@ -30,7 +30,7 @@ ob_start();
             <?php
             foreach ($categorys as $key => $category): ?>
               <div class="c-item">
-                <a href="./pages/category.php?category=<?= $category['id'] ?>" title="<?= $category['desc'] ?>"><?= $category['icon'] ?> <?= $category['category'] ?></a>
+                <a href="./pages/category.php?category=<?= $category['id'] ?>" title="<?= $category['descriptions'] ?>"><?= $category['icon'] ?> <?= $category['category'] ?></a>
               </div>
             <?php endforeach ?>
         </div>

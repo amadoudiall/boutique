@@ -12,26 +12,44 @@ Autoloader::register();
 $Bd = new Bdd();
 $getPanier = new Panier;
 
+if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'boutiquier'){
+    $lien = '../pages/admin.php';
+}else{
+    $lien = '../pages/profile.php';
+}
+
 if(isset($_GET['commande']) and !empty($_GET['commande'])){
     $commande = new addCommande;
     $commande->add();
-    header('location: ../pages/profile.php?url=myCommande');
+    header('location: '.$lien.'?url=myCommande');
 }
 
+// Modifier manuellement la quantité d'un produit dans le panier
 if(isset($_POST['panier']['quantity']) AND $_POST['panier']['quantity'] > 0){
     
     $sessionId = $_SESSION['sessionId'];
+    
+    // si l'utilisateur est connecté
     if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])){
         $userId = $_SESSION['user']['id'];
     }else{
         $userId = null;
     }
+    
+    // recuperer le produit dans le panier
     $productInPanier = $getPanier->getProductPanierByUserId($userId, $sessionId);
-    foreach ($_SESSION['panier'] as $productId => $panier) {
-        if(isset($_POST['panier']['quantity'][$productId])){
-            $_SESSION['panier'][$productId] = $_POST['panier']['quantity'][$productId];
-            $montant = ($_SESSION['product']['price'][$productId] * $_POST['panier']['quantity'][$productId]);
-            $getPanier->update($_POST['panier']['quantity'][$productId], $productId, $userId, $sessionId, $montant);
+    // si l'utilisateur a modifier la quantité de un ou de plusieurs produits
+    foreach ($productInPanier as $key => $product) {
+        
+        // Si l'utilisateur a cliqué sur le bouton recalculer
+        if(isset($_POST['panier']['quantity'][$product['Product_id']])){
+            
+            // Modified quantity
+            $_SESSION['panier'][$product['Product_id']] = $_POST['panier']['quantity'][$product['Product_id']];
+            // modified montant
+            $montant = ($_SESSION['product']['price'][$product['Product_id']] * $_POST['panier']['quantity'][$product['Product_id']]);
+            // update quantity & montant
+            $getPanier->update($_POST['panier']['quantity'][$product['Product_id']], $product['Product_id'], $userId, $sessionId, $montant);
         }
     }
 }
@@ -129,7 +147,7 @@ if($products != null):
                             
                                     <td><?= number_format($product['montant'], 0, '', ' ') ?><span class="suffix"><?= Product::SUFFIX_DEVISE ?></span></td>
                             
-                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-x"></i> Supprimer</span></a></td>
+                                    <td><a href="../pages/panier.php?del=<?= $product['id'] ?>" class="btn supp rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"><i class="bi bi-x"></i> Supprimer</span></a></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
