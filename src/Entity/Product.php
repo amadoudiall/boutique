@@ -386,4 +386,12 @@ class Product
             'is_active' => $this->is_active
         ]);
     }
+    
+    // delete Product
+    public function deleteProduct($id)
+    {
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('DELETE FROM Product WHERE id = ?');
+        $bddstatement->execute(array($id));
+    }
 }

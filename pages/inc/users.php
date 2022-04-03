@@ -1,9 +1,30 @@
 <?php
-if ($_SESSION['user']['roles'] != 'admin') {
+if ($_SESSION['user']['roles'] == 'profile') {
     header('location: ./profile.php');
 }
 use \App\Entity\User;
+$getUser = new User();
 
+if(isset($_GET['banUser']) AND !empty($_GET['banUser'])){
+    $id = $_GET['banUser'];
+    if($_SESSION['user']['roles'] == 'admin'){
+        $getUser->setIs_active(3);
+        $getUser->banUser($id);
+    }
+}
+if(isset($_GET['checkUser']) AND !empty($_GET['checkUser'])){
+    $id = $_GET['checkUser'];
+    if($_SESSION['user']['roles'] == 'admin'){
+        $getUser->setIs_active(1);
+        $getUser->banUser($id);
+    }
+}
+if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
+    $id = $_GET['delUser'];
+    if($_SESSION['user']['roles'] == 'admin'){
+        $getUser->deleteUser($id);
+    }
+}
 ?>
 
 <div class="product_list">
@@ -23,8 +44,7 @@ use \App\Entity\User;
                 </tr>
             </thead>
             <tbody>
-                <?php $getUser = new User();
-                $users = $getUser->getUsers();
+                <?php $users = $getUser->getUsers();
                 foreach ($users as $key => $user) : ?>
                     <tr>
                         <td><?= $user['prenom'] ?></td>
@@ -36,13 +56,23 @@ use \App\Entity\User;
                         <td><?= $user['roles'] ?></td>
                         <td><?= $user['created_at'] ?></td>
                         <td>
-                            <a href="../pages/admin.php?url=edit_user" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
-                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
-                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                            <a href="../pages/admin.php?url=editUser&id=<?= $user['id'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
+                            <?php if($user['is_active'] == 3): ?>
+                                <a href="../pages/admin.php?url=users&checkUser=<?= $user['id'] ?>" class="btn rounded-1 green text-white" title="Réactiver l'utilisateur"><i class="bi bi-person-check"></i></a>
+                                <a href="../pages/admin.php?url=users&delUser=<?= $user['id'] ?>" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                            <?php else : ?>
+                                <a href="../pages/admin.php?url=users&banUser=<?= $user['id'] ?>" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8"></td>
+                    <td><a href="../pages/admin.php?url=addUser" class="btn rounded-1 green text-white" title="Modifier l'utilisateur">Ajouter un utilisateur</a></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

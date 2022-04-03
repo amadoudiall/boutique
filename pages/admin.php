@@ -36,8 +36,10 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/settings.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'users') {
     require('./inc/users.php');
-}elseif (isset($_GET['url']) and $_GET['url'] === 'editUser') {
+}elseif (isset($_GET['url']) and $_GET['url'] === 'addUser') {
     require('./inc/editUser.php');
+}elseif (isset($_GET['url']) and $_GET['url'] === 'editUser') {
+        require('./inc/editUser.php');
 }elseif (isset($_GET['url']) and $_GET['url'] === 'addProduct') {
     require('./inc/addProduct.php');
 }elseif (isset($_GET['url']) and $_GET['url'] === 'editProduct') {

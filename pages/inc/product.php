@@ -1,5 +1,14 @@
 <?php
 use \App\Entity\Product;
+$getProduct = new Product();
+
+if(isset($_GET['delProduct'])){
+    $thisProduct = $getProduct->getProductById($_GET['delProduct']);
+    if($thisProduct['User_id'] == $_SESSION['user']['id'] OR $_SESSION['user']['roles'] == 'admin'){
+        $getProduct->deleteProduct($_GET['delProduct']);
+    }
+}
+
 ?>
 <div class="product_list">
         <a href="../pages/admin.php?url=addCategory" class="btn primary">Gèrer les catégories</a>
@@ -29,8 +38,7 @@ use \App\Entity\Product;
                         <td><?= $product['date_expiration'] ?></td>
                         <td>
                             <a href="../pages/admin.php?url=editProduct&id=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
-                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Suspendre l'utilisateur"><i class="bi bi-person-x"></i></a>
-                            <a href="../pages/admin.php?url=delete_user" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                            <a href="../pages/admin.php?url=product&delProduct=<?= $product['idProduct'] ?>" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>

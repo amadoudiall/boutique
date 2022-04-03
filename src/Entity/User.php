@@ -227,8 +227,16 @@ class User
 
     public function getUsers()
     {
-        $users = $this->getDb()->query('SELECT * FROM User');
+        $users = $this->getDb()->query('SELECT * FROM User ORDER BY id DESC');
         return $users->fetchAll();
+    }
+    
+    // getUserById
+    public function getUserById($id)
+    {
+        $user = $this->getDb()->prepare('SELECT * FROM User WHERE id = ?');
+        $user->execute(array($id));
+        return $user->fetch();
     }
 
     public function flushUser()
@@ -247,6 +255,30 @@ class User
             'is_active' => $this->is_active
         ]);
     }
+    
+    // Update User
+    public function updateUser($id)
+    {
+        $updateUser = $this->getDb()->prepare('UPDATE User SET nom = :nom, prenom = :prenom, adresse = :adresse, tel = :tel, roles = :roles WHERE id = :id');
+        $updateUser->execute([
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'adresse' => $this->adresse,
+            'tel' => $this->tel,
+            'roles' => $this->roles,
+            'id' => $id
+        ]);
+    }
+    
+    // Banning User
+    public function banUser($id)
+    {
+        $banUser = $this->getDb()->prepare('UPDATE User SET is_active = :is_active WHERE id = :id');
+        $banUser->execute([
+            'is_active' => $this->is_active,
+            'id' => $id
+        ]);
+    }
 
     public function getUserByUnique($tel)
     {
@@ -260,5 +292,12 @@ class User
         $statement = $this->getDb()->prepare('SELECT * FROM User WHERE email = ? OR tel = ?');
         $statement->execute(array($username, $username));
         return $statement->fetch();
+    }
+    
+    // deleteUser
+    public function deleteUser($id)
+    {
+        $deleteUser = $this->getDb()->prepare('DELETE FROM User WHERE id = ?');
+        $deleteUser->execute(array($id));
     }
 }

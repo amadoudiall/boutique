@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use \App\Entity\User;
+use \App\Entity\Panier;
 
 class Inscription
 {
@@ -43,17 +44,22 @@ class Inscription
                             ->setCreated_at($created_at)
                             ->setIs_active(2);
                         $users->flushUser();
-
-                        $_SESSION['user'] = $result;
-                        //header('location: /');
+                        session_start();
+                        
+                        // Récuperer l'utilisateur par sont Userame (Téléphone ou E-mail);
+                        $user = $users->getUserByLogin($tel, $pwd);
+                        if($user != null){
+                            $_SESSION['user'] = $user;
+                            $userId = $_SESSION['user']['id'];
+                            $sessionId = null;
+                            if(isset($_SESSION['sessionId'])){
+                                $sessionId = $_SESSION['sessionId'];
+                            }
+                            $panier = new Panier();
+                            $panier->isCnnected($userId, $sessionId);
+                            header('Location: /');
+                        }
                 }else{
-                    
-                    $this->setErreur(' ayez déja un compte !');
-
-                    if($result['email'] === $email){
-                        $this->setErreur('Il semble que vous vous êtes déja inscrit. votre adresse mail est associé a un compte !');
-                    }
-
                     if($result['tel'] === $tel){
                         $this->setErreur('Il semble que vous vous êtes déja inscrit. votre numéro de téléphone est associé a un compte !');
                     }
