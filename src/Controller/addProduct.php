@@ -32,6 +32,13 @@ class addProduct{
     }
 
     public function add(){
+        
+        // pour la redirection
+        if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'boutiquier'){
+            $lien = '../pages/admin.php';
+        }else{
+            $lien = '../pages/profile.php';
+        }
 
         if(isset($_POST['nom']) and !empty($_POST['nom']) and isset($_POST['price']) and !empty($_POST['price'])
             and isset($_POST['category']) and !empty($_POST['category']) and isset($_FILES['img']) and !empty($_FILES['img'])
@@ -72,13 +79,16 @@ class addProduct{
                     ->setPromo(0)
                     ->setUpdatedAt($updatedAt)
                     ->setCreatedAt($createdAt)
-                    ->setUser($user);
+                    ->setUser($user)
+                    ->setVentes(0)
+                    ->setIs_active(0);
             $product->flushProduct();
             $this->setSuccess('Tout c\'est bien passée !');
         }else{
             $this->setErreur('Tout les champs sonts obligatoire !');
         }
-
+        
+        header('location: '.$lien.'?url=product');
     }
 
     /**

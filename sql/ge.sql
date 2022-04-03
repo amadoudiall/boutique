@@ -41,6 +41,8 @@ CREATE TABLE `Product`(
     `updated_at` DATETIME,
     `created_at` DATETIME,
     `User_id` INT(11),
+    `ventes` INT(11),
+    `is_active` INT(11),
     CONSTRAINT FOREIGN KEY (`Category_id`) REFERENCES `Category`(`id`),
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
@@ -61,7 +63,7 @@ CREATE TABLE `Commande`(
     `User_id` INT,
     `createdAt` DATE,
     `chipedAt` DATE,
-    `status` ENUM('en cours', 'en attente', 'livré'),
+    `status` ENUM('En cours', 'En attente', 'Livré'),
     `montant` FLOAT,
     `adresse` VARCHAR(255),
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
@@ -74,6 +76,7 @@ CREATE TABLE `Commande_product`(
     `quantity` INT,
     `priceU` FLOAT,
     `priceT` FLOAT,
+    `etat` ENUM('En cours', 'En attente', 'Livré'),
     CONSTRAINT FOREIGN KEY (`Commande_id`) REFERENCES `Commande`(`id`),
     CONSTRAINT FOREIGN KEY (`Product_id`) REFERENCES `Product`(`id`)
 );

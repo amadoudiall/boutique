@@ -1,9 +1,14 @@
 <?php 
 use App\Entity\Commande;
-
 $getCommandes = new Commande();
+
+if(isset($_GET['validerCommande']) and !empty($_GET['validerCommande'])){
+    $getCommandes->updateCommandeStatus($_GET['validerCommande'], 'En cours');
+}
+
 $commandes = $getCommandes->getAllCommande();
 $lien = '';
+
 
 if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'boutiquier'){
     $lien = '../pages/admin.php';
@@ -36,9 +41,9 @@ if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'bouti
                         <td><?= $commande['montant'] ?> €</td>
                         <td><?= $commande['adresse'] ?></td>
                         <td>
-                            <a href="<?= $lien ?>?url=valider&c=<?= $commande['id'] ?>" class="btn btn-secondary text-white"> Valider <i class="bi bi-check-lg"></i></a>
+                            <a href="<?= $lien ?>?url=userCommande&validerCommande=<?= $commande['id'] ?>&c=<?= $commande['id'] ?>" class="btn btn-secondary text-white"> Valider <i class="bi bi-check-lg"></i></a>
                             <a href="<?= $lien ?>?url=refuser&c=<?= $commande['id'] ?>" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"> Refuser <i class="bi bi-x"></i></span></a>
-                            <a href="<?= $lien ?>?url=detailleCommande&c=<?= $commande['id'] ?>">Detailles →</a>
+                            <a href="<?= $lien ?>?url=userCommandeDetille&c=<?= $commande['id'] ?>">Detailles →</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -21,6 +21,8 @@ class Product
     public string $updatedAt;
     public string $createdAt;
     public string $user;
+    public int $ventes;
+    public int $is_active;
 
     //se suffix permet d'afficher la devise devant le prix a l'affichage
     const SUFFIX_DEVISE = " FCFA";
@@ -286,6 +288,46 @@ class Product
 
         return $this;
     }
+    
+    /**
+     * Get the value of ventes
+     */ 
+    public function getVentes()
+    {
+        return $this->ventes;
+    }
+
+    /**
+     * Set the value of ventes
+     *
+     * @return  self
+     */ 
+    public function setVentes($ventes)
+    {
+        $this->ventes = $ventes;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_active
+     */ 
+    public function getIs_active()
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * Set the value of is_active
+     *
+     * @return  self
+     */ 
+    public function setIs_active($is_active)
+    {
+        $this->is_active = $is_active;
+
+        return $this;
+    }
 
     // Recuperer la base de données
     public function getDb()
@@ -314,10 +356,18 @@ class Product
         $products = $bddstatement->fetch();
         return $products;
     }
+    
+    // update Product quantity
+    public function sellProduct($quantity, $id, $userId)
+    {
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('UPDATE Product SET stock_actuel = stock_actuel - ?, ventes = ventes + ? WHERE id = ? AND User_id = ?');
+        $bddstatement->execute(array($quantity, $quantity, $id, $userId));
+    }
 
     public function flushProduct()
     {
-        $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, User_id) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :User_id)');
+        $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :User_id, :ventes, :is_active)');
         $addUser->execute([
             'nom' => $this->nom,
             'price' => $this->price,
@@ -331,7 +381,9 @@ class Product
             'promo' => $this->promo,
             'updated_at' => $this->updatedAt,
             'created_at' => $this->createdAt,
-            'User_id' => $this->user
+            'User_id' => $this->user,
+            'ventes' => $this->ventes,
+            'is_active' => $this->is_active
         ]);
     }
 }

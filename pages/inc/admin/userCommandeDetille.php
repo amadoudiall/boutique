@@ -3,7 +3,6 @@ use App\Entity\Commande;
 $getCommande = new Commande();
 $erreur = null;
 $userId = $_SESSION['user']['id'];
-
 if(isset($_GET['c']) and !empty($_GET['c'])){
     $productCommande = $getCommande->getProductByCommandeId($userId, $_GET['c']);
     $userCommande = $getCommande->getAllCommandeByUserId($userId);
@@ -29,12 +28,16 @@ if($productCommande != null): ?>
             <tbody>
                 <?php foreach($productCommande as $product): ?>
                     <tr>
-                        <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
+                        <td><img src=".../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
                         <td><a href="/pages/product.php?product=<?= $product['id'] ?>"><?= $product['nom'] ?></a></td>
                         <td><?= $product['quantity'] ?></td>
                         <td><?= $product['priceU'] ?> <span class="suffix">FCFA</span></td>
                         <td><?= $product['priceT'] ?> <span class="suffix">FCFA</span></td>
-                        <td><a href="../pages/product.php?product=<?= $product['id'] ?>">Detaille</a></td>
+                        <td>
+                            <a href="<?= $lien ?>?url=valider&c=<?= $commande['id'] ?>" class="btn btn-secondary text-white"> Valider <i class="bi bi-check-lg"></i></a>
+                            <a href="<?= $lien ?>?url=refuser&c=<?= $commande['id'] ?>" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"> Refuser <i class="bi bi-x"></i></span></a>
+                            <a href="<?= $lien ?>?url=userCommandeDetille&c=<?= $commande['id'] ?>">Detailles →</a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

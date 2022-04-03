@@ -19,6 +19,7 @@ Autoloader::register();
 
 
 $title = "Admin";
+
 ob_start();
 
 if (isset($_GET['url']) and $_GET['url'] === 'product') {

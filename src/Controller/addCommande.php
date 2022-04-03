@@ -2,6 +2,8 @@
 namespace App\Controller;
 use App\Entity\Panier;
 use App\Entity\Commande;
+use App\Entity\Commande_product;
+use App\Entity\Product;
 
 class addCommande{
     public $erreur;
@@ -24,20 +26,21 @@ class addCommande{
                 $commande->setUserId($userId);
                 $commande->setCreatedAt($createdAt);
                 $commande->setChipedAt($chipedAt);
-                $commande->setStatus('En cours');
+                $commande->setStatus('En attente');
                 $commande->setMontant($panier->total($products));
                 $commande->setAdresse($_SESSION['user']['adresse']);
                 $commande->flushCommande();
                                 
                 // lastInsertId() retourne l'id de la dernière commande insérée
-                $lasteCommandeId = $commande->getLastCommandeId();
-            
+                $lasteCommandeId = $commande->getLastCommandeId($userId);
                 foreach($products as $product){
-                    $commande->setCommandeId($lasteCommandeId);
+                    $commande->setCommandeId($lasteCommandeId['id']);
                     $commande->setProductId($product['id']);
                     $commande->setQuantity($product['quantity']);
                     $commande->setPriceU($product['price']);
                     $commande->setPriceT($product['price'] * $product['quantity']);
+                    $commande->setEtat('En attente');
+                    
                     $commande->flushCommandeProduct();
                 }
             
@@ -48,6 +51,23 @@ class addCommande{
                 header('location: ../pages/connexion.php?error=Vous devez être connecté pour valider votre commande');
             }
             
+        }
+    }
+    
+    // confirmer un produit
+    public function confirmerProduit($commandeId, $productId){
+        $userId = $_SESSION['user']['id'];
+        $commande = new Commande();
+        $getProduct = new Product();
+        $product = $getProduct->getProductById($productId);
+        $productCommande = $commande->getOneProductByCommandeBySellerId($userId, $productId);
+        
+        if($product['is_active'] === '1' AND $product['quantity'] > $productCommande['quantity']){
+            
+            $quantity = ($product['quantity'] - $productCommande['quantity']);
+            $commande->confirmerProduit($commandeId, $productId, $quantity, $userId);
+        }else{
+            $this->setErreur('Le produit n\'est plus disponible');
         }
     }
 

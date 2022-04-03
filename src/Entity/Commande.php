@@ -2,7 +2,7 @@
 namespace App\Entity;
 use App\Bdd\Bdd;
 use App\Entity\User;
-use App\Entity\Produit;
+use App\Entity\Product;
 
 class Commande{
     // Commande
@@ -19,6 +19,11 @@ class Commande{
     public $quantity;
     public $priceU;
     public $priceT;
+    public $etat;
+    
+    public function __construct(){
+        $this->product = new Product();
+    }
     
     
     // la bdd
@@ -253,10 +258,31 @@ class Commande{
         return $this;
     }
     
+     /**
+     * Get the value of etat
+     */ 
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set the value of etat
+     *
+     * @return  self
+     */ 
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+    
+    
     // getALLCommande uniquement pour le backOfice
     public function getAllCommande()
     {
-        $result = $this->getDb()->query("SELECT * FROM Commande");
+        $result = $this->getDb()->query("SELECT * FROM Commande ORDER BY createdAt DESC");
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
@@ -276,6 +302,24 @@ class Commande{
         $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  Commande_product.Commande_id = ? AND Commande.User_id = ?");
         $result->execute(array($commandeId, $userId));
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
+        return $commande;
+    }
+    
+    // getProductCommande bay sellerId uniquement pour le backOfice
+    public function getProductCommandeBySellerId($sellerId)
+    {
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id WHERE  Product.User_id = ?");
+        $result->execute([$sellerId]);
+        $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
+        return $commande;
+    }
+    
+    // getOneProductByCommandeBySellerId
+    public function getOneProductByCommandeBySellerId($sellerId, $productId)
+    {
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id WHERE  Product.User_id = ? AND Commande_product.Product_id = ?");
+        $result->execute([$sellerId, $productId]);
+        $commande = $result->fetch(\PDO::FETCH_ASSOC);
         return $commande;
     }
     
@@ -304,7 +348,7 @@ class Commande{
             $chipedAt = null;
         }
         
-        $result = $this->getDb()->prepare("UPDATE Commande SET chipedAt = :chipedAt, status = :status, WHERE id = :commandeId");
+        $result = $this->getDb()->prepare("UPDATE commande SET chipedAt = :chipedAt, status = :status, WHERE id = :commandeId");
         $result->execute([
             'chipedAt' => $chipedAt,
             'status' => $status,
@@ -314,12 +358,12 @@ class Commande{
     }
     
     // le id de la dernière commande créée
-    public function getLastCommandeId()
+    public function getLastCommandeId($userId)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE createdAt = ?");
-        $result->execute([$this->createdAt]);
+        $result = $this->getDb()->prepare("SELECT * FROM Commande WHERE User_id = ? ORDER BY id DESC LIMIT 1");
+        $result->execute([$userId]);
         $commande = $result->fetch();
-        return $commande['id'];
+        return $commande;
     }
     
     // getCommandeByStatus uniquement pour le backoffice
@@ -329,6 +373,32 @@ class Commande{
         $result->execute([$status]);
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
+    }
+    
+    // Confirmer les produits dans produit_commande
+    public function confirmerProduit($commandeId, $productId, $quantity, $userId)
+    {
+        $this->product->sellProduct($quantity, $productId, $userId);
+        
+        $result = $this->getDb()->prepare("UPDATE Commande_product SET status = 'En attente' WHERE Commande_id = ? AND Product_id = ?");
+        $result->execute([$commandeId, $productId]);
+        return $result;
+    }
+    
+    // UpdateCommandeStatus
+    public function updateCommandeStatus($commandeId, $status)
+    {
+        $result = $this->getDb()->prepare("UPDATE Commande SET status = ? WHERE id = ?");
+        $result->execute([$status, $commandeId]);
+        return $result;
+    }
+    
+    // traiterCommande
+    public function traiterCommande($commandeId)
+    {
+        $result = $this->getDb()->prepare("UPDATE Commande SET status = 'En cours' WHERE id = ?");
+        $result->execute([$commandeId]);
+        return $result;
     }
     
     // getUserCommandeByStatus pour le front
@@ -343,14 +413,16 @@ class Commande{
     // Create product in Commande
     public function flushCommandeProduct()
     {
-        $result = $this->getDb()->prepare("INSERT INTO Commande_product (commande_id, product_id, quantity, priceU, priceT) VALUES (:commandeId, :productId, :quantity, :priceU, :priceT)");
+        $result = $this->getDb()->prepare("INSERT INTO Commande_product (commande_id, product_id, quantity, priceU, priceT, etat) VALUES (:commandeId, :productId, :quantity, :priceU, :priceT, :etat)");
         $result->execute([
             'commandeId' => $this->commandeId,
             'productId' => $this->productId,
             'quantity' => $this->quantity,
             'priceU' => $this->priceU,
-            'priceT' => $this->priceT
+            'priceT' => $this->priceT,
+            'etat' => $this->etat
         ]);
         return $result;
     }
+
 }

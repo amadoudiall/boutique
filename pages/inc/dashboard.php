@@ -4,13 +4,16 @@ use App\Entity\Bdd;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Commande;
 
 $getUsers = new User();
 $getProducts = new Product();
 $getCategorys = new Category();
-
+$getCommande = new Commande();
+$userId = $_SESSION['user']['id'];
 $users = $getUsers->getUsers();
 $products = $getProducts->getProducts();
+$commandes = $getCommande->getCommandeByStatus('en attente');
 
 ?>
 <div class="content dashboard rounded-1">
@@ -59,36 +62,36 @@ $products = $getProducts->getProducts();
     <div class="grix xs2">
         <div class="new-product table-infos white rounded-1 shadow-1">
             <div class="title-marked">
-                <span class="rounded-1">Produit récement ajoutée</span>
+                <span class="rounded-1">Commande en attante</span>
             </div>
             <table class="table table-striped">
                 <thead>
-                    <th>#</th>
-                    <th>Nom</th>
-                    <th>Catégorie</th>
-                    <th>Prix</th>
+                    <th>N°</th>
+                    <th>Date</th>
+                    <th>Produits</th>
+                    <th>Montant</th>
                 </thead>
                 <tbody>
-                    <?php foreach ($products as $key => $product) :?>
+                    <?php foreach ($commandes as $key => $commande) : $productCommandes = $getCommande->getProductByCommandeId($userId, $commande['id']);?>
                         <tr>
-                            <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt=""></td>
-                            <td><?= $product['nom'] ?></td>
-                            <td><?= $product['category'] ?></td>
-                            <td><?= $product['price'] ?></td>
+                            <td><?= $commande['id'] ?></td>
+                            <td><?= $commande['createdAt'] ?></td>
+                            <td><?= count($productCommandes); ?></td>
+                            <td><?= $commande['montant'] ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3"></td>
-                        <td><a href="../pages/admin.php?url=product" class="btn btn-primary">Gérer les produits</a></td>
+                        <td><a href="../pages/admin.php?url=userCommande" class="btn btn-primary">Gérer les commandes</a></td>
                     </tr>
                 </tfoot>
             </table>
         </div>
         <div class="new-product table-infos white rounded-1 shadow-1">
             <div class="title-marked">
-                <span class="rounded-1">Nouveaux utilisateurs</span>
+                <span class="rounded-1">Nouveau produits</span>
             </div>
             <table class="table table-striped">
                 <thead>
