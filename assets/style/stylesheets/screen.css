@@ -252,20 +252,69 @@ header nav ul .dropdown_parent {
 }
 
 /* line 1, ../sass/_admin.scss */
-.content {
-  margin: 20px;
+.admin {
+  background: #fff;
+  padding: 10px;
+}
+/* line 5, ../sass/_admin.scss */
+.admin .utils {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* line 11, ../sass/_admin.scss */
+.admin .utils h2 {
+  flex-grow: 2;
+  margin: 0;
+  padding: 0;
+  float: left;
+  font-size: 1.4em;
+  font-weight: 400;
+}
+/* line 19, ../sass/_admin.scss */
+.admin .utils form {
+  flex-grow: 6;
+  margin-right: 10px;
+  text-align: right;
+}
+/* line 24, ../sass/_admin.scss */
+.admin .utils form input {
+  margin: 0;
+  width: 50%;
+}
+/* line 29, ../sass/_admin.scss */
+.admin .utils form button {
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: 400;
+  background: #006d77;
+}
+/* line 39, ../sass/_admin.scss */
+.admin .utils .links {
+  flex-grow: 2;
+  padding: 5px;
+  text-align: right;
+}
+/* line 47, ../sass/_admin.scss */
+.admin .form {
+  width: 50%;
+  padding: 5px;
+  margin: auto;
 }
 
-/* line 7, ../sass/_admin.scss */
+/* line 56, ../sass/_admin.scss */
 .dashboard .title-marked {
   margin: 5px;
 }
-/* line 9, ../sass/_admin.scss */
+/* line 58, ../sass/_admin.scss */
 .dashboard .title-marked span {
   padding: 3px;
   font-size: .8em;
 }
-/* line 13, ../sass/_admin.scss */
+/* line 62, ../sass/_admin.scss */
 .dashboard .title-marked .vente-note {
   color: #1b6d1b;
   padding: 2px;
@@ -273,17 +322,17 @@ header nav ul .dropdown_parent {
   background: #befabe;
   border-radius: 3px;
 }
-/* line 22, ../sass/_admin.scss */
+/* line 71, ../sass/_admin.scss */
 .dashboard .item {
   margin: 5px;
   padding: 10px;
   color: #3f3e3e;
 }
-/* line 27, ../sass/_admin.scss */
+/* line 76, ../sass/_admin.scss */
 .dashboard .item div, .dashboard .item .nombre {
   display: block;
 }
-/* line 30, ../sass/_admin.scss */
+/* line 79, ../sass/_admin.scss */
 .dashboard .item .nombre {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -294,24 +343,24 @@ header nav ul .dropdown_parent {
   text-align: center;
   color: #3f3e3e;
 }
-/* line 42, ../sass/_admin.scss */
+/* line 91, ../sass/_admin.scss */
 .dashboard .table-infos {
   margin: 5px;
 }
-/* line 46, ../sass/_admin.scss */
+/* line 95, ../sass/_admin.scss */
 .dashboard .table-infos table tr {
   height: 20px;
 }
-/* line 48, ../sass/_admin.scss */
+/* line 97, ../sass/_admin.scss */
 .dashboard .table-infos table tr td {
   padding-left: 10px;
   font-size: .9em;
 }
-/* line 51, ../sass/_admin.scss */
+/* line 100, ../sass/_admin.scss */
 .dashboard .table-infos table tr td img {
   height: 19px;
 }
-/* line 58, ../sass/_admin.scss */
+/* line 107, ../sass/_admin.scss */
 .dashboard .table-infos table tfoot a {
   font-size: .8em;
   float: right;
@@ -519,6 +568,27 @@ header nav ul .dropdown_parent {
 .table-liste-infos table tfoot .btn {
   font-size: .9em;
   padding: .3em;
+}
+
+/* line 86, ../sass/_specialTable.scss */
+.admin-table-list table {
+  width: 100%;
+  margin: auto;
+}
+/* line 92, ../sass/_specialTable.scss */
+.admin-table-list table thead tr th {
+  text-align: left;
+  color: #999696;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+/* line 103, ../sass/_specialTable.scss */
+.admin-table-list table tbody tr td img {
+  width: 40px;
+}
+/* line 107, ../sass/_specialTable.scss */
+.admin-table-list table tbody tr #lastTd {
+  text-align: right;
 }
 
 /* line 1, ../sass/_singleSide.scss */

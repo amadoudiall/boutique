@@ -34,7 +34,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
     $submitName = "addProduct";
 }
 ?>
-<div class="content maint">
+<div class="container admin admin-addProduct mt-3">
     <div class="addProduct form">
 
         <?php $form = new bootstrapForm($request);

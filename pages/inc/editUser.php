@@ -33,8 +33,8 @@ if(isset($_GET['url']) and $_GET['url'] === "editUser"){
     $submitName = "addUser";
 }
 ?>
-<div class="inscription">
-    <div class="form">
+<div class="container admin admin-editUser mt-3">
+    <div class="editUser form">
 
         <?php $form = new bootstrapForm($request);
         $erreur = $editUser->getErreur();
@@ -47,7 +47,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editUser"){
             echo $form->input('text', 'prenom', 'Prénom');
             echo $form->input('text', 'adresse', 'Adresse');
             echo $form->input('tel', 'tel', 'Téléphone');
-            echo "<select name='roles' class='form-control'>
+            echo "<select name='roles' class='form-control mb-3'>
                     <option>-- Role --</option>
                     <option value='admin'>Admin</option>
                     <option value='boutiquier'>Boutiquier</option>

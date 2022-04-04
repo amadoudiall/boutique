@@ -9,8 +9,8 @@ if(isset($_POST['addCategory'])){
     $category->add();
 }
 ?>
-<div class="addCategory maint">
-    <div class="form">
+<div class="container admin admin-addCategory mt-3">
+    <div class="addCategory form">
 
         <?php $form = new bootstrapForm($_POST);
         $erreur = $category->getErreur();

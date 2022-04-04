@@ -27,8 +27,23 @@ if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
 }
 ?>
 
-<div class="product_list">
-    <div class="table-responsive">
+<div class="container admin admin-users rounded-1 mt-3">
+    <div class="utils">
+        <h2>Utilisateurs</h2>
+        <!-- Rechercher un produit -->
+        <form id="search" action="admin.php?url=users" method="GET">
+            <div class="form-field">
+                <div class="form-group rounded-5">
+                    <input type="search" name="url" id="name" class="form-control" placeholder="Rechercher un produit" />
+                    <button type="submit" name="search" class="form-group-item shadow-1"><i class="bi bi-search"></i> </button>
+                </div>
+            </div>
+        </form>
+        <div class="links">
+            <a href="../pages/admin.php?url=addProduct" class="btn rounded-1 green text-white" title="Ajouter un produit"><i class="bi bi-plus"></i> Ajouter un produit</a>
+        </div>
+    </div>
+    <div class="table-responsive admin-table-list">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -55,7 +70,7 @@ if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
                         <td><?= $user['email'] ?></td>
                         <td><?= $user['roles'] ?></td>
                         <td><?= $user['created_at'] ?></td>
-                        <td>
+                        <td id="lastTd">
                             <a href="../pages/admin.php?url=editUser&id=<?= $user['id'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
                             <?php if($user['is_active'] == 3): ?>
                                 <a href="../pages/admin.php?url=users&checkUser=<?= $user['id'] ?>" class="btn rounded-1 green text-white" title="Réactiver l'utilisateur"><i class="bi bi-person-check"></i></a>
