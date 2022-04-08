@@ -33,7 +33,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editUser"){
     $submitName = "addUser";
 }
 ?>
-<div class="container admin admin-editUser mt-3">
+<div class="container shadow-1 rounded-1  admin admin-editUser mt-3">
     <div class="editUser form">
 
         <?php $form = new bootstrapForm($request);

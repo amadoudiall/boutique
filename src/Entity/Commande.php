@@ -297,19 +297,19 @@ class Commande{
     }
     
     // getProductByCommandeId and by userId
-    public function getProductByCommandeId($userId, $commandeId)
+    public function getProductByCommandeId($commandeId)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  Commande_product.Commande_id = ? AND Commande.User_id = ?");
-        $result->execute(array($commandeId, $userId));
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  Commande_product.Commande_id = ?");
+        $result->execute(array($commandeId));
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
     
     // getProductCommande bay sellerId uniquement pour le backOfice
-    public function getProductCommandeBySellerId($sellerId)
+    public function getProductCommandeBySellerId($sellerId, $commandeId)
     {
-        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id WHERE  Product.User_id = ?");
-        $result->execute([$sellerId]);
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id WHERE  Product.User_id = ? AND Commande_product.Commande_id = ?");
+        $result->execute([$sellerId, $commandeId]);
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
@@ -320,6 +320,15 @@ class Commande{
         $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id WHERE  Product.User_id = ? AND Commande_product.Product_id = ?");
         $result->execute([$sellerId, $productId]);
         $commande = $result->fetch(\PDO::FETCH_ASSOC);
+        return $commande;
+    }
+    
+    // getCommandeByStatusForSeller
+    public function getCommandeByStatusForSeller($sellerId, $status)
+    {
+        $result = $this->getDb()->prepare("SELECT * FROM Commande_product LEFT JOIN Product ON Commande_product.Product_id=Product.id JOIN Commande ON Commande_product.Commande_id=Commande.id WHERE  Product.User_id = ? AND Commande.status = ?");
+        $result->execute([$sellerId, $status]);
+        $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
     

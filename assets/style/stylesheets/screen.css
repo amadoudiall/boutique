@@ -294,7 +294,7 @@ header nav ul .dropdown_parent {
 }
 /* line 39, ../sass/_admin.scss */
 .admin .utils .links {
-  flex-grow: 2;
+  flex-grow: 1;
   padding: 5px;
   text-align: right;
 }
@@ -570,23 +570,27 @@ header nav ul .dropdown_parent {
   padding: .3em;
 }
 
-/* line 86, ../sass/_specialTable.scss */
+/* line 85, ../sass/_specialTable.scss */
+.admin-table-list {
+  padding: 10px;
+}
+/* line 87, ../sass/_specialTable.scss */
 .admin-table-list table {
   width: 100%;
   margin: auto;
 }
-/* line 92, ../sass/_specialTable.scss */
+/* line 93, ../sass/_specialTable.scss */
 .admin-table-list table thead tr th {
   text-align: left;
   color: #999696;
   text-transform: uppercase;
   font-weight: 500;
 }
-/* line 103, ../sass/_specialTable.scss */
+/* line 104, ../sass/_specialTable.scss */
 .admin-table-list table tbody tr td img {
   width: 40px;
 }
-/* line 107, ../sass/_specialTable.scss */
+/* line 108, ../sass/_specialTable.scss */
 .admin-table-list table tbody tr #lastTd {
   text-align: right;
 }

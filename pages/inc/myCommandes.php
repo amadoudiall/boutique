@@ -11,7 +11,7 @@ if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'bouti
     $lien = '../pages/profile.php';
 }
  ?>
-<div class="container admin admin-commandes mt-3">
+<div class="container shadow-1 rounded-1 admin admin-commandes mt-3">
     <?php if($commandes != null): ?>
     <div class="utils">
         <h2>Mes commandes</h2>
@@ -19,7 +19,7 @@ if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'bouti
         <form id="search" action="admin.php?url=product" method="GET">
             <div class="form-field">
                 <div class="form-group rounded-5">
-                    <input type="search" name="url" id="name" class="form-control" placeholder="Rechercher un produit" />
+                    <input type="search" name="url" id="name" class="form-control" placeholder="Rechercher une commande" />
                     <button type="submit" name="search" class="form-group-item shadow-1"><i class="bi bi-search"></i> </button>
                 </div>
             </div>

@@ -9,8 +9,14 @@ if(isset($_GET['delProduct'])){
     }
 }
 
+if($_SESSION['user']['roles'] == 'admin'){
+    $products = Product::getProducts();
+}else{
+    $products = $getProduct->getProductBySellerId($_SESSION['user']['id']);
+}
+
 ?>
-<div class="container admin admin-product mt-3">
+<div class="container shadow-1 rounded-1 admin admin-product mt-3">
         <div class="utils">
             <h2>Produits</h2>
             <!-- Rechercher un produit -->
@@ -40,7 +46,7 @@ if(isset($_GET['delProduct'])){
                 </tr>
             </thead>
             <tbody>
-                <?php $products = Product::getProducts();
+                <?php
                 foreach ($products as $key => $product) : ?>
                     <tr>
                         <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt=""></td>

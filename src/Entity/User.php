@@ -227,7 +227,7 @@ class User
 
     public function getUsers()
     {
-        $users = $this->getDb()->query('SELECT * FROM User ORDER BY id DESC');
+        $users = $this->getDb()->query('SELECT * FROM User ORDER BY id DESC LIMIT 0,10');
         return $users->fetchAll();
     }
     

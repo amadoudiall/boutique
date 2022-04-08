@@ -27,20 +27,20 @@ if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
 }
 ?>
 
-<div class="container admin admin-users rounded-1 mt-3">
+<div class="container shadow-1 rounded-1 admin admin-users rounded-1 mt-3">
     <div class="utils">
         <h2>Utilisateurs</h2>
         <!-- Rechercher un produit -->
         <form id="search" action="admin.php?url=users" method="GET">
             <div class="form-field">
                 <div class="form-group rounded-5">
-                    <input type="search" name="url" id="name" class="form-control" placeholder="Rechercher un produit" />
+                    <input type="search" name="url" id="name" class="form-control" placeholder="Rechercher un utilisateur" />
                     <button type="submit" name="search" class="form-group-item shadow-1"><i class="bi bi-search"></i> </button>
                 </div>
             </div>
         </form>
         <div class="links">
-            <a href="../pages/admin.php?url=addProduct" class="btn rounded-1 green text-white" title="Ajouter un produit"><i class="bi bi-plus"></i> Ajouter un produit</a>
+            <a href="../pages/admin.php?url=addUser" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-plus"></i> Ajouter un utilisateur</a>
         </div>
     </div>
     <div class="table-responsive admin-table-list">
@@ -82,12 +82,6 @@ if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
                     </tr>
                 <?php endforeach ?>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="8"></td>
-                    <td><a href="../pages/admin.php?url=addUser" class="btn rounded-1 green text-white" title="Modifier l'utilisateur">Ajouter un utilisateur</a></td>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>

@@ -205,7 +205,7 @@ if($products != null):
                         </div>
                         <div class="review-buy">
                             <span><i class="bi bi-star-half"></i>3.8</span>
-                            <a href="./pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
+                            <a href="../pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary">Acheter</a>
                         </div>
                     </div>
                 </div>

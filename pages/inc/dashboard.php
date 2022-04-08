@@ -11,12 +11,18 @@ $getProducts = new Product();
 $getCategorys = new Category();
 $getCommande = new Commande();
 $userId = $_SESSION['user']['id'];
-$users = $getUsers->getUsers();
-$products = $getProducts->getProducts();
-$commandes = $getCommande->getCommandeByStatus('en attente');
+$categorys = $getCategorys->getCategorys();
+if($_SESSION['user']['roles'] == 'admin'){
+    $users = $getUsers->getUsers();
+    $products = $getProducts->getProducts();
+    $commandes = $getCommande->getCommandeByStatus('en attente');
+}else{
+    $products = $getProducts->getProductBySellerId($userId);
+    $commandes = $getCommande->getCommandeByStatusForSeller($userId, 'en attente');
+}
 
 ?>
-<div class="content dashboard rounded-1">
+<div class="container dashboard rounded-1 mt-3">
     <div class="grix xs4">
         
         <div class="newusers item rounded-1 white shadow-1">
@@ -59,8 +65,8 @@ $commandes = $getCommande->getCommandeByStatus('en attente');
             </div>
         </div>
     </div>
-    <div class="grix xs2">
-        <div class="new-product table-infos white rounded-1 shadow-1">
+    <div class="grix xs2 admin admin-dashboard mt-3">
+        <div class="new-product table-infos white rounded-1 shadow-1 admin-table-list">
             <div class="title-marked">
                 <span class="rounded-1">Commande en attante</span>
             </div>
@@ -68,16 +74,12 @@ $commandes = $getCommande->getCommandeByStatus('en attente');
                 <thead>
                     <th>N°</th>
                     <th>Date</th>
-                    <th>Produits</th>
-                    <th>Montant</th>
                 </thead>
                 <tbody>
-                    <?php foreach ($commandes as $key => $commande) : $productCommandes = $getCommande->getProductByCommandeId($userId, $commande['id']);?>
+                    <?php foreach ($commandes as $key => $commande) :?>
                         <tr>
                             <td><?= $commande['id'] ?></td>
                             <td><?= $commande['createdAt'] ?></td>
-                            <td><?= count($productCommandes); ?></td>
-                            <td><?= $commande['montant'] ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
@@ -89,7 +91,7 @@ $commandes = $getCommande->getCommandeByStatus('en attente');
                 </tfoot>
             </table>
         </div>
-        <div class="new-product table-infos white rounded-1 shadow-1">
+        <div class="new-product table-infos white rounded-1 shadow-1 admin-table-list">
             <div class="title-marked">
                 <span class="rounded-1">Nouveau produits</span>
             </div>

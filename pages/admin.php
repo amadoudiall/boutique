@@ -30,6 +30,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/commandeDetaille.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'userCommande') {
     require('./inc/commandes.php');
+} elseif (isset($_GET['url']) and $_GET['url'] === 'userCommandeDetille') {
+        require('./inc/admin/userCommandeDetille.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'rapport') {
     require('./inc/rapports.php');
 } elseif (isset($_GET['url']) and $_GET['url'] === 'setting') {

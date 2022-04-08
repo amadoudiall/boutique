@@ -4,17 +4,20 @@ $getCommande = new Commande();
 $erreur = null;
 $userId = $_SESSION['user']['id'];
 if(isset($_GET['c']) and !empty($_GET['c'])){
-    $productCommande = $getCommande->getProductByCommandeId($userId, $_GET['c']);
+    if($_SESSION['user']['roles'] == 'admin'){
+        $productCommande = $getCommande->getProductByCommandeId($_GET['c']);
+    }else{
+        $productCommande = $getCommande->getProductCommandeBySellerId($userId, $_GET['c']);
+    }
     $userCommande = $getCommande->getAllCommandeByUserId($userId);
 }else{
     $productCommande = null;
     $erreur = "Desolé cette commande n'est pas disponible !";
 }
-
 if($productCommande != null): ?>
- <div class="commandeProduct">
-    <div class="table table-liste-infos">
-        <table class="table">
+ <div class="container shadow-1 rounded-1 admin admin-users-commande-detaille rounded-1 mt-3">
+    <div class="table-responsive admin-table-list">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -28,7 +31,7 @@ if($productCommande != null): ?>
             <tbody>
                 <?php foreach($productCommande as $product): ?>
                     <tr>
-                        <td><img src=".../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
+                        <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
                         <td><a href="/pages/product.php?product=<?= $product['id'] ?>"><?= $product['nom'] ?></a></td>
                         <td><?= $product['quantity'] ?></td>
                         <td><?= $product['priceU'] ?> <span class="suffix">FCFA</span></td>

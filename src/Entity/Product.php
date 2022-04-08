@@ -387,6 +387,18 @@ class Product
         ]);
     }
     
+    // getProductBySellerId
+    
+    public function getProductBySellerId($id)
+    {
+        $connect = new Bdd();
+        $bddcontent = 'SELECT *, Product.id as idProduct FROM Product LEFT JOIN Category ON Category.id = Product.Category_id WHERE User_id = ?';
+        $bddstatement = $connect->connect()->prepare($bddcontent);
+        $bddstatement->execute(array($id));
+        $products = $bddstatement->fetchAll();
+        return $products;
+    }
+    
     // delete Product
     public function deleteProduct($id)
     {
