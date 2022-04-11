@@ -20,7 +20,7 @@ $form = new bootstrapForm();
              echo $erreur;
         } ?>
         <h2>Modifier vos information personel</h2>
-        <form class="form-material" action="" method="post">
+        <form class="form-material" action="./profile.php?url=editProfile" method="post">
             <?php
                 echo $form->input('text', 'nom', 'Nom');
                 echo $form->input('text', 'prenom', 'Prénom');

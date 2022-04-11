@@ -25,7 +25,7 @@
                 <a href="#"><i class="bi bi-person-circle"></i> <?= $_SESSION['user']['nom'] ?></a>
                 <ul class="dropdown_enfant">
                     <li>
-                        <?php if ($_SESSION['user']['roles'] === 'admin') : ?>
+                        <?php if ($_SESSION['user']['roles'] != 'client') : ?>
                             <a href="../pages/admin.php">Tableau de bord</a>
                         <?php else : ?>
                             <a href="../pages/profile.php">Mon compte</a>

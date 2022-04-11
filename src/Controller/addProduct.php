@@ -52,10 +52,11 @@ class addProduct{
             $desc = htmlspecialchars($_POST['descr']);
             $stocka = htmlspecialchars($_POST['stock_actuel']);
             $stockm = htmlspecialchars($_POST['stock_min']);
-            $expiration = '';
 
             if(isset($_POST['date_expiration']) and !empty($_POST['date_expiration'])){
                 $expiration = $_POST['date_expiration'];
+            }else{
+                $expiration = '1970-01-01';
             }
 
             $imageName = $this->uploadImage($image);
@@ -66,7 +67,6 @@ class addProduct{
             $now = new \Datetime;
             $createdAt = $now->format('Y-m-d H:i:s');
             $updatedAt = $now->format('Y-m-d H:i:s');
-
             $product->setNom($nom)
                     ->setPrice($price)
                     ->setCategory($category)
@@ -84,11 +84,12 @@ class addProduct{
                     ->setIs_active(0);
             $product->flushProduct();
             $this->setSuccess('Tout c\'est bien passée !');
+            //header('location: '.$lien.'?url=product');
         }else{
             $this->setErreur('Tout les champs sonts obligatoire !');
         }
         
-        header('location: '.$lien.'?url=product');
+        
     }
 
     /**

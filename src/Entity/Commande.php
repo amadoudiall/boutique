@@ -331,6 +331,15 @@ class Commande{
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
+
+    // getCommandeBySellerProductId
+    public function getCommandeBySellerProductId($sellerId)
+    {
+        $result = $this->getDb()->prepare("SELECT * FROM Commande LEFT JOIN Commande_product ON Commande_product.Commande_id=Commande.id JOIN Product ON Product.id=Commande_product.Product_id WHERE  Product.User_id = ?");
+        $result->execute([$sellerId]);
+        $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
+        return $commande;
+    }
     
     // Create Commande
     public function flushCommande()

@@ -6,9 +6,12 @@ if(isset($_GET['validerCommande']) and !empty($_GET['validerCommande'])){
     $getCommandes->updateCommandeStatus($_GET['validerCommande'], 'En cours');
 }
 
-$commandes = $getCommandes->getAllCommande();
 $lien = '';
-
+if($_SESSION['user']['roles'] == 'admin'){
+    $commandes = $getCommandes->getAllCommande();
+}else{
+    $commandes = $getCommandes->getCommandeBySellerProductId($_SESSION['user']['id']);
+}
 
 if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'boutiquier'){
     $lien = '../pages/admin.php';

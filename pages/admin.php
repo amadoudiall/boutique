@@ -2,9 +2,9 @@
 session_start();
 
 if (empty($_SESSION['user'])) {
-    header('location: ./pages/connexion.php');
+    header('location: ./connexion.php');
 }elseif($_SESSION['user']['roles'] == 'client'){
-    header('location: ./pages/profile.php');
+    header('location: ./profile.php');
 }
 
 
@@ -46,6 +46,8 @@ if (isset($_GET['url']) and $_GET['url'] === 'product') {
     require('./inc/addProduct.php');
 }elseif (isset($_GET['url']) and $_GET['url'] === 'editProduct') {
     require('./inc/addProduct.php');
+}elseif (isset($_GET['url']) and $_GET['url'] === 'categorys') {
+    require('./inc/category.php');
 }elseif (isset($_GET['url']) and $_GET['url'] === 'addCategory') {
     require('./inc/addCategory.php');
 } else {

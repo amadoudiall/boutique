@@ -23,7 +23,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
     $getProduct = new Product();
     $product = $getProduct->getProductById($id);
     
-    if($_SESSION['user']['id'] != $product['User_id']){
+    if($_SESSION['user']['id'] != $product['User_id'] and $_SESSION['user']['roles'] != "admin"){
         header('location: /');
     }
     $request = $product;

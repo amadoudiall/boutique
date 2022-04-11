@@ -2,9 +2,9 @@
 session_start();
 
 if (empty($_SESSION['user'])) {
-    header('location: ../pages/connexion.php');
+    header('location: ./connexion.php');
 }elseif($_SESSION['user']['roles'] != 'client'){
-    header('location: ../pages/admin.php');
+    header('location: ./admin.php');
 }
 
 use \App\Autoloader;

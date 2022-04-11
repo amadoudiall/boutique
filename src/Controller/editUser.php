@@ -35,7 +35,7 @@ class editUser{
                         ->setCreated_at($created_at)
                         ->setIs_active(2);
                     $users->flushUser();
-                    header('Location: /pages/admin.php?url=users');
+                    header('Location: ./admin.php?url=users');
             }else{
                 if($result['tel'] === $tel){
                     $this->setErreur('Cette numéro de téléphone est associé a un compte !');
@@ -109,7 +109,7 @@ class editUser{
                 ->setTel($tel)
                 ->setRoles($role);
             $users->updateUser($id);
-            header('Location: /pages/admin.php?url=users');
+            header('Location: ./admin.php?url=users');
         }else{
             $this->setErreur('Tout les champs sont obligatoire !');
         }

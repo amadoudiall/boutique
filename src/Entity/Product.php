@@ -367,24 +367,29 @@ class Product
 
     public function flushProduct()
     {
-        $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :User_id, :ventes, :is_active)');
-        $addUser->execute([
-            'nom' => $this->nom,
-            'price' => $this->price,
-            'Category_id' => $this->category,
-            'img' => $this->img,
-            'descr' => $this->desc,
-            'stock_actuel' => $this->stock_actuel,
-            'stock_min' => $this->stock_min,
-            'date_expiration' => $this->date_expiration,
-            'is_promo' => $this->is_promo,
-            'promo' => $this->promo,
-            'updated_at' => $this->updatedAt,
-            'created_at' => $this->createdAt,
-            'User_id' => $this->user,
-            'ventes' => $this->ventes,
-            'is_active' => $this->is_active
-        ]);
+        try {
+            $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :User_id, :ventes, :is_active)');
+            $addUser->execute([
+                'nom' => $this->nom,
+                'price' => $this->price,
+                'Category_id' => $this->category,
+                'img' => $this->img,
+                'descr' => $this->desc,
+                'stock_actuel' => $this->stock_actuel,
+                'stock_min' => $this->stock_min,
+                'date_expiration' => $this->date_expiration,
+                'is_promo' => $this->is_promo,
+                'promo' => $this->promo,
+                'updated_at' => $this->updatedAt,
+                'created_at' => $this->createdAt,
+                'User_id' => $this->user,
+                'ventes' => $this->ventes,
+                'is_active' => $this->is_active
+            ]);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            die('Erreur lors de l\'ajout d\'un produit');
+        }       
     }
     
     // getProductBySellerId
