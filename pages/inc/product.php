@@ -42,6 +42,7 @@ if($_SESSION['user']['roles'] == 'admin'){
                     <th>Catégorie</th>
                     <th>Stock Actuel</th>
                     <th>Date d'expiration</th>
+                    <th>Nombre de Ventes</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -54,7 +55,12 @@ if($_SESSION['user']['roles'] == 'admin'){
                         <td><?= $product['price'], Product::SUFFIX_DEVISE ?></td>
                         <td><?= $product['category'] ?></td>
                         <td><?= $product['stock_actuel'] ?></td>
-                        <td><?= $product['date_expiration'] ?></td>
+                        <?php if($product['date_expiration'] == '1970-01-01'): ?>
+                            <td></td>
+                        <?php else: ?>
+                            <td><?= $product['date_expiration'] ?></td>
+                        <?php endif ?>
+                        <td><?= $product['ventes'] ?></td>
                         <td id="lastTd">
                             <a href="../pages/admin.php?url=editProduct&id=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
                             <a href="../pages/admin.php?url=product&delProduct=<?= $product['idProduct'] ?>" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>

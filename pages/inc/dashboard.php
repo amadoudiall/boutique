@@ -74,12 +74,16 @@ if($_SESSION['user']['roles'] == 'admin'){
                 <thead>
                     <th>N°</th>
                     <th>Date</th>
+                    <th>Etat</th>
+                    <th>Nombre de vos produits</th>
                 </thead>
                 <tbody>
-                    <?php foreach ($commandes as $key => $commande) :?>
+                    <?php foreach ($commandes as $key => $commande) : $nbrProduct = $getCommande->countSellerProduct($commande['idCommande'],$userId);?>
                         <tr>
                             <td><?= $commande['id'] ?></td>
                             <td><?= $commande['createdAt'] ?></td>
+                            <td><?= $commande['status'] ?></td>
+                            <td><?= count($nbrProduct) ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

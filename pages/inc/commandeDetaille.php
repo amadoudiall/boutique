@@ -5,7 +5,8 @@ $erreur = null;
 $userId = $_SESSION['user']['id'];
 
 if(isset($_GET['c']) and !empty($_GET['c'])){
-    $productCommande = $getCommande->getProductByCommandeId($userId, $_GET['c']);
+    // $productCommande = $getCommande->getUserProductByCommandeId($_GET['c'], $userId);
+    $productCommande = $getCommande->getProductByCommandeId($_GET['c']);
     $userCommande = $getCommande->getAllCommandeByUserId($userId);
 }else{
     $productCommande = null;

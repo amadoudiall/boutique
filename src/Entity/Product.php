@@ -350,19 +350,36 @@ class Product
     public static function getProductById($id)
     {
         $connect = new Bdd();
-        $bddcontent = 'SELECT *, Product.id as idProduct FROM Product LEFT JOIN Category ON Category.id = Product.Category_id WHERE Product.id = ?';
+        $bddcontent = 'SELECT *, Product.id as idProduct FROM Product JOIN Category ON Category.id = Product.Category_id WHERE Product.id = ?';
         $bddstatement = $connect->connect()->prepare($bddcontent);
         $bddstatement->execute(array($id));
         $products = $bddstatement->fetch();
         return $products;
     }
-    
-    // update Product quantity
-    public function sellProduct($quantity, $id, $userId)
+
+    // update Stock_actuel
+    public function updateStockActuel($productId, $stock_actuel, $userId)
     {
         $connect = new Bdd();
-        $bddstatement = $connect->connect()->prepare('UPDATE Product SET stock_actuel = stock_actuel - ?, ventes = ventes + ? WHERE id = ? AND User_id = ?');
-        $bddstatement->execute(array($quantity, $quantity, $id, $userId));
+        $bddcontent = 'UPDATE Product SET stock_actuel = ? WHERE id = ? AND User_id = ?';
+        $bddstatement = $connect->connect()->prepare($bddcontent);
+        $bddstatement->execute(array($stock_actuel, $productId, $userId));
+    }
+
+    // update Ventes
+    public function updateVentes($productId, $ventes, $userId)
+    {
+        $connect = new Bdd();
+        $bddcontent = 'UPDATE Product SET ventes = ? WHERE id = ? AND User_id = ?';
+        $bddstatement = $connect->connect()->prepare($bddcontent);
+        $bddstatement->execute(array($ventes, $productId, $userId));
+    }
+    
+    // update Product quantity
+    public function sellProduct($stock_actuel, $productId, $userId, $ventes)
+    {
+        $this->updateStockActuel($productId, $stock_actuel, $userId);
+        $this->updateVentes($productId, $ventes, $userId);
     }
 
     public function flushProduct()
