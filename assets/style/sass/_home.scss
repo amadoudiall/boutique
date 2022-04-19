@@ -1,0 +1,41 @@
+.section-top{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: $primary;
+    
+    .slider{
+        width: 75%;
+        margin: auto;
+        position: relative;
+        
+        img{
+            width: 100%;
+            margin: auto;
+        }
+        
+        .text_slider{
+            width: 45%;
+            position: absolute;
+            top: 40%;
+            right: 2px;
+            color: $white;
+            
+            h2{
+                font-weight: 400;
+                font-size: 1.5em;
+                margin: 0;
+                padding: 0;
+            }
+            
+            p{
+                font-size: 1em;
+                margin: 5px 0;
+            }
+        }
+        
+        .sl2{
+            left: 0;
+        }
+    }
+}

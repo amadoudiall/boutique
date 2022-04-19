@@ -16,10 +16,11 @@ header {
         .logo {
             flex-grow: 2;
             height: 58px;
-            line-height: 56px;
+            margin-top: 10px;
 
             img {
                 width: 170px;
+                color: $white;
             }
         }
 

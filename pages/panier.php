@@ -190,7 +190,7 @@ if($products != null):
             <h1>Vues récements</h1>
             <a href="#">Voire plus</a>
         </header>
-        <div class="products">
+        <div class="products product-slider">
             <?php $products = Product::getProducts();
             foreach ($products as $key => $product) : ?>
                 <div class="product shadow-1">

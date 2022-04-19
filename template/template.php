@@ -16,8 +16,10 @@ if(!isset($_SESSION['sessionId'])){
     <!-- Axentix CSS minified version -->
     <link rel="stylesheet" href="../assets/axentix/axentix.min.css">
     <link href="../assets/style/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../assets/slick/slick.css">
+    <link rel="stylesheet" href="../assets/slick/slick-theme.css">
     <script src="../assets/axentix/axentix.min.js"></script>
-
+    
     <title>Diapali | <?= $title ?></title>
 </head>
 
@@ -25,11 +27,15 @@ if(!isset($_SESSION['sessionId'])){
     <header class="shadow-1 fixed">
         <?php if($title === 'Accueil'){require_once('./pages/inc/nav/_nav.php');}else{require_once('../pages/inc/nav/_nav.php');} ?>
     </header>
-    <main class="container">
+    <main>
         <?= $content ?>
     </main>
 
     <!-- Axentix JS minified version -->
+    <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/slick/slick.min.js"></script>
+    <script src="../assets/js/slick.js"></script>
     <script src="../assets/js/main.js"></script>
 </body>
 

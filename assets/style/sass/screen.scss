@@ -8,6 +8,7 @@
 }
 @import "variables";
 @import "header";
+@import "home";
 @import "section_primaire";
 @import "product_card";
 @import "admin";
@@ -16,7 +17,8 @@
 @import "singleSide";
 @import "panier";
 @import "primarySection";
+@import "productPage";
 
 body{
-    background: $gray;
+    background: $white;
 }

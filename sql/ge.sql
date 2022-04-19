@@ -47,6 +47,18 @@ CREATE TABLE `Product`(
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
 
+-- Product Commnt && rating
+CREATE TABLE `Product_comment`(
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `comment` TEXT,
+    `rating` INT(11),
+    `Product_id` INT(11),
+    `User_id` INT(11),
+    `created_at` DATETIME,
+    CONSTRAINT FOREIGN KEY (`Product_id`) REFERENCES `Product`(`id`),
+    CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
+);
+
 -- Panier product
 CREATE TABLE `Panier`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,

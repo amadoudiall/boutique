@@ -30,24 +30,25 @@ header nav {
 header nav .logo {
   flex-grow: 2;
   height: 58px;
-  line-height: 56px;
+  margin-top: 10px;
 }
 /* line 21, ../sass/_header.scss */
 header nav .logo img {
   width: 170px;
+  color: #fff;
 }
-/* line 26, ../sass/_header.scss */
+/* line 27, ../sass/_header.scss */
 header nav #search {
   flex-grow: 4;
   margin-top: 3px;
 }
-/* line 30, ../sass/_header.scss */
+/* line 31, ../sass/_header.scss */
 header nav #search input {
   background-color: #fff;
   border: 1px solid #fff;
   color: black;
 }
-/* line 37, ../sass/_header.scss */
+/* line 38, ../sass/_header.scss */
 header nav ul {
   flex-grow: 4;
   margin: 0;
@@ -55,20 +56,20 @@ header nav ul {
   display: flex;
   justify-content: flex-end;
 }
-/* line 44, ../sass/_header.scss */
+/* line 45, ../sass/_header.scss */
 header nav ul li {
   flex-direction: end;
   list-style-type: none;
   margin-left: 20px;
   font-size: 1.2em;
 }
-/* line 51, ../sass/_header.scss */
+/* line 52, ../sass/_header.scss */
 header nav ul li a {
   position: relative;
   padding: 5px;
   border-radius: 4px;
 }
-/* line 56, ../sass/_header.scss */
+/* line 57, ../sass/_header.scss */
 header nav ul li a:after {
   content: "";
   position: absolute;
@@ -81,15 +82,15 @@ header nav ul li a:after {
   transform: scaleX(0);
   transition: 300ms ease;
 }
-/* line 70, ../sass/_header.scss */
+/* line 71, ../sass/_header.scss */
 header nav ul li a:hover:after {
   transform: scaleX(1);
 }
-/* line 81, ../sass/_header.scss */
+/* line 82, ../sass/_header.scss */
 header nav ul .dropdown_parent a:after {
   width: 110%;
 }
-/* line 86, ../sass/_header.scss */
+/* line 87, ../sass/_header.scss */
 header nav ul .dropdown_parent .dropdown_enfant {
   display: none;
   margin: 0;
@@ -97,7 +98,7 @@ header nav ul .dropdown_parent .dropdown_enfant {
   position: absolute;
   background: #014e55;
 }
-/* line 93, ../sass/_header.scss */
+/* line 94, ../sass/_header.scss */
 header nav ul .dropdown_parent .dropdown_enfant li {
   font-size: .9em;
   display: block;
@@ -105,35 +106,35 @@ header nav ul .dropdown_parent .dropdown_enfant li {
   padding: 3px;
   margin: 0;
 }
-/* line 101, ../sass/_header.scss */
+/* line 102, ../sass/_header.scss */
 header nav ul .dropdown_parent .dropdown_enfant li a:after {
   left: 0;
 }
-/* line 111, ../sass/_header.scss */
+/* line 112, ../sass/_header.scss */
 header nav ul .dropdown_parent:hover .dropdown_enfant {
   display: block;
   z-index: 5;
 }
-/* line 117, ../sass/_header.scss */
+/* line 118, ../sass/_header.scss */
 header nav ul .dropdown_parent:after {
   content: "▼";
   font-size: .7em;
 }
-/* line 123, ../sass/_header.scss */
+/* line 124, ../sass/_header.scss */
 header nav ul .panier {
   font-size: 1.6em;
   margin-left: 0;
   position: relative;
 }
-/* line 128, ../sass/_header.scss */
+/* line 129, ../sass/_header.scss */
 header nav ul .panier a:hover {
   background: #014e55;
 }
-/* line 131, ../sass/_header.scss */
+/* line 132, ../sass/_header.scss */
 header nav ul .panier a:hover:after {
   transform: scaleX(0);
 }
-/* line 137, ../sass/_header.scss */
+/* line 138, ../sass/_header.scss */
 header nav ul .panier .badge {
   position: absolute;
   text-align: center;
@@ -147,18 +148,18 @@ header nav ul .panier .badge {
   background: #e29578;
   border-radius: 50%;
 }
-/* line 152, ../sass/_header.scss */
+/* line 153, ../sass/_header.scss */
 header nav ul .dropdown_parent {
   display: block;
 }
 
-/* line 160, ../sass/_header.scss */
+/* line 161, ../sass/_header.scss */
 .btn-ev {
   background: #e29578;
   border: 1px solid #e29578;
 }
 
-/* line 165, ../sass/_header.scss */
+/* line 166, ../sass/_header.scss */
 .btn {
   background: #006d77;
   color: #fff;
@@ -166,6 +167,49 @@ header nav ul .dropdown_parent {
   text-align: center;
   font-size: 1em;
   padding: .5em;
+}
+
+/* line 1, ../sass/_home.scss */
+.section-top {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #006d77;
+}
+/* line 7, ../sass/_home.scss */
+.section-top .slider {
+  width: 75%;
+  margin: auto;
+  position: relative;
+}
+/* line 12, ../sass/_home.scss */
+.section-top .slider img {
+  width: 100%;
+  margin: auto;
+}
+/* line 17, ../sass/_home.scss */
+.section-top .slider .text_slider {
+  width: 45%;
+  position: absolute;
+  top: 40%;
+  right: 2px;
+  color: #fff;
+}
+/* line 24, ../sass/_home.scss */
+.section-top .slider .text_slider h2 {
+  font-weight: 400;
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+/* line 31, ../sass/_home.scss */
+.section-top .slider .text_slider p {
+  font-size: 1em;
+  margin: 5px 0;
+}
+/* line 37, ../sass/_home.scss */
+.section-top .slider .sl2 {
+  left: 0;
 }
 
 /* line 1, ../sass/_section_primaire.scss */
@@ -180,22 +224,22 @@ header nav ul .dropdown_parent {
 /* line 1, ../sass/_product_card.scss */
 .products {
   width: 100%;
-  display: flex;
+  padding-bottom: 10px;
 }
 /* line 5, ../sass/_product_card.scss */
 .products .product {
   position: relative;
   border-radius: 10px;
-  width: 16.666%;
   margin: 5px;
+  background: #fff;
 }
-/* line 11, ../sass/_product_card.scss */
+/* line 10, ../sass/_product_card.scss */
 .products .product .promo,
 .products .product .like {
   position: absolute;
   top: 10px;
 }
-/* line 17, ../sass/_product_card.scss */
+/* line 16, ../sass/_product_card.scss */
 .products .product .promo {
   left: 10px;
   padding: 5px;
@@ -203,49 +247,77 @@ header nav ul .dropdown_parent {
   background: #e29578;
   color: #fff;
 }
-/* line 25, ../sass/_product_card.scss */
+/* line 24, ../sass/_product_card.scss */
 .products .product .like {
   right: 10px;
   background: #ffddd2;
   padding: 5px;
   border-radius: 50%;
 }
-/* line 32, ../sass/_product_card.scss */
+/* line 31, ../sass/_product_card.scss */
 .products .product img {
   width: 100%;
   height: 200px;
   border-radius: 10px;
 }
-/* line 38, ../sass/_product_card.scss */
+/* line 37, ../sass/_product_card.scss */
 .products .product .detaille {
   width: 100%;
 }
-/* line 41, ../sass/_product_card.scss */
+/* line 40, ../sass/_product_card.scss */
 .products .product .detaille .title-price {
-  display: flex;
   padding: 5px;
+  margin-left: 5px;
 }
-/* line 45, ../sass/_product_card.scss */
+/* line 44, ../sass/_product_card.scss */
 .products .product .detaille .title-price h3 {
   margin: 0;
   padding: 0;
   font-size: 1.1em;
-  flex-grow: 8;
-  word-wrap: break-word;
-  font-weight: 500;
+  font-weight: 200;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /* line 54, ../sass/_product_card.scss */
-.products .product .detaille .title-price span {
+.products .product .detaille .title-price p {
+  margin: 0;
+  padding: 0;
+  margin-top: 5px;
   font-size: 1.2em;
-  flex-grow: 2;
+  font-weight: 400;
 }
-/* line 60, ../sass/_product_card.scss */
+/* line 63, ../sass/_product_card.scss */
 .products .product .detaille .review-buy {
-  display: flex;
-  justify-content: space-between;
+  height: 48px;
+  line-height: 20px;
   padding: 5px;
 }
-/* line 67, ../sass/_product_card.scss */
+/* line 68, ../sass/_product_card.scss */
+.products .product .detaille .review-buy span, .products .product .detaille .review-buy a {
+  display: inline-block;
+}
+/* line 72, ../sass/_product_card.scss */
+.products .product .detaille .review-buy span {
+  margin-top: 10px;
+}
+/* line 75, ../sass/_product_card.scss */
+.products .product .detaille .review-buy span i {
+  color: orange;
+}
+/* line 80, ../sass/_product_card.scss */
+.products .product .detaille .review-buy .new {
+  color: #e29578;
+  margin-left: 10px;
+}
+/* line 85, ../sass/_product_card.scss */
+.products .product .detaille .review-buy a {
+  float: right;
+  bottom: 3px;
+  right: 3px;
+  font-size: 1.2em;
+}
+/* line 94, ../sass/_product_card.scss */
 .products .product:hover {
   width: 17%;
   margin: 2.5px;
@@ -641,7 +713,7 @@ header nav ul .dropdown_parent {
 
 /* line 1, ../sass/_primarySection.scss */
 .primary-section {
-  width: 100%;
+  background: #f5f5f5;
 }
 /* line 3, ../sass/_primarySection.scss */
 .primary-section header {
@@ -669,7 +741,412 @@ header nav ul .dropdown_parent {
   float: right;
 }
 
-/* line 20, ../sass/screen.scss */
+/* line 1, ../sass/_productPage.scss */
+.product_page {
+  display: grid;
+  grid-template-columns: 1fr 25%;
+  grid-template-rows: auto;
+  padding: 1rem;
+  margin: 1rem;
+  grid-column-gap: 1rem;
+}
+/* line 9, ../sass/_productPage.scss */
+.product_page .product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "product_image product_image" "product_info product_info";
+  grid-column-gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+}
+/* line 19, ../sass/_productPage.scss */
+.product_page .product .product_image {
+  height: 300px;
+  max-height: 500px;
+}
+/* line 26, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_name {
+  margin: 0.5rem;
+}
+/* line 30, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list input[type="radio"] {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* line 38, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list input[type="radio"]:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+/* line 48, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list input[type="radio"]:checked {
+  box-shadow: 0 0 5px 0px rgba(26, 26, 26, 0.719);
+  border: 2px solid black;
+}
+/* line 53, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list input[type="radio"]:checked:before {
+  opacity: 1;
+}
+/* line 58, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .orang {
+  border: 1px solid #834f02;
+}
+/* line 61, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .orang:before {
+  background: orangered;
+}
+/* line 67, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .rouge {
+  border: 1px solid #790808;
+}
+/* line 70, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .rouge:before {
+  background: red;
+}
+/* line 76, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .jaune {
+  border: 1px solid #796e08;
+}
+/* line 79, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .jaune:before {
+  background: yellow;
+}
+/* line 85, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .vert {
+  border: 1px solid #2c7908;
+}
+/* line 88, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .vert:before {
+  background: green;
+}
+/* line 94, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .bleu {
+  border: 1px solid #085579;
+}
+/* line 97, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .bleu:before {
+  background: blue;
+}
+/* line 103, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .rose {
+  border: 1px solid #790846;
+}
+/* line 106, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .rose:before {
+  background: pink;
+}
+/* line 112, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .blanc {
+  border: 1px solid #3f3f3f;
+}
+/* line 115, ../sass/_productPage.scss */
+.product_page .product .product_info .colors .color_list .blanc:before {
+  background: white;
+}
+/* line 123, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_name {
+  margin: 0.5rem;
+}
+/* line 128, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list input[type="radio"] {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+/* line 136, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list input[type="radio"]:checked {
+  opacity: 1;
+}
+/* line 140, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list input[type="radio"]:hover {
+  opacity: 0.7;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-36:before {
+  content: "36";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-37:before {
+  content: "37";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-38:before {
+  content: "38";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-39:before {
+  content: "39";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-40:before {
+  content: "40";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-41:before {
+  content: "41";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-42:before {
+  content: "42";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-43:before {
+  content: "43";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-44:before {
+  content: "44";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-45:before {
+  content: "45";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-46:before {
+  content: "46";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-47:before {
+  content: "47";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-48:before {
+  content: "48";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-49:before {
+  content: "49";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-50:before {
+  content: "50";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-51:before {
+  content: "51";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-52:before {
+  content: "52";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-53:before {
+  content: "53";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-54:before {
+  content: "54";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-55:before {
+  content: "55";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 147, ../sass/_productPage.scss */
+.product_page .product .product_info .pointures .pointure_list .pointure-56:before {
+  content: "56";
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 161, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_name {
+  margin: 0.5rem;
+}
+/* line 166, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list input[type="radio"] {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+/* line 174, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list input[type="radio"]:before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
+  border: 1px solid black;
+}
+/* line 183, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list input[type="radio"]:hover {
+  opacity: 0.7;
+}
+/* line 187, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list input[type="radio"]:checked {
+  opacity: 1;
+}
+/* line 194, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-S:before {
+  content: "S";
+}
+/* line 200, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-M:before {
+  content: "M";
+}
+/* line 206, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-L:before {
+  content: "L";
+}
+/* line 212, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-XL:before {
+  content: "XL";
+}
+/* line 217, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-XXL {
+  width: 50px;
+}
+/* line 219, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-XXL:before {
+  content: "XXL";
+}
+/* line 224, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-XXXL {
+  width: 60px;
+}
+/* line 226, ../sass/_productPage.scss */
+.product_page .product .product_info .tailles .taille_list #taille-XXXL:before {
+  content: "XXXL";
+}
+
+/* line 22, ../sass/screen.scss */
 body {
-  background: #edf6f9;
+  background: #fff;
 }
