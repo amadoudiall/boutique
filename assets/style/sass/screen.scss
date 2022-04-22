@@ -20,5 +20,9 @@
 @import "productPage";
 
 body{
-    background: $white;
+    background: $primaryLighter;
+    
+    .hidden{
+        display: none;
+    }
 }

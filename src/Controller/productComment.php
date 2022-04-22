@@ -13,7 +13,7 @@ class productComment
     // getCommentByProductId
     public function getComments($productId)
     {
-        $req = $this->bdd->prepare('SELECT * FROM Product_comment WHERE Product_id = ? ORDER BY id DESC');
+        $req = $this->bdd->prepare('SELECT *, Product_comment.id as commentId FROM Product_comment JOIN User ON User.id=Product_comment.User_id WHERE Product_comment.Product_id = ? ORDER BY commentId DESC');
         $req->execute([$productId]);
         $comment = $req->fetchAll();
         return $comment;
@@ -24,6 +24,15 @@ class productComment
     {
         $req = $this->bdd->prepare('INSERT INTO Product_comment(comment, rating, Product_id, User_id, created_at) VALUES(?, ?, ?, ?, ?)');
         $req->execute([$comment, $rating, $productId, $userId, $date]);
+    }
+    
+    // getMoyenne && getMoyenneByProductId
+    public function getMoyenne($productId)
+    {
+        $req = $this->bdd->prepare('SELECT AVG(rating) AS moyenne FROM Product_comment WHERE Product_id = ?');
+        $req->execute([$productId]);
+        $moyenne = $req->fetch();
+        return $moyenne;
     }
     
     // deleteComment

@@ -6,7 +6,8 @@
     margin: 1rem;
     grid-column-gap: 1rem;
     
-    .product{
+    .product_grix_info{
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
@@ -225,6 +226,153 @@
                         width: 60px;
                         &:before{
                             content: "XXXL";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .comment-section{
+        padding-top: 5px;
+        h2{
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 300;
+            color: $blackLight;
+        }
+        .content{
+            padding: 10px;
+            padding-top: 0;
+            margin-top: 0;
+            
+            .commente_form{
+                width: 100%;
+                margin-bottom: 10px;
+                
+                .star-hovered{
+                    height: 20px;
+                    color: $blackLighter;
+                    font-size: 1em;
+                    text-align: center;
+                    margin: 2px;
+                }
+                .stars_form{
+                    width: 50%;
+                    margin: auto;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    text-align: center;
+                    
+                    i{
+                        font-size: 1.5em;
+                        padding: 5px;
+                        cursor: pointer;
+                    }
+                }
+                
+                form{
+                    width: 50%;
+                    margin: auto;
+                    
+                    textarea{
+                        width: 100%;
+                        height: 100px;
+                        padding: 10px;
+                        border: 1px solid $blackLighter;
+                        border-radius: 5px;
+                        resize: none;
+                        outline: none;
+                        font-size: 1em;
+                        background: $white;
+                    }
+                    
+                    .btn{
+                        width: 100%;
+                        height: 40px;
+                        margin-top: 10px;
+                        border: none;
+                        border-radius: 5px;
+                        background: $primary;
+                        color: $white;
+                        font-size: 1em;
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+            .commentairs{
+                width: 90%;
+                margin: auto;
+                margin-top: 30px;
+                
+                .commentair{
+                    width: 100%;
+                    margin: auto;
+                    padding: 5px;
+                    position: relative;
+                    border-bottom: 1px solid $blackLighter;
+                    
+                    .reviews{
+                        div{
+                            float: left;
+                        }
+                        
+                        span{
+                            font-size: 1.1em;
+                            font-style: italic;
+                            font-weight: lighter;
+                        }
+                    }
+                    .commentair_info{
+                        .commentair_auth{
+                            h3{
+                                font-size: 1.2em;
+                                font-weight: 300;
+                                margin: 5px;
+                                padding: 0;
+                                
+                            }
+                        }
+                        
+                        .commentair_content{
+                            p{
+                                font-size: 1em;
+                                margin: 5px;
+                                padding: 0;
+                            }
+                        }
+                    }
+                    
+                    .commentair_date{
+                        display: flex;
+                        flex-direction: row;
+                        vertical-align: middle;
+                        
+                        em{
+                            font-size: .8em;
+                            margin-right: 5px;
+                        }
+                        .acv{
+                            margin: 5px;
+                            width: fit-content;
+                            font-size: .8em;
+                            padding: 3px;
+                            border-radius: 3px;
+                            color: $green;
+                            background: $greenLight;
+                        }
+                        
+                        .delete{
+                            float: right;
+                            color: red;
+                            font-size: 1em;
+                            padding: 3px;
+                            border-radius: 2px;
+                            &:hover{
+                                background: $primaryLighter;
+                            }
                         }
                     }
                 }
