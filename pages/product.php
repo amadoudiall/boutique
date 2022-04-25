@@ -159,7 +159,7 @@ ob_start();
                             <em><?= $comment['created_at'] ?></em>
                             <em class="acv">Achat vérifié</em>
                             <!-- Si l'hauteur du commentaire est celui connecté afficher le bouton supprimer -->
-                            <?php if($_SESSION['user']['id'] == $comment['User_id']){ ?>
+                            <?php if(isset($_SESSION['user']['id']) AND !empty($_SESSION['user']['id']) AND $_SESSION['user']['id'] == $comment['User_id']){ ?>
                                 <a href="?delete=<?= $comment['idComment'] ?>" class="delete">Supprimer</a>
                             <?php } ?>
                         </div>

@@ -13,7 +13,7 @@ class productComment
     // getCommentByProductId
     public function getComments($productId)
     {
-        $req = $this->bdd->prepare('SELECT *, Product_comment.id as commentId FROM Product_comment JOIN User ON User.id=Product_comment.User_id WHERE Product_comment.Product_id = ? ORDER BY commentId DESC');
+        $req = $this->bdd->prepare('SELECT *, Product_comment.id as idComment FROM Product_comment JOIN User ON User.id=Product_comment.User_id WHERE Product_comment.Product_id = ? ORDER BY idComment DESC');
         $req->execute([$productId]);
         $comment = $req->fetchAll();
         return $comment;

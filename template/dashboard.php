@@ -40,7 +40,7 @@
     </main>
 
     <!-- Axentix JS minified version -->
-    <script src="https://kit.fontawesome.com/33342bcb44.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/form.js"></script>
 </body>
 
 </html>

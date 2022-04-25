@@ -6,8 +6,8 @@ for (let i = 0; i < pointure_input.length; i++) {
     pointure_input[i].classList.add('pointure-' + valeur_pointure);
 }
 
-// systeme de note pour permetre aux client de noter un produit
 window.onload = () => {
+    // systeme de note pour permetre aux client de noter un produit
     // Recuperer uniquement les etoiles du formulaire
     const note_input = document.getElementsByClassName('note');
     let statrs_form = document.querySelector('.stars_form');
@@ -114,4 +114,6 @@ window.onload = () => {
             previous = previous.previousElementSibling;
         }
     }
+    
+    // fin du systeme de note
 }

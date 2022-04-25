@@ -40,6 +40,10 @@ CREATE TABLE `Product`(
     `promo` INT(11) NULL,
     `updated_at` DATETIME,
     `created_at` DATETIME,
+    `color` VARCHAR(255) NULL,
+    `size` VARCHAR(255) NULL,
+    `pointure` VARCHAR(255) NULL,
+    `dimensions` VARCHAR(255) NULL,
     `User_id` INT(11),
     `ventes` INT(11),
     `is_active` INT(11),
@@ -55,6 +59,7 @@ CREATE TABLE `Product_comment`(
     `Product_id` INT(11),
     `User_id` INT(11),
     `created_at` DATETIME,
+    `updated_at` DATETIME,
     CONSTRAINT FOREIGN KEY (`Product_id`) REFERENCES `Product`(`id`),
     CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 );
