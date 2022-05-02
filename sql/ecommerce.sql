@@ -151,9 +151,15 @@ CREATE TABLE `Product` (
   `promo` int DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
+  `color` VARCHAR(255) NULL,
+  `size` VARCHAR(255) NULL,
+  `pointure` VARCHAR(255) NULL,
+  `dimensions` VARCHAR(255) NULL,
   `User_id` int DEFAULT NULL,
   `ventes` int DEFAULT NULL,
-  `is_active` int DEFAULT NULL
+  `is_active` int DEFAULT NULL,
+  CONSTRAINT FOREIGN KEY (`Category_id`) REFERENCES `Category`(`id`),
+  CONSTRAINT FOREIGN KEY (`User_id`) REFERENCES `User`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

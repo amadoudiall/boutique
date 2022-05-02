@@ -33,6 +33,20 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
     $submitValue = "Ajouter";
     $submitName = "addProduct";
 }
+// if(isset($_POST['click'])){
+//     $nom = $_POST['nom'];
+//     $description = $_POST['description'];
+//     $prixU = $_POST['prixU'];
+//     $imageInfo = $_FILES['image'];
+//     $image = telechargeImage($imageInfo);
+//     $id_boutiquier = $_SESSION['user']['id'];
+//     $result = $transaction->createProduct($nom, $description, $prixU, $image, $id_boutiquier);
+//     if($result == 1){
+//         header('location: listProduit.php');
+//     }
+    
+//     $msg = "Erreur lors de l'ajout du produit";
+// }
 ?>
 <div class="container shadow-1 rounded-1 admin admin-addProduct mt-3">
     <div class="addProduct form">

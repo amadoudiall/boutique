@@ -23,6 +23,10 @@ class Product
     public string $user;
     public int $ventes;
     public int $is_active;
+    public string $color;
+    public string $size;
+    public string $pointure;
+    public string $dimensions;
 
     //se suffix permet d'afficher la devise devant le prix a l'affichage
     const SUFFIX_DEVISE = " FCFA";
@@ -268,6 +272,82 @@ class Product
 
         return $this;
     }
+    
+    /**
+     * Get the value of color
+     */
+    public function getColor(){
+        return $this->color;
+    }
+    
+    /**
+     * Set the value of color
+     * @return  self
+     */
+    public function setColor($color){
+        $this->color = $color;
+        return $this;
+    }
+    
+    /**
+     * Get the value of size
+     */ 
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set the value of size
+     *
+     * @return  self
+     */ 
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+    
+    /**
+     * Get the value of pointure
+     */ 
+    public function getPointure()
+    {
+        return $this->pointure;
+    }
+
+    /**
+     * Set the value of pointure
+     *
+     * @return  self
+     */ 
+    public function setPointure($pointure)
+    {
+        $this->pointure = $pointure;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of dimensions
+     */ 
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+
+    /**
+     * Set the value of dimensions
+     *
+     * @return  self
+     */ 
+    public function setDimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
 
     /**
      * Get the value of user
@@ -337,6 +417,18 @@ class Product
         return $this->database;
     }
     
+    // create a new product
+    // public function createProduct($nom, $description, $prixU, $image, $id_boutiquier)
+    // {
+    //     try {
+    //         $result = $this->database->prepare('INSERT INTO produit (nom, descriptions, prixU, img, id_boutiquier) VALUES (?, ?, ?, ?, ?)');
+    //         $result->execute([$nom, $description, $prixU, $image, $id_boutiquier]);
+    //         return 1;
+    //     } catch (\Throwable $th) {
+    //         die($th->getMessage());
+    //     }
+    // }
+    
     public static function getProducts()
     {
         $connect = new Bdd();
@@ -385,7 +477,7 @@ class Product
     public function flushProduct()
     {
         try {
-            $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :User_id, :ventes, :is_active)');
+            $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, color, size, pointure, dimensions, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :color, :size, :pointure, :dimensions, :User_id, :ventes, :is_active)');
             $addUser->execute([
                 'nom' => $this->nom,
                 'price' => $this->price,
@@ -399,6 +491,10 @@ class Product
                 'promo' => $this->promo,
                 'updated_at' => $this->updatedAt,
                 'created_at' => $this->createdAt,
+                'color' => $this->color,
+                'size' => $this->size,
+                'pointure' => $this->pointure,
+                'dimensions' => $this->dimensions,
                 'User_id' => $this->user,
                 'ventes' => $this->ventes,
                 'is_active' => $this->is_active
@@ -428,4 +524,5 @@ class Product
         $bddstatement = $connect->connect()->prepare('DELETE FROM Product WHERE id = ?');
         $bddstatement->execute(array($id));
     }
+
 }

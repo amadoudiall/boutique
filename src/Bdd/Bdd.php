@@ -9,8 +9,8 @@ class Bdd
 
             $connect = new \PDO(
                 'mysql:host=localhost;dbname=ecommerce;charset=utf8',
-                'root',
-                ''
+                'bente',
+                'bente'
             );
         } catch (\PDOException $exception) {
 
