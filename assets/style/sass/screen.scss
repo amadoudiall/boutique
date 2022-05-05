@@ -7,6 +7,7 @@
     box-sizing: border-box;
 }
 @import "variables";
+@import "form";
 @import "header";
 @import "home";
 @import "section_primaire";
@@ -18,7 +19,7 @@
 @import "panier";
 @import "primarySection";
 @import "productPage";
-@import "form";
+@import "loader";
 
 body{
     background: $primaryLighter;

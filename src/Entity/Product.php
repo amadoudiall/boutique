@@ -9,7 +9,9 @@ use \App\Entity\Category;
 class Product
 {
     public string $nom;
+    public float $price_by;
     public float $price;
+    public float $price_sell;
     public string $category;
     public string $img;
     public string $desc;
@@ -70,6 +72,46 @@ class Product
     {
         $this->price = $price;
 
+        return $this;
+    }
+    
+    /**
+     * Get the value of price_by
+     */ 
+    public function getPrice_by()
+    {
+        return $this->price_by;
+    }
+
+    /**
+     * Set the value of price_by
+     *
+     * @return  self
+     */ 
+    public function setPrice_by($price_by)
+    {
+        $this->price_by = $price_by;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of price_sell
+     */ 
+    public function getPrice_sell()
+    {
+        return $this->price_sell;
+    }
+    
+    /**
+     * Set the value of price_sell
+     *
+     * @return  self
+     */ 
+    public function setPrice_sell($price_sell)
+    {
+        $this->price_sell = $price_sell;
+        
         return $this;
     }
 
@@ -417,18 +459,6 @@ class Product
         return $this->database;
     }
     
-    // create a new product
-    // public function createProduct($nom, $description, $prixU, $image, $id_boutiquier)
-    // {
-    //     try {
-    //         $result = $this->database->prepare('INSERT INTO produit (nom, descriptions, prixU, img, id_boutiquier) VALUES (?, ?, ?, ?, ?)');
-    //         $result->execute([$nom, $description, $prixU, $image, $id_boutiquier]);
-    //         return 1;
-    //     } catch (\Throwable $th) {
-    //         die($th->getMessage());
-    //     }
-    // }
-    
     public static function getProducts()
     {
         $connect = new Bdd();
@@ -477,17 +507,18 @@ class Product
     public function flushProduct()
     {
         try {
-            $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price, Category_id, img, descr, stock_actuel, stock_min, date_expiration, is_promo, promo, updated_at, created_at, color, size, pointure, dimensions, User_id, ventes, is_active) VALUES(:nom, :price, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :is_promo, :promo, :updated_at, :created_at, :color, :size, :pointure, :dimensions, :User_id, :ventes, :is_active)');
+            $addUser = $this->getDb()->prepare('INSERT INTO Product(nom, price_by, price, price_sell, Category_id, img, descr, stock_actuel, stock_min, date_expiration, promo, updated_at, created_at, color, size, pointure, dimensions, User_id, ventes, is_active) VALUES(:nom, :price_by, :price, :price_sell, :Category_id, :img, :descr, :stock_actuel, :stock_min, :date_expiration, :promo, :updated_at, :created_at, :color, :size, :pointure, :dimensions, :User_id, :ventes, :is_active)');
             $addUser->execute([
                 'nom' => $this->nom,
+                'price_by' => $this->price_by,
                 'price' => $this->price,
+                'price_sell' => $this->price_sell,
                 'Category_id' => $this->category,
                 'img' => $this->img,
                 'descr' => $this->desc,
                 'stock_actuel' => $this->stock_actuel,
                 'stock_min' => $this->stock_min,
                 'date_expiration' => $this->date_expiration,
-                'is_promo' => $this->is_promo,
                 'promo' => $this->promo,
                 'updated_at' => $this->updatedAt,
                 'created_at' => $this->createdAt,
@@ -517,6 +548,35 @@ class Product
         return $products;
     }
     
+    // Edit product
+    public function editProduct($id)
+    {
+        try {
+            $editProduct = $this->getDb()->prepare('UPDATE Product SET nom = :nom, price = :price, price_sell = :price_sell, Category_id = :Category_id, img = :img, descr = :descr, stock_actuel = :stock_actuel, stock_min = :stock_min, date_expiration = :date_expiration, promo = :promo, updated_at = :updated_at, color = :color, size = :size, pointure = :pointure, dimensions = :dimensions WHERE id = :id');
+            $editProduct->execute([
+                'nom' => $this->nom,
+                'price' => $this->price,
+                'price_sell' => $this->price_sell,
+                'Category_id' => $this->category,
+                'img' => $this->img,
+                'descr' => $this->desc,
+                'stock_actuel' => $this->stock_actuel,
+                'stock_min' => $this->stock_min,
+                'date_expiration' => $this->date_expiration,
+                'promo' => $this->promo,
+                'updated_at' => $this->updatedAt,
+                'color' => $this->color,
+                'size' => $this->size,
+                'pointure' => $this->pointure,
+                'dimensions' => $this->dimensions,
+                'id' => $id
+            ]);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            die('Erreur lors de la modification d\'un produit');
+        }
+    }
+    
     // delete Product
     public function deleteProduct($id)
     {
@@ -524,5 +584,21 @@ class Product
         $bddstatement = $connect->connect()->prepare('DELETE FROM Product WHERE id = ?');
         $bddstatement->execute(array($id));
     }
-
+    
+    // Get Comments
+    public function getComments($id){
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('SELECT * FROM Product_comment WHERE Product_id = ?');
+        $bddstatement->execute(array($id));
+        $comments = $bddstatement->fetchAll();
+    }
+    
+    // Avoir la moyenne des notes
+    public function getAverageNote($id){
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('SELECT AVG(note) FROM Product_comment WHERE Product_id = ?');
+        $bddstatement->execute(array($id));
+        $average = $bddstatement->fetch();
+        return $average;
+    }
 }

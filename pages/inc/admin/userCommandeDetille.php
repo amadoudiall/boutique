@@ -81,8 +81,8 @@ if(isset($_GET['c']) and !empty($_GET['c'])){
 if($productCommande != null): ?>
  <div class="container shadow-1 rounded-1 admin admin-users-commande-detaille rounded-1 mt-3">
     <?php if(isset($erreur)): ?>
-        <div class="alert alert-danger">
-            <?= $erreur ?>
+        <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4 bd-solid bd-red bd-1">
+            <span class="iconify-inline" data-icon="mdi:alert-octagon"></span> <?= $erreur ?>
         </div>
     <?php endif; ?>
     <div class="table-responsive admin-table-list">

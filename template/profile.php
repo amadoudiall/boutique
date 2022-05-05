@@ -14,6 +14,13 @@
 </head>
 
 <body class="layout">
+    <div class="loader">
+        <div class="lds-ellipsis">
+            <div class="lds-ellipsis1"></div>
+            <div class="lds-ellipsis2"></div>
+            <div class="lds-ellipsis3"></div>
+        </div>
+    </div>
     <header class="shadow-1 fixed">
         <?php require('../pages/inc/nav/_nav.php'); ?>
     </header>
@@ -51,7 +58,7 @@
     </main>
 
     <!-- Axentix JS minified version -->
-    <script src="https://kit.fontawesome.com/33342bcb44.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

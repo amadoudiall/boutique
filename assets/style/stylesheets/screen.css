@@ -9,6 +9,97 @@
   box-sizing: border-box;
 }
 
+/* line 2, ../sass/_vueColor.scss */
+.form_option .vueSize div {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid black;
+  opacity: 0.5;
+}
+/* line 10, ../sass/_vueColor.scss */
+.form_option .vueSize div.selected {
+  opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+/* line 18, ../sass/_vueColor.scss */
+.form_option .vueColor div {
+  cursor: pointer;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+/* line 28, ../sass/_vueColor.scss */
+.form_option .vueColor div.selected {
+  opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+/* line 34, ../sass/_vueColor.scss */
+.form_option .vueColor .rouge {
+  background: red;
+}
+/* line 39, ../sass/_vueColor.scss */
+.form_option .vueColor .bleu {
+  background: blue;
+}
+/* line 44, ../sass/_vueColor.scss */
+.form_option .vueColor .vert {
+  background: green;
+}
+/* line 49, ../sass/_vueColor.scss */
+.form_option .vueColor .jaune {
+  background: yellow;
+}
+/* line 54, ../sass/_vueColor.scss */
+.form_option .vueColor .noir {
+  background: black;
+}
+/* line 59, ../sass/_vueColor.scss */
+.form_option .vueColor .blanc {
+  background: white;
+}
+/* line 64, ../sass/_vueColor.scss */
+.form_option .vueColor .orange {
+  background: orange;
+}
+/* line 69, ../sass/_vueColor.scss */
+.form_option .vueColor .violet {
+  background: purple;
+}
+/* line 74, ../sass/_vueColor.scss */
+.form_option .vueColor .marron {
+  background: brown;
+}
+/* line 79, ../sass/_vueColor.scss */
+.form_option .vueColor .gris {
+  background: grey;
+}
+/* line 84, ../sass/_vueColor.scss */
+.form_option .vueColor .rose {
+  background: pink;
+}
+/* line 89, ../sass/_vueColor.scss */
+.form_option .vueColor .turquoise {
+  background: turquoise;
+}
+/* line 94, ../sass/_vueColor.scss */
+.form_option .vueColor .beige {
+  background: beige;
+}
+/* line 99, ../sass/_vueColor.scss */
+.form_option .vueColor .or {
+  background: gold;
+}
+/* line 104, ../sass/_vueColor.scss */
+.form_option .vueColor .argent {
+  background: silver;
+}
+
 /* line 1, ../sass/_header.scss */
 header {
   margin: 0;
@@ -758,399 +849,113 @@ header nav ul .dropdown_parent {
   grid-template-areas: "product_image product_image" "product_info product_info";
   grid-column-gap: 1rem;
   background: #fff;
-  padding: 1rem;
+  padding: 0.5em;
 }
 /* line 20, ../sass/_productPage.scss */
 .product_page .product_grix_info .product_image {
   height: 300px;
   max-height: 500px;
 }
-/* line 27, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_name {
-  margin: 0.5rem;
+/* line 25, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info {
+  padding: 10px;
+}
+/* line 28, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .product_name {
+  margin: 0;
 }
 /* line 31, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list input[type="radio"] {
-  -webkit-appearance: none;
-  width: 40px;
-  height: 40px;
-  margin: 4px;
-  border-radius: 50%;
-  cursor: pointer;
+.product_page .product_grix_info .product_info .product_name h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 /* line 39, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list input[type="radio"]:before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  border-radius: 50%;
-  opacity: 0.5;
+.product_page .product_grix_info .product_info .category {
+  font-size: .8em;
 }
-/* line 49, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list input[type="radio"]:checked {
-  box-shadow: 0 0 5px 0px rgba(26, 26, 26, 0.719);
-  border: 2px solid black;
+/* line 42, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .category p {
+  margin: 2px;
+  padding: 0;
+}
+/* line 45, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .category p a {
+  color: blue;
+}
+/* line 48, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .category p a:hover {
+  text-decoration: underline;
 }
 /* line 54, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list input[type="radio"]:checked:before {
-  opacity: 1;
+.product_page .product_grix_info .product_info .reviews {
+  display: flex;
 }
-/* line 59, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .orang {
-  border: 1px solid #834f02;
+/* line 57, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .reviews .stars_rating {
+  margin: 5px;
 }
-/* line 62, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .orang:before {
-  background: orangered;
+/* line 61, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .reviews .note_moyene {
+  margin: 5px;
 }
-/* line 68, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .rouge {
-  border: 1px solid #790808;
+/* line 64, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .reviews .note_moyene .rating_value {
+  font-size: .8em;
 }
-/* line 71, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .rouge:before {
-  background: red;
+/* line 67, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .reviews .note_moyene .nbr_rating {
+  color: #006d77;
+  font-size: .9em;
 }
 /* line 77, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .jaune {
-  border: 1px solid #796e08;
+.product_page .product_grix_info .product_info .addToCart .quantity_input {
+  position: relative;
+  line-height: 1.2em;
+  float: left;
+  left: 20px;
+  bottom: 5px;
 }
-/* line 80, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .jaune:before {
-  background: yellow;
-}
-/* line 86, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .vert {
-  border: 1px solid #2c7908;
-}
-/* line 89, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .vert:before {
-  background: green;
-}
-/* line 95, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .bleu {
-  border: 1px solid #085579;
-}
-/* line 98, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .bleu:before {
-  background: blue;
-}
-/* line 104, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .rose {
-  border: 1px solid #790846;
-}
-/* line 107, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .rose:before {
-  background: pink;
-}
-/* line 113, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .blanc {
-  border: 1px solid #3f3f3f;
-}
-/* line 116, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .colors .color_list .blanc:before {
-  background: white;
-}
-/* line 124, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_name {
-  margin: 0.5rem;
-}
-/* line 129, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list input[type="radio"] {
-  -webkit-appearance: none;
+/* line 83, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .addToCart .quantity_input input[type="number"] {
   width: 40px;
-  height: 40px;
-  margin: 5px;
-  cursor: pointer;
-  opacity: 0.5;
-}
-/* line 137, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list input[type="radio"]:checked {
-  opacity: 1;
-}
-/* line 141, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list input[type="radio"]:hover {
-  opacity: 0.7;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-36:before {
-  content: "36";
-  display: block;
-  width: 100%;
-  height: 100%;
+  height: 30px;
+  border: 1px solid #006d77;
+  padding: 5px;
   text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
+  -moz-appearance: textfield;
 }
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-37:before {
-  content: "37";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-38:before {
-  content: "38";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-39:before {
-  content: "39";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-40:before {
-  content: "40";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-41:before {
-  content: "41";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-42:before {
-  content: "42";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-43:before {
-  content: "43";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-44:before {
-  content: "44";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-45:before {
-  content: "45";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-46:before {
-  content: "46";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-47:before {
-  content: "47";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-48:before {
-  content: "48";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-49:before {
-  content: "49";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-50:before {
-  content: "50";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-51:before {
-  content: "51";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-52:before {
-  content: "52";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-53:before {
-  content: "53";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-54:before {
-  content: "54";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-55:before {
-  content: "55";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 148, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .pointures .pointure_list .pointure-56:before {
-  content: "56";
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
-}
-/* line 162, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_name {
-  margin: 0.5rem;
-}
-/* line 167, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list input[type="radio"] {
+/* line 91, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .addToCart .quantity_input input[type="number"]::-webkit-inner-spin-button,
+.product_page .product_grix_info .product_info .addToCart .quantity_input input[type="number"] ::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  cursor: pointer;
-  opacity: 0.5;
+  margin: 0;
 }
-/* line 175, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list input[type="radio"]:before {
-  display: block;
-  width: 100%;
-  height: 100%;
+/* line 97, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .addToCart .quantity_input #moin, .product_page .product_grix_info .product_info .addToCart .quantity_input #plus {
+  display: inline-block;
   text-align: center;
-  padding-top: 25%;
-  border: 1px solid black;
+  cursor: pointer;
+  width: 25px;
+  height: 30px;
+  background: #006d77;
+  font-size: 1.2em;
+  color: #fff;
+  margin: 0;
+  padding: 4px;
 }
-/* line 184, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list input[type="radio"]:hover {
-  opacity: 0.7;
+/* line 111, ../sass/_productPage.scss */
+.product_page .product_grix_info .product_info .addToCart .btn {
+  float: right;
+  right: 5px;
+  bottom: 5px;
 }
-/* line 188, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list input[type="radio"]:checked {
-  opacity: 1;
-}
-/* line 195, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-S:before {
-  content: "S";
-}
-/* line 201, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-M:before {
-  content: "M";
-}
-/* line 207, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-L:before {
-  content: "L";
-}
-/* line 213, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-XL:before {
-  content: "XL";
-}
-/* line 218, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-XXL {
-  width: 50px;
-}
-/* line 220, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-XXL:before {
-  content: "XXL";
-}
-/* line 225, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-XXXL {
-  width: 60px;
-}
-/* line 227, ../sass/_productPage.scss */
-.product_page .product_grix_info .product_info .tailles .taille_list #taille-XXXL:before {
-  content: "XXXL";
-}
-/* line 236, ../sass/_productPage.scss */
+/* line 120, ../sass/_productPage.scss */
 .product_page .comment-section {
   padding-top: 5px;
 }
-/* line 238, ../sass/_productPage.scss */
+/* line 122, ../sass/_productPage.scss */
 .product_page .comment-section h2 {
   width: 100%;
   text-align: center;
@@ -1158,18 +963,18 @@ header nav ul .dropdown_parent {
   font-weight: 300;
   color: #3f3e3e;
 }
-/* line 245, ../sass/_productPage.scss */
+/* line 129, ../sass/_productPage.scss */
 .product_page .comment-section .content {
   padding: 10px;
   padding-top: 0;
   margin-top: 0;
 }
-/* line 250, ../sass/_productPage.scss */
+/* line 134, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form {
   width: 100%;
   margin-bottom: 10px;
 }
-/* line 254, ../sass/_productPage.scss */
+/* line 138, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form .star-hovered {
   height: 20px;
   color: #999696;
@@ -1177,7 +982,7 @@ header nav ul .dropdown_parent {
   text-align: center;
   margin: 2px;
 }
-/* line 261, ../sass/_productPage.scss */
+/* line 145, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form .stars_form {
   width: 50%;
   margin: auto;
@@ -1185,18 +990,18 @@ header nav ul .dropdown_parent {
   margin-bottom: 10px;
   text-align: center;
 }
-/* line 268, ../sass/_productPage.scss */
+/* line 152, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form .stars_form i {
   font-size: 1.5em;
   padding: 5px;
   cursor: pointer;
 }
-/* line 275, ../sass/_productPage.scss */
+/* line 159, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form form {
   width: 50%;
   margin: auto;
 }
-/* line 279, ../sass/_productPage.scss */
+/* line 163, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form form textarea {
   width: 100%;
   height: 100px;
@@ -1208,7 +1013,7 @@ header nav ul .dropdown_parent {
   font-size: 1em;
   background: #fff;
 }
-/* line 291, ../sass/_productPage.scss */
+/* line 175, ../sass/_productPage.scss */
 .product_page .comment-section .content .commente_form form .btn {
   width: 100%;
   height: 40px;
@@ -1220,13 +1025,13 @@ header nav ul .dropdown_parent {
   font-size: 1em;
   cursor: pointer;
 }
-/* line 305, ../sass/_productPage.scss */
+/* line 189, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs {
   width: 90%;
   margin: auto;
   margin-top: 30px;
 }
-/* line 310, ../sass/_productPage.scss */
+/* line 194, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair {
   width: 100%;
   margin: auto;
@@ -1234,41 +1039,41 @@ header nav ul .dropdown_parent {
   position: relative;
   border-bottom: 1px solid #999696;
 }
-/* line 318, ../sass/_productPage.scss */
+/* line 202, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .reviews div {
   float: left;
 }
-/* line 322, ../sass/_productPage.scss */
+/* line 206, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .reviews span {
   font-size: 1.1em;
   font-style: italic;
   font-weight: lighter;
 }
-/* line 330, ../sass/_productPage.scss */
+/* line 214, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_info .commentair_auth h3 {
   font-size: 1.2em;
   font-weight: 300;
   margin: 5px;
   padding: 0;
 }
-/* line 340, ../sass/_productPage.scss */
+/* line 224, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_info .commentair_content p {
   font-size: 1em;
   margin: 5px;
   padding: 0;
 }
-/* line 348, ../sass/_productPage.scss */
+/* line 232, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_date {
   display: flex;
   flex-direction: row;
   vertical-align: middle;
 }
-/* line 353, ../sass/_productPage.scss */
+/* line 237, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_date em {
   font-size: .8em;
   margin-right: 5px;
 }
-/* line 357, ../sass/_productPage.scss */
+/* line 241, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_date .acv {
   margin: 5px;
   width: fit-content;
@@ -1278,7 +1083,7 @@ header nav ul .dropdown_parent {
   color: #1b6d1b;
   background: #befabe;
 }
-/* line 367, ../sass/_productPage.scss */
+/* line 251, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_date .delete {
   float: right;
   color: red;
@@ -1286,93 +1091,90 @@ header nav ul .dropdown_parent {
   padding: 3px;
   border-radius: 2px;
 }
-/* line 373, ../sass/_productPage.scss */
+/* line 257, ../sass/_productPage.scss */
 .product_page .comment-section .content .commentairs .commentair .commentair_date .delete:hover {
   background: #f5f5f5;
 }
 
-/* line 5, ../sass/_form.scss */
-.addProduct form .color_container .vueColor div {
-  cursor: pointer;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border: 1px solid black;
-  border-radius: 50%;
-  opacity: 0.5;
-}
-/* line 15, ../sass/_form.scss */
-.addProduct form .color_container .vueColor div.selected {
-  opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-/* line 22, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .red {
-  background: red;
-}
-/* line 27, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .bleu {
-  background: blue;
-}
-/* line 32, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .green {
-  background: green;
-}
-/* line 37, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .yellow {
-  background: yellow;
-}
-/* line 42, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .black {
-  background: black;
-}
-/* line 47, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .white {
+/* line 1, ../sass/_loader.scss */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: white;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-/* line 52, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .orange {
-  background: orange;
+/* line 12, ../sass/_loader.scss */
+.loader .lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
 }
-/* line 57, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .purple {
-  background: purple;
+/* line 18, ../sass/_loader.scss */
+.loader .lds-ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #006d77;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
-/* line 62, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .brown {
-  background: brown;
+/* line 27, ../sass/_loader.scss */
+.loader .lds-ellipsis div:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
 }
-/* line 67, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .grey {
-  background: grey;
+/* line 31, ../sass/_loader.scss */
+.loader .lds-ellipsis div:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
 }
-/* line 72, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .pink {
-  background: pink;
+/* line 35, ../sass/_loader.scss */
+.loader .lds-ellipsis div:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2 0.6s infinite;
 }
-/* line 77, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .turquoise {
-  background: turquoise;
+/* line 39, ../sass/_loader.scss */
+.loader .lds-ellipsis div:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3 0.6s infinite;
 }
-/* line 82, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .beige {
-  background: beige;
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-/* line 87, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .gold {
-  background: gold;
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }
-/* line 92, ../sass/_form.scss */
-.addProduct form .color_container .vueColor .silver {
-  background: silver;
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(19px);
+  }
 }
-
-/* line 23, ../sass/screen.scss */
+/* line 24, ../sass/screen.scss */
 body {
   background: #f5f5f5;
 }
-/* line 26, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 body .hidden {
   display: none;
 }

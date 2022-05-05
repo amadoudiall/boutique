@@ -31,7 +31,7 @@ class bootstrapForm extends Form
     
     public function inputCheckbox($name, $id, $label)
     {
-        return $this->surround('<label class="form-check"><input class="form-check" type="checkbox" name="' . $name . '" id="' . $id . '" value="' . $this->getDataValue($name) . '"><span> '. $label .'</span></label>'
+        return $this->surround('<label class="form-check"><input class="form-check" type="checkbox" name="' . $name . '" id="' . $id . '" value=""><span> '. $label .'</span></label>'
         );
     }
     

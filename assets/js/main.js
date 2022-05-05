@@ -1,10 +1,10 @@
-const pointure_input = document.getElementsByClassName('pointure');
-const pointure_list = document.getElementsByClassName('pointure_list');
-
-for (let i = 0; i < pointure_input.length; i++) {
-    let valeur_pointure = pointure_input[i].value;
-    pointure_input[i].classList.add('pointure-' + valeur_pointure);
-}
+// Loder du site
+window.addEventListener('load', () => {
+    // Recuperer le loader
+    const loader = document.querySelector('.loader');
+    // Ajouter la class hidden au loader si la page est chargée completement et le supprimer si la page est rechargée
+    loader.classList.add('hidden');
+})
 
 window.onload = () => {
     // systeme de note pour permetre aux client de noter un produit

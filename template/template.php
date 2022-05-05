@@ -24,6 +24,13 @@ if(!isset($_SESSION['sessionId'])){
 </head>
 
 <body class="layout">
+    <div class="loader">
+        <div class="lds-ellipsis">
+            <div class="lds-ellipsis1"></div>
+            <div class="lds-ellipsis2"></div>
+            <div class="lds-ellipsis3"></div>
+        </div>
+    </div>
     <header class="shadow-1 fixed">
         <?php if($title === 'Accueil'){require_once('./pages/inc/nav/_nav.php');}else{require_once('../pages/inc/nav/_nav.php');} ?>
     </header>
@@ -36,6 +43,7 @@ if(!isset($_SESSION['sessionId'])){
     <script src="../assets/js/jquery.js"></script>
     <script src="../assets/slick/slick.min.js"></script>
     <script src="../assets/js/slick.js"></script>
+    <script src="../assets/js/form.js"></script>
     <script src="../assets/js/main.js"></script>
 </body>
 

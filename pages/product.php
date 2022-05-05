@@ -26,6 +26,8 @@ if(isset($_GET['product']) && !empty($_GET['product'])){
         }
     }
     
+    $comments = $productComment->getComments($product['idProduct']);
+    
 }
 
 $title = $product['nom'];
@@ -48,7 +50,7 @@ ob_start();
                     <h2><?= $product['nom'] ?></h2>
                 </div>
                 <div class="category">
-                    <a href="./category.php" class="clink">Trouver des produit similaires pour <?= $product['category'] ?></a>
+                    <p>Trouver des produit similaires à<a href="./category.php" class="clink"> <?= $product['category'] ?></a></p>
                 </div>
                 <div class="reviews">
                     <!-- Les etoiles pour la note du produit -->
@@ -62,53 +64,143 @@ ob_start();
                     <div class="note_moyene">
                         <!-- Afficher la moyene des avis comments -->
                         <?php $moyenne = $productComment->getMoyenne($product['idProduct']);?>
-                        <span class="rating_value" data-value="<?= round($moyenne['moyenne'], 1) ?>"> <?= round($moyenne['moyenne'], 1) ?> </span>
+                        (<span class="rating_value" data-value="<?= round($moyenne['moyenne'], 1) ?>"><?= round($moyenne['moyenne'], 1) ?>/5</span>) <span class="nbr_rating"> <?= count($comments), ' Avis vérifiés'; ?> </span>
+                        
                     </div>
                 </div>
                 <hr>
-                <form action="./panier.php" method="post">
-                    <div class="colors">
-                        <div class="color_name">
-                            <span>Color</span>
+                <div class="prices">
+                    
+                    <?php if($product['promo'] > 0) :?>
+                        <div class="prix-vente">
+                            <span> <?= $product['price_sell'] ?> FCFA </span>
                         </div>
-                        <div class="color_list">                   
-                            <input type="radio" name="color" id="color" value="#ff5733" class="orang">
-                            <input type="radio" name="color" id="color" value="#ff3333" class="rouge">
-                            <input type="radio" name="color" id="color" value="#ffd133" class="jaune">
-                            <input type="radio" name="color" id="color" value="#3cff33" class="vert">
-                            <input type="radio" name="color" id="color" value="#33b2ff" class="bleu">
-                            <input type="radio" name="color" id="color" value="#ff3390" class="rose">
-                            <input type="radio" name="color" id="color" value="#FFF" class="blanc">
+                        <div class="prix-norm">
+                            <span> <?= $product['price'] ?> FCFA </span>
                         </div>
+                        <?php else : ?>
+                        <div class="prix-vente">
+                            <span> <?= number_format($product['price'], 0, '', ' ') ?> FCFA </span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <form action="./panier.php" class="addToCart" method="post">
+                    <!-- If product has color -->
+                    <?php if($product['color'] != 'auccun'): ?>
+                        <div class="colors form_option mt-3">
+                            <div class="color_name">
+                                <span>Couleurs</span>
+                            </div>
+                            <div class="color_list">                   
+                                <div class="vueColor vueOption">
+                                    <?php $colors = explode('|', $product['color']); foreach($colors as $cs): if(strlen($cs) > 0): ?>
+                                            <div class="<?= $cs ?>" data-value="<?= $cs ?>" title="<?= $cs ?>" ></div>
+                                    <?php endif; endforeach; ?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="colors" value="" id="color_input">
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- If product has shoe size -->
+                    <?php if($product['pointure'] != 'auccun'): ?>
+                        <div class="pointures form_option mt-3">
+                            <div class="pointure_name">
+                                <span>Pointure</span>
+                            </div>
+                            <div class="pointure_list">
+                                <div class="vueShoeSize vueSize">
+                                    <?php $pointure = explode('|', $product['pointure']); foreach($pointure as $p): if(strlen($p) > 0): ?>
+                                            <div class="<?= $p ?>" data-value="<?= $p ?>" title="<?= $p ?>" ><?= $p ?></div>
+                                    <?php endif; endforeach; ?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="pointure" value="" id="shoeSize_input">
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- If product has taille -->
+                    <?php if($product['size'] != 'auccun'): ?>
+                        <div class="taille form_option mt-3">
+                            <div class="taille_name">
+                                <span>Taille</span>
+                            </div>
+                            <div class="taille_list">
+                                <div class="vueSize">
+                                    <?php $taille = explode('|', $product['size']); foreach($taille as $t): if(strlen($t) > 0): ?>
+                                            <div class="<?= $t ?>" data-value="<?= $t ?>" title="<?= $t ?>" ><?= $t ?></div>
+                                    <?php endif; endforeach; ?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="taille" value="" id="size_input">
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- Nombre de produit a mettre dans le panier -->
+                    <div class="quantity_input mt-3">
+                        <span id="moin">-</span><input type="number" name="quantity" value="1" min="1" max="10" id="quantity_input"><span id="plus">+</span>
                     </div>
-                    <div class="pointures">
-                        <div class="pointure_name">
-                            <span>Pointure</span>
-                        </div>
-                        <div class="pointure_list">
-                            <input type="radio" name="pointure" id="pointure-36" value="36" class="pointure">
-                            <input type="radio" name="pointure" id="pointure-37" value="37" class="pointure">
-                            <input type="radio" name="pointure" id="pointure-38" value="38" class="pointure">
-                            <input type="radio" name="pointure" id="pointure-39" value="39" class="pointure">
-                        </div>
-                    </div>
-                    <div class="tailles">
-                        <div class="taille_name">
-                            <span>Taille</span>
-                        </div>
-                        <div class="taille_list">
-                            <input type="radio" name="taille" id="taille-S" value="S" class="taille">
-                            <input type="radio" name="taille" id="taille-M" value="M" class="taille">
-                            <input type="radio" name="taille" id="taille-L" value="L" class="taille">
-                            <input type="radio" name="taille" id="taille-XL" value="XL" class="taille">
-                            <input type="radio" name="taille" id="taille-XXL" value="XXL" class="taille">
-                            <input type="radio" name="taille" id="taille-XXXL" value="XXXL" class="taille">
-                        </div>
-                    </div>
+                    
+                    <!-- Submit -->
+                    <input type="submit" name="add_to_cart" value="Ajouter au panier" class="btn btn-primary mt-3">
                 </form>
             </div>
         </div>
-        
+        <section class="primary-section mt-3 white detaill-section rounded-1">
+            <div class="tab" id="example-tab" data-ax="tab">
+                <ul class="tab-menu">
+                    <li class="tab-link">
+                        <a href="#tab1">Description</a>
+                    </li>
+                    <li class="tab-link">
+                        <a href="#tab2">Détailles</a>
+                    </li>
+                </ul>
+                
+                <!-- Here are your tab contents -->
+                <div id="tab1" class="p-3"> <?= $product['descr'] ?> </div>
+                <div id="tab2" class="p-3">
+                    <p>Ici vous pouvez trouver tous les détailles concernant ce produit comme les dimensions, les pointures et les couleurs disponibles pour ce produit.</p>
+                    <!-- Color -->
+                    <?php if($product['color'] != 'auccun'): ?>
+                        <p>
+                            <strong>Couleur disponibles :</strong>
+                            <?php $color = explode('|', $product['color']); foreach($color as $c): ?>
+                                <span class="badge badge-primary"><?= $c ?></span> 
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                    
+                    <!-- Size -->
+                    <?php if($product['size'] != 'auccun'): ?>
+                        <p>
+                            <strong>Taille disponibles :</strong>
+                            <?php $size = explode('|', $product['size']); foreach($size as $s): ?>
+                                <span class="badge badge-primary"><?= $s ?></span> 
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                    
+                    <!-- Dimentions -->
+                    <?php if($product['dimensions'] != 'auccun'): ?>
+                        <p>
+                            <strong>Dimensions :</strong>
+                            <?= $product['dimensions'] ?>
+                        </p>
+                    <?php endif; ?>
+                    
+                    <!-- Pointure -->
+                    <?php if($product['pointure'] != 'auccun'): ?>
+                        <p>
+                            <strong>Pointure disponible:</strong>
+                            <?php explode('|', $product['pointure']); foreach($pointure as $p): ?>
+                                <span class="badge badge-primary"><?= $p ?></span>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
         <section class="primary-section mt-3 white comment-section rounded-1">
             <h2>Avis utilisateurs</h2>
             <div class="content">
@@ -131,8 +223,7 @@ ob_start();
                 <!-- Afficher les commentaires -->
                 <div class="commentairs">
                     <?php
-                    $comments = $productComment->getComments($product['idProduct']);
-                    foreach($comments as $comment){
+                        foreach($comments as $comment){
                     ?>
                     <div class="commentair">
                         <div class="reviews">

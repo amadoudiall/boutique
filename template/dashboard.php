@@ -14,6 +14,13 @@
 </head>
 
 <body class="layout-under-navbar">
+    <div class="loader">
+        <div class="lds-ellipsis">
+            <div class="lds-ellipsis1"></div>
+            <div class="lds-ellipsis2"></div>
+            <div class="lds-ellipsis3"></div>
+        </div>
+    </div>
     <header>
         <div class="navbar-fixed">
             <?php require('../pages/inc/nav/_nav.php'); ?>
@@ -41,6 +48,7 @@
 
     <!-- Axentix JS minified version -->
     <script src="../assets/js/form.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

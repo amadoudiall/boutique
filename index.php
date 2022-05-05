@@ -68,23 +68,34 @@ ob_start();
         foreach ($products as $key => $product) : ?>
             <div class="product shadow-1">
 
-                <span class="promo">-20%</span>
-                <span class="like"><a href="#"><i class="bi bi-heart"></i></a></span>
+                <?php if ($product['promo'] > 0) : ?>
+                  <span class="promo"><?= $product['promo'] ?>%</span>
+                <?php endif; ?>
+                <!-- Pour les likes -->
+                <!-- <span class="like"><a href="#"><i class="bi bi-heart"></i></a></span> -->
                 <a href="./pages/product.php?product=<?= $product['idProduct'] ?>"><img src="./assets/images/Product/<?= $product['img'] ?>" alt="produit"></a>
                 <div class="detaille">
                     <div class="title-price">
                         <h3><a href="#"><?= $product['nom'] ?></a></h3>
-                        <p><?= number_format($product['price'], 0, '', ' ',) ?> CFA</p>
+                        <?php if ($product['promo'] > 0) : ?>
+                          <span class="price"><?= $product['price_sell'] ?></span>
+                          <span class="price-norm"><?= $product['price'] ?></span>
+                        <?php else : ?>
+                          <span class="price"><?= $product['price'] ?></span>
+                        <?php endif; ?>
                     </div>
                     <div class="review-buy">
-                        <span>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-half"></i>
-                          <i class="bi bi-star"></i>
-                          3.8
-                        </span>
+                        <div class="reviews">
+                            <!-- Les etoiles pour la note d'un utilisateure -->
+                            <div class="stars_users" data-value="<?= $comment['rating'] ?>">
+                                <i class="bi bi-star" data-value="1"></i>
+                                <i class="bi bi-star" data-value="2"></i>
+                                <i class="bi bi-star" data-value="3"></i>
+                                <i class="bi bi-star" data-value="4"></i>
+                                <i class="bi bi-star" data-value="5"></i>
+                            </div>
+                            <span class="reviews-count"><?= $product['rating'] ?></span>
+                        </div> 
                         <a href="./pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary"><i class="bi bi-cart-plus"></i></a>
                     </div>
                 </div>
