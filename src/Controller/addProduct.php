@@ -111,6 +111,8 @@ class addProduct{
                 $height = 'Hauteur: '.htmlspecialchars($_POST['dimention_height']);
                 $height .= ' '.htmlspecialchars($_POST['dimention_height_unit']);
                 $dimensions = $width.', '.$depth.', '.$height;
+            }else{
+                $dimensions = 'auccun';
             }
             
             // if Promotion is set
@@ -154,7 +156,7 @@ class addProduct{
                 $this->setSuccess('Tout c\'est bien passée !');
                 //header('location: '.$lien.'?url=product');
             }else{
-                $this->setErreur('Le prix d\'achat doit être inférieur au prix de vente');
+                $this->setErreur('Le prix de vente doit être supérieur au prix d\'achat');
             }
         }else{
             $this->setErreur('Tout les champs sonts obligatoire !');
@@ -204,9 +206,17 @@ class addProduct{
         if(isset($_FILES['img']) and !empty($_FILES['img'])){
             $image = $_FILES['img'];
             $imageName = $this->uploadImage($image);
+            // if $image is not empty
+            if($imageName == ""){
+                $imageName = $thisProduct['img'];
+            }else{
+                unlink('../assets/images/Product/'.$thisProduct['img']);
+            }
             $product->setImg($imageName);
+            
         }else{
-            $product->setImg($thisProduct['img']);
+            $imageName = $thisProduct['img'];
+            $product->setImg($imageName);
         }
         
         // Description
