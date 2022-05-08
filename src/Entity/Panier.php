@@ -13,6 +13,7 @@ class Panier{
     public $productId;
     public $sessionId;
     public $quantity;
+    public $detaille_options;
     public $price;
     
     public function __construct(){
@@ -174,6 +175,26 @@ class Panier{
         return $this;
     }
     
+    /**
+     * Get the value of detaille_options
+     */ 
+    public function getDetaille_options()
+    {
+        return $this->detaille_options;
+    }
+    
+    /**
+     * Set the value of detaille_options
+     *
+     * @return  self
+     */ 
+    public function setDetaille_options($detaille_options)
+    {
+        $this->detaille_options = $detaille_options;
+        
+        return $this;
+    }
+    
     public function getPanier()
     {
         $products = $this->getDb()->query('SELECT * FROM Panier');
@@ -200,12 +221,13 @@ class Panier{
     // Insert panier
     public function flushPanier()
     {
-        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, session_id, quantity, montant) VALUES(:User_id, :Product_id, :session_id, :quantity, :montant)');
+        $addProduct = $this->getDb()->prepare('INSERT INTO Panier(User_id, Product_id, session_id, quantity, detaille_options, montant) VALUES(:User_id, :Product_id, :session_id, :quantity, :detaille_options, :montant)');
         $addProduct->execute([
             'User_id' => $this->userId,
             'Product_id' => $this->productId,
             'session_id' => $this->sessionId,
             'quantity' => $this->quantity,
+            'detaille_options' => $this->detaille_options,
             'montant' => $this->montant
         ]);
     }
@@ -227,15 +249,15 @@ class Panier{
     }
     
     // Update panier
-    public function update($quantity, $productId, $userId, $sessionId, $montant){
+    public function update($quantity, $productId, $userId, $sessionId, $detailles, $montant){
         try {
-            $this->getDb()->prepare("UPDATE Panier SET quantity = ?, montant = ? WHERE Product_id = ? AND Panier.User_id= ? OR Panier.Product_id = ? AND Panier.session_id = ? ")->execute(array($quantity, $montant, $productId, $userId, $productId, $sessionId));
+            $this->getDb()->prepare("UPDATE Panier SET quantity = ?, detaille_options = ?, montant = ? WHERE Product_id = ? AND Panier.User_id= ? OR Panier.Product_id = ? AND Panier.session_id = ? ")->execute(array($quantity, $detailles, $montant, $productId, $userId, $productId, $sessionId));
         } catch (\Throwable $th) {
-            echo "La requete ne s'est pas passé comme prévue !". $th;
+            echo "La requete ne s'est pas passé comme prévue !". $th->getMessage();
         }
     }
     
-    public function addPanier($productId, $userId, $sessionId, $montant){ 
+    public function addPanier($productId, $userId, $sessionId, $quantity, $detailles, $montant){ 
           
         $getProduct = new Product();
         $product = $getProduct->getProductById($productId);
@@ -251,28 +273,29 @@ class Panier{
                     $_SESSION['panier'] = array();
                                         
                     foreach ($panier as $key => $product) {
-                        $_SESSION['panier'][$product['Product_id']] = ($product['quantity'] + 1);
+                        $_SESSION['panier'][$product['Product_id']] = ($product['quantity'] + $quantity);
                     }
                     
                 }else{    
-                    $_SESSION['panier'][$productId]= ($existProduct['quantity'] + 1);
+                    $_SESSION['panier'][$productId]= ($existProduct['quantity'] + $quantity);
                 }
 
-                
                 $montant = ($product['price'] * $_SESSION['panier'][$productId]);
                 $quantity = $_SESSION['panier'][$productId];
                 
-                $this->update($quantity, $productId, $userId, $sessionId, $montant);
+                $this->update($quantity, $productId, $userId, $sessionId, $detailles, $montant);
                 
             }else{
                 // sinon on l'ajoute.
-                $_SESSION['panier'][$productId] = 1;
+                $_SESSION['panier'][$productId] = $quantity;
+                $montant = ($product['price'] * $quantity);
                 
                 $this->setUserId($userId)
                     ->setProductId($productId)
                     ->setSessionId($sessionId)
-                    ->setQuantity(1)
-                    ->setMontant($product['price']);
+                    ->setQuantity($quantity)
+                    ->setDetaille_options($detailles)
+                    ->setMontant($montant);
                 $this->flushPanier();
             }
         }else{
@@ -300,7 +323,7 @@ class Panier{
                         try {
                             $this->getDb()->prepare("UPDATE Panier SET user_id = ? WHERE session_id = ? ")->execute(array($userId, $sessionId));
                         } catch (\Throwable $th) {
-                            echo "La requete ne s'est pas passé comme prévue au moment de la connexion !". $th;
+                            echo "La requete ne s'est pas passé comme prévue au moment de la connexion !". $th->getMessage();
                         }
                     }
                 }

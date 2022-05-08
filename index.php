@@ -11,9 +11,8 @@ Autoloader::registerHome();
 
 $getCategory = new Category();
 $categorys = $getCategory->getCategorys();
-if(!isset($_SESSION)){
-    session_start();  
-}
+
+session_start();  
 
 if (empty($_SESSION['user'])) {
     unset($_SESSION['user']);

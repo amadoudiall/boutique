@@ -33,14 +33,24 @@ if(isset($_GET['url']) and $_GET['url'] === "editUser"){
     $submitName = "addUser";
 }
 ?>
-<div class="container shadow-1 rounded-1  admin admin-editUser mt-3">
+<div class="shadow-1 rounded-1  admin admin-editUser mt-3">
     <div class="editUser form">
 
         <?php $form = new bootstrapForm($request);
         $erreur = $editUser->getErreur();
-        if (isset($erreur)) {
-            echo $erreur;
-        } ?>
+        // If there is an error, display it
+        if (isset($erreur)): ?>
+            <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4">
+                <?= $erreur ?>
+            </div>
+        <?php endif ?>
+        <!-- If there is an success, display it -->
+        <?php $success = $category->getSuccess();
+        if (isset($success)): ?>
+            <div class="p-3 my-2 rounded-1 green light-4 text-green text-dark-4">
+                <?= $success ?>
+            </div>
+        <?php endif ?>
         <form class="form-material" action="" method="post">
             <?php
             echo $form->input('text', 'nom', 'Nom');

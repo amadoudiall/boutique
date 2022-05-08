@@ -14,7 +14,7 @@ if(isset($_GET['c']) and !empty($_GET['c'])){
 }
 
 if($productCommande != null): ?>
- <div class="container shadow-1 rounded-1 admin admin-commandeDetaille mt-3">
+ <div class="shadow-1 rounded-1 admin admin-commandeDetaille mt-3">
     <div class="table table-striped admin-table-list">
         <table class="table">
             <thead>

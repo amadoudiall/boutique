@@ -11,7 +11,7 @@ if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'bouti
     $lien = '../pages/profile.php';
 }
  ?>
-<div class="container shadow-1 rounded-1 admin admin-commandes mt-3">
+<div class="shadow-1 rounded-1 admin admin-commandes mt-3">
     <?php if($commandes != null): ?>
     <div class="utils">
         <h2>Mes commandes</h2>

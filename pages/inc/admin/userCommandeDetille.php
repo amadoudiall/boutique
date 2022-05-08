@@ -29,6 +29,7 @@ if(isset($_GET['valider']) and !empty($_GET['valider'])){
         if($product['stock_actuel'] > $commandeDetaille['quantity']){
             // Mettre a jour la commande et vendre le produit
             $getCommande->updateCommandeProduct('Validé', $commandeId, $productId, $stock, $userId, $vente);
+            $success = 'Vous avez validé le produit !';
         }else{
             $erreur = "Desolé le stock actuel du produit est insuffisant !";
         }
@@ -58,6 +59,7 @@ if(isset($_GET['refuser']) and !empty($_GET['refuser'])){
     if($commandeDetaille['etat'] != 'Décliné'){
         // Mettre a jour la commande et vendre le produit
         $getCommande->updateCommandeProduct('Décliné', $commandeId, $productId, $stock, $userId, $vente);
+        $warning = 'Vous avez refusé le produit !';
     }else{
         $erreur = "Ce produit est déjà annulé !";
     }
@@ -79,12 +81,26 @@ if(isset($_GET['c']) and !empty($_GET['c'])){
     $erreur = "Desolé cette commande n'est pas disponible !";
 }
 if($productCommande != null): ?>
- <div class="container shadow-1 rounded-1 admin admin-users-commande-detaille rounded-1 mt-3">
-    <?php if(isset($erreur)): ?>
-        <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4 bd-solid bd-red bd-1">
-            <span class="iconify-inline" data-icon="mdi:alert-octagon"></span> <?= $erreur ?>
-        </div>
-    <?php endif; ?>
+ <div class="shadow-1 rounded-1 admin admin-users-commande-detaille rounded-1 mt-3">
+        <!-- If there is an error, display it -->
+        <?php if (isset($erreur)): ?>
+            <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4">
+                <?= $erreur ?>
+            </div>
+        <?php endif ?>
+        <!-- If there is an success, display it -->
+        <?php if (isset($success)): ?>
+            <div class="p-3 my-2 rounded-1 green light-4 text-green text-dark-4">
+                <?= $success ?>
+            </div>
+        <?php endif ?>
+        
+        <!-- If there is an warning, display it -->
+        <?php if (isset($warning)): ?>
+            <div class="p-3 my-2 rounded-1 orange light-4 text-orange text-dark-4">
+                <?= $warning ?>
+            </div>
+        <?php endif ?>
     <div class="table-responsive admin-table-list">
         <table class="table table-striped">
             <thead>

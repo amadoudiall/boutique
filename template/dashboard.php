@@ -42,10 +42,37 @@
         <a href="../pages/admin.php?url=rapport" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'rapport') {echo 'active';} ?>"><i class="bi bi-graph-up"></i> Rapport</a>
         <a href="../pages/admin.php?url=setting" class="sidenav-link <?php if (isset($_GET['url']) and $_GET['url'] === 'setting') {echo 'active';} ?>"><i class="bi bi-gear"></i> Général</a>
     </div>
-    <main>
+    <main class="container">
         <?= $content ?>
     </main>
-
+    <footer class="d-flex fx-col primary">
+        <div class="container">
+            <div class="grix xs3">
+            <div>
+                <h6>Left side of the footer</h6>
+                <p>
+                This is my phone number<br />
+                01 23 45 67 89
+                </p>
+            </div>
+            <div class="text-center">
+                <h6>Middle of the footer</h6>
+                <p>
+                Welcome<br />
+                I'm under "Welcome"
+                </p>
+            </div>
+            <div class="text-right">
+                <h6>Right side of the footer</h6>
+                <p>
+                This is my address<br />
+                Route 12
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="footer fx-center primary-dark">Copyright © 2022 - Example</div>
+    </footer>
     <!-- Axentix JS minified version -->
     <script src="../assets/js/form.js"></script>
     <script src="../assets/js/main.js"></script>

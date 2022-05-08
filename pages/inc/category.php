@@ -9,7 +9,7 @@ if($_SESSION['user']['roles'] != 'admin'){
 
 $title = "Catégories"
 ?>
-<div class="container shadow-1 rounded-1 admin admin-category mt-3">
+<div class="shadow-1 rounded-1 admin admin-category mt-3">
         <div class="utils">
             <h2>Catégories</h2>
             <div class="links">

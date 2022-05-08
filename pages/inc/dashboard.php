@@ -22,7 +22,7 @@ if($_SESSION['user']['roles'] == 'admin'){
 }
 
 ?>
-<div class="container dashboard rounded-1 mt-3">
+<div class="dashboard rounded-1 mt-3">
     <div class="grix xs4">
         
         <div class="newusers item rounded-1 white shadow-1">

@@ -1,3 +1,45 @@
-.grille{
-    padding: 10px;
+.panier{
+    .grille{
+        padding: 10px;
+    }
+    
+    .chipping-infos{
+        h2{
+            font-size: 1.5em;
+        }
+        .grix{
+            width: 50%;
+            margin: auto;
+            
+            button{
+                width: 100%;
+                background: $primary;
+                color: $white;
+                border: 1px solid $primary;
+                font-size: 1.3em;
+            }
+            
+            .btn-green{
+                background: $green;
+            }
+        }
+        
+        #map{
+            text-align: center;
+            iframe{
+                width: 70%;
+            }
+        }
+        
+        .not_connected{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+            p{
+                a{
+                    color: $primaryDark;
+                }
+            }
+        }
+    }
 }

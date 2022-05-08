@@ -38,14 +38,24 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
     $submitName = "addProduct";
 }
 ?>
-<div class="container shadow-1 rounded-1 admin admin-addProduct mt-3">
+<div class="shadow-1 rounded-1 admin admin-addProduct mt-3">
     <div class="addProduct form">
 
         <?php $form = new bootstrapForm($request);
         $erreur = $addProduct->getErreur();
-        if (isset($erreur)) {
-            echo $erreur;
-        }?>
+        // If there is an error, display it
+        if (isset($erreur)): ?>
+            <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4">
+                <?= $erreur ?>
+            </div>
+        <?php endif ?>
+        <!-- If there is an success, display it -->
+        <?php $success = $category->getSuccess();
+        if (isset($success)): ?>
+            <div class="p-3 my-2 rounded-1 green light-4 text-green text-dark-4">
+                <?= $success ?>
+            </div>
+        <?php endif ?>
         <form class="form-material" action="" method="post" enctype="multipart/form-data">
             <?php
                 // Product name input
@@ -109,7 +119,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
                 
                 <!-- Each size -->
                 <div class="form-field size_container form_option hidden mt-3">
-                    <div class="vueSize vueOption">
+                    <div class="vueSize vueOption size_Option">
                         <div class="xs" data-value="xs" title="XS" >XS</div>
                         <div class="s" data-value="s" title="S" >S</div>
                         <div class="m" data-value="m" title="M" >M</div>
@@ -132,7 +142,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
                 <!-- Each shoe size -->
                 <div class="form-field shoeSize_container hidden form_option mt-3">
                     <p>Veuillez selectionner les différents pointures que vous avez en stock :</p>
-                    <div class="vueShoeSize vueSize vueOption">
+                    <div class="vueShoeSize size_Option vueOption">
                         <div class="36" data-value="36" title="36" >36</div>
                         <div class="37" data-value="37" title="37" >37</div>
                         <div class="38" data-value="38" title="38" >38</div>

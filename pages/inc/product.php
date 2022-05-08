@@ -16,7 +16,7 @@ if($_SESSION['user']['roles'] == 'admin'){
 }
 
 ?>
-<div class="container shadow-1 rounded-1 admin admin-product mt-3">
+<div class="shadow-1 rounded-1 admin admin-product mt-3">
         <div class="utils">
             <h2>Produits</h2>
             <!-- Rechercher un produit -->

@@ -12,9 +12,10 @@ class Connection
 
     protected $erreur;
     protected $success;
+    protected $warning;
     
     // Login permet d'identifier l'utilisateur;
-    public function Login()
+    public function Login($last)
     {
         // Vérifie si l'utilisateur a bien saisit le formulaire;
         if (
@@ -58,15 +59,17 @@ class Connection
                         // Mettre à jour le panier pour charger $userId;
                         $panier->isCnnected($userId, $sessionId);
                         
-                        header("Location: HTTP_REFERER");
+                        header("Location: $last");
                     } else {
                         $this->setErreur('Mot de passe incorecte !');
+                        $this->setWarning('Vous avez oublié votre mot de passe ? <a href="?forgot">Cliquez ici</a>');
                     }
                 } else {
                     $this->setErreur('Téléphone, E-mail incorecte !');
                 }
             }else{
                 $this->setErreur('Identifiant incorrecte !');
+                $this->setWarning('Vous n\'avez pas encore de compte ? <a href="inscription">Inscrivez-vous</a>');
             }
         } else {
             $this->setErreur('Veuillez remplire tout les champs !');
@@ -85,6 +88,46 @@ class Connection
     public function getErreur()
     {
         return $this->erreur;
+    }
+    
+    /**
+     * Get the value of success
+     */ 
+    public function getSuccess()
+    {
+        return $this->success;
+    }
+    
+    /**
+     * Set the value of success
+     *
+     * @return  self
+     */ 
+    public function setSuccess($success)
+    {
+        $this->success = $success;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the value of warning
+     */ 
+    public function getWarning()
+    {
+        return $this->warning;
+    }
+    
+    /**
+     * Set the value of warning
+     *
+     * @return  self
+     */ 
+    public function setWarning($warning)
+    {
+        $this->warning = $warning;
+        
+        return $this;
     }
 
     /*

@@ -84,7 +84,7 @@ ob_start();
                         </div>
                     <?php endif; ?>
                 </div>
-                <form action="./panier.php" class="addToCart" method="post">
+                <form action="./panier.php?product=<?= $product['idProduct'] ?>" class="addToCart" method="post">
                     <!-- If product has color -->
                     <?php if($product['color'] != 'auccun'): ?>
                         <div class="colors form_option mt-3">
@@ -98,7 +98,7 @@ ob_start();
                                     <?php endif; endforeach; ?>
                                 </div>
                             </div>
-                            <input type="hidden" name="colors" value="" id="color_input">
+                            <input type="hidden" name="options[color]" value="" id="color_input">
                         </div>
                     <?php endif; ?>
                     
@@ -109,13 +109,13 @@ ob_start();
                                 <span>Pointure</span>
                             </div>
                             <div class="pointure_list">
-                                <div class="vueShoeSize vueSize">
+                                <div class="vueShoeSize size_Option">
                                     <?php $pointure = explode('|', $product['pointure']); foreach($pointure as $p): if(strlen($p) > 0): ?>
                                             <div class="<?= $p ?>" data-value="<?= $p ?>" title="<?= $p ?>" ><?= $p ?></div>
                                     <?php endif; endforeach; ?>
                                 </div>
                             </div>
-                            <input type="hidden" name="pointure" value="" id="shoeSize_input">
+                            <input type="text" name="options[shoeSize]" value="" id="shoeSize_input">
                         </div>
                     <?php endif; ?>
                     
@@ -132,15 +132,16 @@ ob_start();
                                     <?php endif; endforeach; ?>
                                 </div>
                             </div>
-                            <input type="hidden" name="taille" value="" id="size_input">
+                            <input type="hidden" name="options[size]" value="" id="size_input">
                         </div>
                     <?php endif; ?>
                     
                     <!-- Nombre de produit a mettre dans le panier -->
                     <div class="quantity_input mt-3">
-                        <span id="moin">-</span><input type="number" name="quantity" value="1" min="1" max="10" id="quantity_input"><span id="plus">+</span>
+                        <span id="moin">-</span><input type="number" name="options[quantity]" value="1" min="1" max="10" id="quantity_input"><span id="plus">+</span>
                     </div>
-                    
+                    <!-- Prix -->
+                    <input type="hidden" name="options[price]" value="<?= $product['price'] ?>">
                     <!-- Submit -->
                     <input type="submit" name="add_to_cart" value="Ajouter au panier" class="btn btn-primary mt-3">
                 </form>

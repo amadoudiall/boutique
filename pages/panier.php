@@ -48,8 +48,14 @@ if(isset($_POST['panier']['quantity']) AND $_POST['panier']['quantity'] > 0){
             $_SESSION['panier'][$product['Product_id']] = $_POST['panier']['quantity'][$product['Product_id']];
             // modified montant
             $montant = ($_SESSION['product']['price'][$product['Product_id']] * $_POST['panier']['quantity'][$product['Product_id']]);
+            // modified details
+            if($product['detaille_options'] != null){
+                $details = $product['detaille_options'];
+            }else{
+                $details = "Generic";
+            }
             // update quantity & montant
-            $getPanier->update($_POST['panier']['quantity'][$product['Product_id']], $product['Product_id'], $userId, $sessionId, $montant);
+            $getPanier->update($_POST['panier']['quantity'][$product['Product_id']], $product['Product_id'], $userId, $sessionId, $details, $montant);
         }
     }
 }
@@ -57,6 +63,7 @@ if(isset($_POST['panier']['quantity']) AND $_POST['panier']['quantity'] > 0){
 if(isset($_GET['product']) AND !empty($_GET['product'])){
     $productId = $_GET['product'];
     $montant = null;
+    $quantity = 1;
      
     if(!isset($_SESSION['user']) OR empty($_SESSION['user'])){
         $userId = null;
@@ -65,8 +72,43 @@ if(isset($_GET['product']) AND !empty($_GET['product'])){
         $userId = $_SESSION['user']['id'];
         $sessionId = $_SESSION['sessionId'];
     }
+    
+    // Si les options sont selectionnées comme la couleur, la taille, etc...
+    if(isset($_POST['options']) AND !empty($_POST['options'])){
+        // Color is selected
+        if(isset($_POST['options']['color']) AND !empty($_POST['options']['color'])){
+            $color = $_POST['options']['color'];
+        }else{
+            $color = 'Generic';
+        }
         
-    $getPanier->addPanier($productId, $userId, $sessionId, $montant);
+        // Size is selected
+        if(isset($_POST['options']['size']) AND !empty($_POST['options']['size'])){
+            $size = $_POST['options']['size'];
+        }else{
+            $size = 'Generic';
+        }
+        
+        // Shoe Size is selected
+        if(isset($_POST['options']['shoeSize']) AND !empty($_POST['options']['shoeSize'])){
+            $shoeSize = $_POST['options']['shoeSize'];
+        }else{
+            $shoeSize = 'Generic';
+        }
+        
+        // Quantity is selected
+        if(isset($_POST['options']['quantity']) AND !empty($_POST['options']['quantity'])){
+            $quantity = $_POST['options']['quantity'];
+            // modified montant
+            $montant = ($_POST['options']['price'] * $quantity);
+        }
+        
+        // Mettre toute les options dans Detailles
+        $details = 'Couleur: '.$color.', Taille: '.$size.', Pointure: '.$shoeSize;
+        
+    }
+        
+    $getPanier->addPanier($productId, $userId, $sessionId, $quantity, $details, $montant);
     header('location: HTTP_REFERER');
 }
 if(isset($_GET['del'])){
@@ -117,7 +159,7 @@ ob_start();
 if($products != null):
 ?>
 
-<div class="panier mt-3">
+<div class="container panier mt-3">
     <div class="grix xs4 grille white rounded-1">
                 
         <div class="col-xs4 col-md3 profile-infos">
@@ -181,10 +223,80 @@ if($products != null):
                 livrée en moin de 48h.
             </p>
             <div class="btn-lib">
-                <a href="../pages/panier.php?commande=1" class="btn btn-secondary">Finaliser la commande</a>
+                <!-- <a href="../pages/panier.php?commande=1" class="btn btn-secondary">Finaliser la commande</a> -->
+                <a href="../pages/panier.php?checkout=1" class="btn btn-secondary">Finaliser la commande</a>
             </div>
         </div>
     </div>
+    <?php
+        // if checking out
+        if(isset($_GET['checkout'])):
+            // if user is logged in
+            if(isset($_SESSION['user'])):
+    ?>
+    <section class="checkout-infos primary-section primarySection mt-3 white rounded-1">
+        <header>
+            <h1>Finaliser votre commande</h1>
+        </header>
+        <form action="?commande=1" method="post">
+            <div class="chipping-infos container">
+                <h2> Vos informations de livraison</h2>
+                <div class="grix xs1 sm2">
+                    <div class="form-field">
+                        <label for="nom">Nom</label>
+                        <input type="text" value="<?= $_SESSION['user']['prenom'], ' ',$_SESSION['user']['nom'] ?>" id="nom" class="form-control rounded-1" disabled />
+                    </div>
+                    <div class="form-field">
+                        <label  for="tel">Téléphone</label>
+                        <input type="tel" value="<?= $_SESSION['user']['tel'] ?>" id="tel" class="form-control rounded-1" disabled />
+                    </div>
+                    <div class="form-field col-sm2">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="adresse" value="<?= $_SESSION['user']['adresse'] ?>" class="form-control rounded-1" />
+                        <span class="form-helper text-center">Vous pouvez cliquer sur le bouton me localiser pour vous faire livrer sur votre localisation actuel</span>
+                    </div>
+                    <div class="form-field col-sm2">
+                        <button type="button" class="btn btn-primary btn-address" id="btn-address" title="Me géolocaliser"><i class="bi bi-geo-alt"></i> Me localiser</button>
+                        <input type="hidden" id="coords" name="coords" value="" />
+                    </div>
+                    
+                    <!-- Mode de payment -->
+                    <div class="form-field col-sm2">
+                        <label for="mode">Mode de paiement</label>
+                        <select name="mode" id="mode" class="form-control rounded-1">
+                            <option value="">Choisir votre mode de paiement</option>
+                            <option value="1">Orange Money</option>
+                            <option value="1">Carte bancaire</option>
+                            <option value="2">Payer à la livraison</option>
+                        </select>
+                    </div>
+                    <div class="form-field col-sm2">
+                        <button type="submit" class="btn btn-primary" name="checkout">Finaliser la commande</button>
+                    </div>
+                </div>
+                <!-- Embed google maps -->
+                <div id="map" class="col-sm-12 hidden"></div>
+            </div>
+            <!-- submit -->
+        </form>
+    </section>
+    <?php
+        // if user is not logged in
+        else:
+            $erreur = "Veuillez vous connecter pour finaliser votre commande";
+        endif;
+     endif; ?>
+     
+    <!-- If user is not logged in -->
+    <?php if(!isset($_SESSION['user'])): $_SESSION['last_visited'] = $_SERVER['REQUEST_URI']; ?>
+        <section class="checkout-info primary-section primarySection mt-3 white rounded-1">
+            <div class="container not_connected">
+                <p>Identifiez-vous pour finaliser votre commande</p>
+                <a href="connexion.php?last=1" class="btn btn-secondary">Se connecter</a>
+                <p> Vous n'avez pas de compte ? <a href="inscription.php?last=1">S'inscrire</a> </p>
+            </div>
+        </section>
+    <?php endif; ?>
     <section class="primary-section recently primarySection mt-3 white rounded-1">
         <header>
             <h1>Vues récements</h1>

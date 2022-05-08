@@ -27,7 +27,7 @@ if(isset($_GET['delUser']) AND !empty($_GET['delUser'])){
 }
 ?>
 
-<div class="container shadow-1 rounded-1 admin admin-users rounded-1 mt-3">
+<div class="shadow-1 rounded-1 admin admin-users rounded-1 mt-3">
     <div class="utils">
         <h2>Utilisateurs</h2>
         <!-- Rechercher un produit -->

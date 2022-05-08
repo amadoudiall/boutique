@@ -20,11 +20,21 @@
 @import "primarySection";
 @import "productPage";
 @import "loader";
+@import "identify";
+
 
 body{
     background: $primaryLighter;
     
     .hidden{
         display: none;
+    }
+    
+    .primary{
+        background: $primary;
+    }
+    
+    .primary-dark{
+        background: $primaryDark;
     }
 }
