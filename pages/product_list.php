@@ -3,6 +3,7 @@
 use \App\Bdd\Bdd;
 use \App\Entity\Product;
 use \App\Autoloader;
+    $_SESSION['last_visited'] = $_SERVER['REQUEST_URI']; 
 
 
 require('../src/Autoload/Autoloader.php');

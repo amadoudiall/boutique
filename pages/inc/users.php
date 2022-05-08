@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['user']['roles'] == 'profile') {
+if ($_SESSION['user']['roles'] == 'admin') {
     header('location: ./profile.php');
 }
 use \App\Entity\User;

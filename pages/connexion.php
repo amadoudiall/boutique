@@ -13,7 +13,6 @@ $login = new Connection();
 // the Last visited page is saved in the session
 $last = $_SESSION['last_visited'];
 
-var_dump($_SESSION['last_visited']);
 if (isset($_POST['connection'])) {
     $login->Login($last);
 }
@@ -22,7 +21,7 @@ if(isset($_GET['logout'])){
     $login->Logout();
     header("Location: /");
 }
-$title = "Connexion";
+$title = "Connection";
 ob_start();
 ?>
 <section class="container mt-3 connection">

@@ -24,7 +24,7 @@ $inscription = new Inscription();
 if (isset($_POST['inscription'])) {
     $inscription->Subscrib();
 }
-$title = "Liste des produits";
+$title = "Inscription";
 ob_start();
 ?>
 <div class="inscription">

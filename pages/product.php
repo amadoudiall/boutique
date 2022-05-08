@@ -5,6 +5,7 @@ use \App\Entity\Product;
 use \App\Controller\productComment;
 use \App\Autoloader;
 
+$_SESSION['last_visited'] = $_SERVER['REQUEST_URI']; 
 
 require('../src/Autoload/Autoloader.php');
 Autoloader::register();
@@ -264,8 +265,27 @@ ob_start();
         </section>
     </div>
     <div class="right">
-        <div class="title">
-            <h2>Droite</h2>
+        <div class="right-info">
+            <?php if($product['promo'] > 0):  $ecom = ($product['price']-$product['price_cell']); ?>
+                <p>Si vous chetez ce produit maintenant vous economisez <?= $ecom ?> FCFA </p>
+            <?php endif ?>
+        </div>
+        <div class="productStiky prices rounded-1">
+            <img src="../assets/images/Product/<?= $product['img'] ?>" alt="Image du produit">
+            <p><?= $product['nom'] ?></p>
+            <?php if($product['promo'] > 0) :?>
+                <div class="prix-vente">
+                    <span> <?= $product['price_sell'] ?> FCFA </span>
+                </div>
+                <div class="prix-norm">
+                    <span> <?= $product['price'] ?> FCFA </span>
+                </div>
+                <?php else : ?>
+                <div class="prix-vente">
+                    <span> <?= number_format($product['price'], 0, '', ' ') ?> FCFA </span>
+                </div>
+            <?php endif; ?>
+            <a href="" class="btn btn-primary">J'achete</a>
         </div>
     </div>
 </div>

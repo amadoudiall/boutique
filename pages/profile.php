@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$_SESSION['last_visited'] = $_SERVER['REQUEST_URI'];
 if (empty($_SESSION['user'])) {
     header('location: ./connexion.php');
 }elseif($_SESSION['user']['roles'] != 'client'){

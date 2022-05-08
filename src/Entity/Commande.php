@@ -17,6 +17,7 @@ class Commande{
     public $commandeId;
     public $productId;
     public $quantity;
+    public $details;
     public $priceU;
     public $priceT;
     public $etat;
@@ -214,6 +215,26 @@ class Commande{
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+    
+     /**
+     * Get the value of details
+     */ 
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    /**
+     * Set the value of details
+     *
+     * @return  self
+     */ 
+    public function setDetails($details)
+    {
+        $this->details = $details;
 
         return $this;
     }
@@ -480,16 +501,16 @@ class Commande{
     // Create product in Commande
     public function flushCommandeProduct()
     {
-        $result = $this->getDb()->prepare("INSERT INTO Commande_product (commande_id, product_id, quantity, priceU, priceT, etat) VALUES (:commandeId, :productId, :quantity, :priceU, :priceT, :etat)");
+        $result = $this->getDb()->prepare("INSERT INTO Commande_product (commande_id, product_id, quantity, detaille_options, priceU, priceT, etat) VALUES (:commandeId, :productId, :quantity, :details, :priceU, :priceT, :etat)");
         $result->execute([
             'commandeId' => $this->commandeId,
             'productId' => $this->productId,
             'quantity' => $this->quantity,
+            'details' => $this->details,
             'priceU' => $this->priceU,
             'priceT' => $this->priceT,
             'etat' => $this->etat
         ]);
         return $result;
     }
-
 }

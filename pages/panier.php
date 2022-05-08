@@ -288,7 +288,7 @@ if($products != null):
      endif; ?>
      
     <!-- If user is not logged in -->
-    <?php if(!isset($_SESSION['user'])): $_SESSION['last_visited'] = $_SERVER['REQUEST_URI']; ?>
+    <?php if(!isset($_SESSION['user'])): ?>
         <section class="checkout-info primary-section primarySection mt-3 white rounded-1">
             <div class="container not_connected">
                 <p>Identifiez-vous pour finaliser votre commande</p>

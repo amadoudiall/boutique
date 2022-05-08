@@ -37,6 +37,7 @@ class addCommande{
                     $commande->setCommandeId($lasteCommandeId['id']);
                     $commande->setProductId($product['id']);
                     $commande->setQuantity($product['quantity']);
+                    $commande->setDetails($product['detaille_options']);
                     $commande->setPriceU($product['price']);
                     $commande->setPriceT($product['price'] * $product['quantity']);
                     $commande->setEtat('En attente');

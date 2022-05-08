@@ -1134,6 +1134,39 @@ header nav ul .dropdown_parent {
 .product_page .comment-section .content .commentairs .commentair .commentair_date .delete:hover {
   background: #f5f5f5;
 }
+/* line 267, ../sass/_productPage.scss */
+.product_page .right {
+  position: relative;
+}
+/* line 269, ../sass/_productPage.scss */
+.product_page .right .productStiky {
+  width: 100%;
+  margin: auto;
+  padding: 5px;
+  position: sticky;
+  top: 5px;
+  background: #fff;
+}
+/* line 276, ../sass/_productPage.scss */
+.product_page .right .productStiky img {
+  width: 80px;
+  float: left;
+}
+/* line 281, ../sass/_productPage.scss */
+.product_page .right .productStiky p {
+  margin: 2px;
+  font-size: 1em;
+  font-weight: 200;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* line 290, ../sass/_productPage.scss */
+.product_page .right .productStiky a {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+}
 
 /* line 1, ../sass/_loader.scss */
 .loader {
@@ -1289,4 +1322,16 @@ body .primary {
 /* line 37, ../sass/screen.scss */
 body .primary-dark {
   background: #014e55;
+}
+/* line 42, ../sass/screen.scss */
+body .prices .prix-vente {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+/* line 46, ../sass/screen.scss */
+body .prices .prix-norm {
+  font-size: 1em;
+  font-weight: 300;
+  color: #999696;
+  text-decoration: line-through;
 }

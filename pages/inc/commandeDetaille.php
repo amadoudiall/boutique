@@ -22,6 +22,7 @@ if($productCommande != null): ?>
                     <th>#</th>
                     <th>Produit</th>
                     <th>Quantité</th>
+                    <th>Détailles</th>
                     <th>Prix unitaire</th>
                     <th>Prix total</th>
                     <th>Action</th>
@@ -33,6 +34,7 @@ if($productCommande != null): ?>
                         <td><img src="../assets/images/Product/<?= $product['img'] ?>" alt="image du produit" width="30px"></td>
                         <td><a href="/pages/product.php?product=<?= $product['Product_id'] ?>"><?= $product['nom'] ?></a></td>
                         <td><?= $product['quantity'] ?></td>
+                        <td><?= $product['detaille_options'] ?></td>
                         <td><?= $product['priceU'] ?> <span class="suffix">FCFA</span></td>
                         <td><?= $product['priceT'] ?> <span class="suffix">FCFA</span></td>
                         <td><a href="../pages/product.php?product=<?= $product['Product_id'] ?>">Detaille</a></td>

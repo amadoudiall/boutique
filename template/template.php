@@ -5,6 +5,7 @@ if(!isset($_SESSION['sessionId'])){
 }else{
     $sessionId = $_SESSION['sessionId'];
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

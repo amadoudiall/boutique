@@ -6,6 +6,7 @@ if (empty($_SESSION['user'])) {
 }elseif($_SESSION['user']['roles'] == 'client'){
     header('location: ./profile.php');
 }
+$_SESSION['last_visited'] = $_SERVER['REQUEST_URI'];
 
 
 use \App\Bdd\Bdd;
