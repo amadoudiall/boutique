@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Bdd;
+
 class Bdd
 {
     public function connect()
@@ -22,8 +24,9 @@ class Bdd
 
         return $connect;
     }
-    
-    public function query($sql, $data = array()){
+
+    public function query($sql, $data = array())
+    {
         $req = $this->connect()->prepare($sql);
         $req->execute($data);
         return $req->fetchAll(\PDO::FETCH_ASSOC);
