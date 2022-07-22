@@ -9,7 +9,6 @@ Pour executer cette app sur votre ordinateur vous avez besoin de:
 # Configurer la bage de donnée
 Dans src/Bdd/Bdd.php
 1 Redfinissez le $username et le $password pour accéder a votre base de donnée.
-
 2 Executer le ficher database.sql dans votre gestionnaire de base de donnée pour installer la base de donnée et avoir les informations de teste.
 3 Ouvrez un terminal dans le dossier du projet et demarer le server php "php -S localhost:8000".
 
