@@ -6,7 +6,7 @@ Pour executer cette app sur votre ordinateur vous avez besoin de:
 - MySql
 - Apache
 
-# Configurer la bage de donnée
+# Configurer la base de donnée
 Dans src/Bdd/Bdd.php
 - Redfinissez le $username et le $password pour accéder a votre base de donnée.
 - Executer le ficher database.sql dans votre gestionnaire de base de donnée pour installer la base de donnée et avoir les informations de teste.
