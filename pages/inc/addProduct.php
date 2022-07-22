@@ -50,8 +50,7 @@ if(isset($_GET['url']) and $_GET['url'] === "editProduct"){
             </div>
         <?php endif ?>
         <!-- If there is an success, display it -->
-        <?php $success = $category->getSuccess();
-        if (isset($success)): ?>
+        <?php if (isset($success)): ?>
             <div class="p-3 my-2 rounded-1 green light-4 text-green text-dark-4">
                 <?= $success ?>
             </div>

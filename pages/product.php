@@ -70,6 +70,7 @@ ob_start();
                     </div>
                 </div>
                 <hr>
+                
                 <div class="prices">
                     
                     <?php if($product['promo'] > 0) :?>
@@ -116,7 +117,7 @@ ob_start();
                                     <?php endif; endforeach; ?>
                                 </div>
                             </div>
-                            <input type="text" name="options[shoeSize]" value="" id="shoeSize_input">
+                            <input type="hidden" name="options[shoeSize]" value="" id="shoeSize_input">
                         </div>
                     <?php endif; ?>
                     
@@ -127,7 +128,7 @@ ob_start();
                                 <span>Taille</span>
                             </div>
                             <div class="taille_list">
-                                <div class="vueSize">
+                                <div class="vueSize size_Option">
                                     <?php $taille = explode('|', $product['size']); foreach($taille as $t): if(strlen($t) > 0): ?>
                                             <div class="<?= $t ?>" data-value="<?= $t ?>" title="<?= $t ?>" ><?= $t ?></div>
                                     <?php endif; endforeach; ?>
@@ -136,16 +137,24 @@ ob_start();
                             <input type="hidden" name="options[size]" value="" id="size_input">
                         </div>
                     <?php endif; ?>
-                    
-                    <!-- Nombre de produit a mettre dans le panier -->
-                    <div class="quantity_input mt-3">
-                        <span id="moin">-</span><input type="number" name="options[quantity]" value="1" min="1" max="10" id="quantity_input"><span id="plus">+</span>
+                    <?php if($product['is_active'] == 0 or $product['stock_actuel'] < 1): ?>
+                        <div class="indisp text-red mt-3">
+                            Ce produit est indisponible pour le moment.
+                        </div>
+                    <?php endif; ?>
+                    <div class="qP">
+                        <!-- Nombre de produit a mettre dans le panier -->
+                        <div class="quantity_input mt-3">
+                            <span>Quantité : </span><span id="moin">-</span><input type="number" name="options[quantity]" value="1" min="1" max="10" id="quantity_input"><span id="plus">+</span>
+                        </div>
+                        <!-- Prix -->
+                        <input type="hidden" name="options[price]" value="<?= $product['price'] ?>">
+                        
+                        <!-- Submit -->
+                        <input type="submit" name="add_to_cart" value="Ajouter au panier" class="btn btn-primary mt-3 <?php if($product['is_active'] == 0 ){ echo 'disabled';} ?>">
                     </div>
-                    <!-- Prix -->
-                    <input type="hidden" name="options[price]" value="<?= $product['price'] ?>">
-                    <!-- Submit -->
-                    <input type="submit" name="add_to_cart" value="Ajouter au panier" class="btn btn-primary mt-3">
                 </form>
+                <!-- if product is not active -->
             </div>
         </div>
         <section class="primary-section mt-3 white detaill-section rounded-1">
@@ -266,11 +275,16 @@ ob_start();
     </div>
     <div class="right">
         <div class="right-info">
-            <?php if($product['promo'] > 0):  $ecom = ($product['price']-$product['price_cell']); ?>
-                <p>Si vous chetez ce produit maintenant vous economisez <?= $ecom ?> FCFA </p>
-            <?php endif ?>
+            <h2>Diapali Expresse</h2>
+            <p>Vous profitez de la livraison <span>VIP</span></p>
+            <P>En moin de <span>12h top chrono</span></P>
         </div>
-        <div class="productStiky prices rounded-1">
+        <?php if($product['promo'] > 0):  $ecom = ($product['price']-$product['price_sell']); ?>
+            <div class="right-proms rounded-1 mt-3">
+                <p>Si vous chetez ce produit maintenant vous economisez jusqu'à <span><?= $ecom ?> FCFA</span> </p>
+            </div>
+        <?php endif ?>
+        <div class="productStiky prices rounded-1 mt-3">
             <img src="../assets/images/Product/<?= $product['img'] ?>" alt="Image du produit">
             <p><?= $product['nom'] ?></p>
             <?php if($product['promo'] > 0) :?>
@@ -285,7 +299,29 @@ ob_start();
                     <span> <?= number_format($product['price'], 0, '', ' ') ?> FCFA </span>
                 </div>
             <?php endif; ?>
-            <a href="" class="btn btn-primary">J'achete</a>
+            <!-- if is not active -->
+            <?php if($product['is_active'] == 0) : ?>
+                <div class="solde text-red">
+                    <span>Produit indisponible</span>
+                </div>
+            <?php else : ?>
+            
+                <?php if($product['stock_actuel'] > 10): ?>
+                    <div class="solde text-green">
+                        <span>En stock</span>
+                    </div>
+                <?php elseif($product['stock_actuel'] < 10 and $product['stock_actuel'] > 1) : ?>
+                    <div class="solde text-orange">
+                        <span>Il ne reste que <?= $product['stock_actuel'] ?> pièces en stock</span>
+                    </div>
+                <?php elseif($product['stock_actuel'] < 1) : ?>
+                    <div class="solde text-red">
+                        <span>Produit en rupture de stock</span>
+                    </div>
+                <?php endif; ?>
+            
+            <?php endif; ?>
+            <a href="./panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary" <?php if($product["is_active"] == 0 ){ echo "disabled";} ?>>J'achete <i class="bi bi-cart-plus"></i></a>
         </div>
     </div>
 </div>

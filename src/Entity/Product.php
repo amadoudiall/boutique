@@ -552,9 +552,10 @@ class Product
     public function editProduct($id)
     {
         try {
-            $editProduct = $this->getDb()->prepare('UPDATE Product SET nom = :nom, price = :price, price_sell = :price_sell, Category_id = :Category_id, img = :img, descr = :descr, stock_actuel = :stock_actuel, stock_min = :stock_min, date_expiration = :date_expiration, promo = :promo, updated_at = :updated_at, color = :color, size = :size, pointure = :pointure, dimensions = :dimensions WHERE id = :id');
+            $editProduct = $this->getDb()->prepare('UPDATE Product SET nom = :nom, price_by = :price_by, price = :price, price_sell = :price_sell, Category_id = :Category_id, img = :img, descr = :descr, stock_actuel = :stock_actuel, stock_min = :stock_min, date_expiration = :date_expiration, promo = :promo, updated_at = :updated_at, color = :color, size = :size, pointure = :pointure, dimensions = :dimensions WHERE id = :id');
             $editProduct->execute([
                 'nom' => $this->nom,
+                'price_by' => $this->price_by,
                 'price' => $this->price,
                 'price_sell' => $this->price_sell,
                 'Category_id' => $this->category,
@@ -596,9 +597,23 @@ class Product
     // Avoir la moyenne des notes
     public function getAverageNote($id){
         $connect = new Bdd();
-        $bddstatement = $connect->connect()->prepare('SELECT AVG(note) FROM Product_comment WHERE Product_id = ?');
+        $bddstatement = $connect->connect()->prepare('SELECT AVG(rating) FROM Product_comment WHERE Product_id = ?');
         $bddstatement->execute(array($id));
         $average = $bddstatement->fetch();
         return $average;
+    }
+    
+    // Activer un produit
+    public function activeProduct($id){
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('UPDATE Product SET is_active = 1 WHERE id = ?');
+        $bddstatement->execute(array($id));
+    }
+    
+    // Desactiver un produit
+    public function desactiveProduct($id){
+        $connect = new Bdd();
+        $bddstatement = $connect->connect()->prepare('UPDATE Product SET is_active = 0 WHERE id = ?');
+        $bddstatement->execute(array($id));
     }
 }

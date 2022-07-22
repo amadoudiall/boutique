@@ -109,7 +109,8 @@ if(isset($_GET['product']) AND !empty($_GET['product'])){
     }
         
     $getPanier->addPanier($productId, $userId, $sessionId, $quantity, $details, $montant);
-    header('location: HTTP_REFERER');
+    // After addPanier redirect to the last visited page
+    header('location: '.$_SERVER['HTTP_REFERER']);
 }
 if(isset($_GET['del'])){
     $productId = $_GET['del'];

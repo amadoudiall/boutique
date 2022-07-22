@@ -71,13 +71,14 @@
                 }
             }
             .addToCart{
+                position: relative;
                 .form_option{
                     @import 'vueColor';
                 }
                 .quantity_input{
+                    flex-grow: 2;
                     position: relative;
                     line-height: 1.2em;
-                    float: left;
                     left: 20px;
                     bottom: 5px;
                     input[type="number"]{
@@ -109,9 +110,19 @@
                 }
                 
                 .btn{
-                    float: right;
                     right: 5px;
                     bottom: 5px;
+                }
+                
+                .qP{
+                    width: 100%;
+                    display: flex;
+                    position: absolute;
+                }
+                
+                .indisp{
+                    font-size: .8em;
+                    display: block;
                 }
             }
         }
@@ -157,12 +168,12 @@
                 }
                 
                 form{
-                    width: 50%;
+                    width: 30%;
                     margin: auto;
                     
                     textarea{
                         width: 100%;
-                        height: 100px;
+                        height: 80px;
                         padding: 10px;
                         border: 1px solid $blackLighter;
                         border-radius: 5px;
@@ -266,6 +277,45 @@
     
     .right{
         position: relative;
+        
+        .right-info{
+            padding: 10px;
+            background: $white;
+            text-align: center;
+            
+            h2,p{
+                margin: 0;
+                padding: 0;
+            }
+            h2{
+                font-size: 1.3em;
+                font-weight: 500;
+                color: $pinksecond;
+            }
+            
+            p{
+                font-size: .9em;
+                span{
+                    color: red;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-style: italic;
+                }
+            }
+        }
+        .right-proms{
+            background: $white;
+            padding: 5px;
+            text-align: center;
+            p{
+                font-size: .9em;
+                color: $primary;
+                
+                span{
+                    color: red;
+                }
+            }
+        }
         .productStiky{
             width: 100%;
             margin: auto;
@@ -275,11 +325,12 @@
             background: $white;
             img{
                 width: 80px;
+                margin: 10px;
                 float: left;
             }
             
             p{
-                margin: 2px;
+                margin: 4px;
                 font-size: 1em;
                 font-weight: 200;
                 text-overflow: ellipsis;

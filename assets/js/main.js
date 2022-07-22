@@ -61,8 +61,8 @@ window.addEventListener('load', () => {
     let statrs_form = document.querySelector('.stars_form');
     if(statrs_form != null){
         
-        const star_hovered = document.querySelector('.star-hovered');
-        const stars = statrs_form.children;
+        var star_hovered = document.querySelector('.star-hovered');
+        var stars = statrs_form.children;
         
         // Recuperer l'input
         const note = document.querySelector('#rate');
@@ -119,6 +119,17 @@ window.addEventListener('load', () => {
         }
     }
     
+    // Les etoiles sur le produit dans la page accueil
+    const stars_products = document.querySelectorAll('div.stars_products');
+    if(stars_products != null){
+        // Recuperer toute les stars_products elements et appliquer le ratToShow a chaque stars_products;
+        for(star_product of stars_products){
+            const stars_product = star_product.children;
+            let note_product = star_product.dataset.value;
+            rateToShow(stars_product, star_product);
+        }
+    }
+    
     // Function pour mettre en forme les etoile sur l'affichage de la note
     function rateToShow(rates, rate_value){
         // Remplir l'etoile si l'etoile est egale ou superieur a la note
@@ -151,9 +162,7 @@ window.addEventListener('load', () => {
         }
         
         if(note.value > 0){
-            star_hovered.innerHTML = 'Vous donnez une note de ' + note + '/5';
-        }else{
-            star_hovered.innerHTML = 'Donner une note';
+            star_hovered.innerHTML = 'Vous donnez une note de ' + note.value + '/5';
         }
     }
     

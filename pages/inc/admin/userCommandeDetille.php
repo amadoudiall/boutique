@@ -29,6 +29,8 @@ if(isset($_GET['valider']) and !empty($_GET['valider'])){
         if($product['stock_actuel'] > $commandeDetaille['quantity']){
             // Mettre a jour la commande et vendre le produit
             $getCommande->updateCommandeProduct('Validé', $commandeId, $productId, $stock, $userId, $vente);
+            // Update cmmande status
+            $getCommande->updateCommandeStatus($commandeId, "En cours");
             $success = 'Vous avez validé le produit !';
         }else{
             $erreur = "Desolé le stock actuel du produit est insuffisant !";
@@ -126,8 +128,8 @@ if($productCommande != null): ?>
                         <td><?= $product['priceU'] ?> <span class="suffix">FCFA</span></td>
                         <td><?= $product['priceT'] ?> <span class="suffix">FCFA</span></td>
                         <td>
-                            <a href="<?= $lien ?>?url=userCommandeDetille&c=<?= $product['Commande_id'] ?>&valider=<?= $product['idProductCommande'] ?>" class="btn btn-secondary text-white" <?php if($product['etat'] == 'Validé'){echo 'disabled';} ?>> Valider <i class="bi bi-check-lg"></i></a>
-                            <a href="<?= $lien ?>?url=userCommandeDetille&c=<?= $product['Commande_id'] ?>&refuser=<?= $product['idProductCommande'] ?>" class="btn shadow-1 rounded-1 red" title="Refuser" <?php if($product['etat'] == 'Décliné'){echo 'disabled';} ?>><i class="bi bi-x"></i></a>
+                            <a href="../pages/admin.php?url=userCommandeDetille&c=<?= $product['Commande_id'] ?>&valider=<?= $product['idProductCommande'] ?>" class="btn btn-secondary text-white" <?php if($product['etat'] == 'Validé'){echo 'disabled';} ?>> Valider <i class="bi bi-check-lg"></i></a>
+                            <a href="../pages/admin.phpurl=userCommandeDetille&c=<?= $product['Commande_id'] ?>&refuser=<?= $product['idProductCommande'] ?>" class="btn shadow-1 rounded-1 red" title="Refuser" <?php if($product['etat'] == 'Décliné'){echo 'disabled';} ?>><i class="bi bi-x"></i></a>
                             <a href="../pages/product.php?product=<?= $product['Product_id'] ?>" class="btn btn-primary"><i class="bi bi-eye"></i> Voir</a>
 
                         </td>

@@ -2,10 +2,17 @@
 use App\Entity\Commande;
 $getCommandes = new Commande();
 $userId = $_SESSION['user']['id'];
-
+// Validation de la commande
 if(isset($_GET['validerCommande']) and !empty($_GET['validerCommande'])){
     if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'manager'){
-        $getCommandes->updateCommandeStatus($_GET['validerCommande'], 'En cours');
+        $getCommandes->updateCommandeStatus($_GET['validerCommande'], 'Livré');
+    }
+}
+
+// Annulation de la commande
+if(isset($_GET['refuserCommande']) and !empty($_GET['refuserCommande'])){
+    if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'manager'){
+        $getCommandes->updateCommandeStatus($_GET['refuserCommande'], 'Annulé');
     }
 }
 
@@ -61,10 +68,10 @@ if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'bouti
                         <td><?= $commande['montant'] ?> CFA</td>
                         <td><?= count($nbrProduct) ?></td>
                         <td><?= $commande['adresse'] ?></td>
-                        <td>
+                        <td id="lastTd">
                             <?php if($_SESSION['user']['roles'] == 'admin' OR $_SESSION['user']['roles'] == 'manager'): ?>
-                                <a href="<?= $lien ?>?url=userCommande&validerCommande=<?= $commande['idCommande'] ?>&c=<?= $commande['id'] ?>" class="btn btn-secondary text-white"> Valider <i class="bi bi-check-lg"></i></a>
-                                <a href="<?= $lien ?>?url=refuser&c=<?= $commande['idCommande'] ?>" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text"> Refuser <i class="bi bi-x"></i></span></a>
+                                <a href="<?= $lien ?>?url=userCommande&validerCommande=<?= $commande['idCommande'] ?>&c=<?= $commande['id'] ?>" class="btn btn-secondary text-white">Valider <i class="bi bi-check-lg"></i></a>
+                                <a href="<?= $lien ?>?url=userCommande&refuserCommande=<?= $commande['idCommande'] ?>&c=<?= $commande['idCommande'] ?>" class="btn shadow-1 rounded-1 btn-outline btn-opening text-red"><span class="btn-outline-text">Annuler <i class="bi bi-x"></i></span></a>
                             <?php else : ?>
                                 <a href="<?= $lien ?>?url=userCommandeDetille&c=<?= $commande['idCommande'] ?>" class="btn btn-primary"><i class="bi bi-eye"></i> Voir</a>
                             <?php endif; ?>

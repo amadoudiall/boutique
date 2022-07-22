@@ -303,7 +303,7 @@ class Commande{
     // getALLCommande uniquement pour le backOfice
     public function getAllCommande()
     {
-        $result = $this->getDb()->query("SELECT * FROM Commande ORDER BY createdAt DESC");
+        $result = $this->getDb()->query("SELECT *, Commande.id as idCommande FROM Commande ORDER BY createdAt DESC");
         $commande = $result->fetchAll(\PDO::FETCH_ASSOC);
         return $commande;
     }
@@ -460,7 +460,7 @@ class Commande{
             $result = $this->getDb()->prepare("UPDATE Commande_product SET etat = ? WHERE Commande_id = ? AND Product_id = ?");
             $result->execute([$etat, $commandeId, $productId]);
         } catch (\Throwable $th) {
-            throw $th;
+            throw $th->getMessage();
             die('error');
         }
     }
@@ -478,7 +478,6 @@ class Commande{
     {
         $result = $this->getDb()->prepare("UPDATE Commande SET status = ? WHERE id = ?");
         $result->execute([$status, $commandeId]);
-        return $result;
     }
     
     // traiterCommande

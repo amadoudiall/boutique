@@ -40,37 +40,42 @@
             .title-price {
                 padding: 5px;
                 margin-left: 5px;
+                height: 66px;
 
                 h3 {
                     margin: 0;
                     padding: 0;
-                    font-size: 1.1em;
+                    font-size: 1em;
                     font-weight: 200;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;
                 }
-
-                p {
-                    margin: 0;
-                    padding: 0;
-                    margin-top: 5px;
-                    font-size: 1.2em;
-                    font-weight: 400;
+                
+                .prix-promo{
+                    margin-top: 3px;
+                }
+                .prix-vente{
+                    margin-top: 10px;
                 }
             }
 
             .review-buy {
-                height: 48px;
-                line-height: 20px;
+                margin-top: 0;
                 padding: 5px;
-                
-                span, a {
-                    display: inline-block;
+                padding-top: 0;
+                .reviews{
+                    margin: 4px;
+                    margin-top: 0;
+                    
+                    .stars_products{
+                        margin: 0;
+                        margin-right: 5px;
+                        float: left;
+                    }
                 }
-                
                 span {
-                    margin-top: 10px;
+                    margin-top: 5px;
                     
                     i{
                         color: orange;
@@ -78,14 +83,24 @@
                 }
                 
                 .new{
+                    margin: 0;
+                    padding: 0;
                     color: $pinksecond;
                     margin-left: 10px;
+                    font-style: italic;
+                    font-size: .8em;
+                    
+                    p{
+                        margin: 5px;
+                        padding: 0;
+                        line-height: 1em;
+                    }
                 }
                 
                 a{
-                    float: right;
-                    bottom: 3px;
-                    right: 3px;
+                    display: block;
+                    width: 100%;
+                    margin: auto;
                     font-size: 1.2em;
                 }
             }

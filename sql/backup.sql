@@ -84,6 +84,7 @@ CREATE TABLE `Commande_product` (
   `Commande_id` int DEFAULT NULL,
   `Product_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
+  `detaille_options` VARCHAR(255) DEFAULT NULL,
   `priceU` float DEFAULT NULL,
   `priceT` float DEFAULT NULL,
   `etat` enum('En cours','En attente','Livré','Validé','Décliné') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,

@@ -3,6 +3,7 @@
 use \App\Bdd\Bdd;
 use \App\Entity\Product;
 use \App\Entity\Category;
+use \App\Controller\productComment;
 use \App\HTML\bootstrapForm;
 use \App\Autoloader;
 
@@ -11,6 +12,7 @@ Autoloader::registerHome();
 
 $getCategory = new Category();
 $categorys = $getCategory->getCategorys();
+$productComment = new productComment();
 
 session_start();  
 
@@ -64,7 +66,7 @@ ob_start();
     </header>
     <div class="products product-slider">
         <?php $products = Product::getProducts();
-        foreach ($products as $key => $product) : ?>
+        foreach ($products as $key => $product) : if($product['is_active'] == 1 AND $product['stock_actuel'] > 0):?>
             <div class="product shadow-1">
 
                 <?php if ($product['promo'] > 0) : ?>
@@ -74,33 +76,47 @@ ob_start();
                 <!-- <span class="like"><a href="#"><i class="bi bi-heart"></i></a></span> -->
                 <a href="./pages/product.php?product=<?= $product['idProduct'] ?>"><img src="./assets/images/Product/<?= $product['img'] ?>" alt="produit"></a>
                 <div class="detaille">
-                    <div class="title-price">
+                    <div class="title-price prices">
                         <h3><a href="#"><?= $product['nom'] ?></a></h3>
-                        <?php if ($product['promo'] > 0) : ?>
-                          <span class="price"><?= $product['price_sell'] ?></span>
-                          <span class="price-norm"><?= $product['price'] ?></span>
-                        <?php else : ?>
-                          <span class="price"><?= $product['price'] ?></span>
-                        <?php endif; ?>
+                        <?php if($product['promo'] > 0) :?>
+                          <div class="prix-promo">
+                              <span> <?= $product['price_sell'] ?> FCFA </span>
+                          </div>
+                          <div class="prix-norm">
+                              <span> <?= $product['price'] ?> FCFA </span>
+                          </div>
+                          <?php else : ?>
+                          <div class="prix-vente">
+                              <span> <?= number_format($product['price'], 0, '', ' ') ?> FCFA </span>
+                          </div>
+                      <?php endif; ?>
                     </div>
+                    <?php $moyenne = $productComment->getMoyenne($product['idProduct']); ?>
+                    
                     <div class="review-buy">
-                        <div class="reviews">
-                            <!-- Les etoiles pour la note d'un utilisateure -->
-                            <div class="stars_users" data-value="<?= $comment['rating'] ?>">
-                                <i class="bi bi-star" data-value="1"></i>
-                                <i class="bi bi-star" data-value="2"></i>
-                                <i class="bi bi-star" data-value="3"></i>
-                                <i class="bi bi-star" data-value="4"></i>
-                                <i class="bi bi-star" data-value="5"></i>
-                            </div>
-                            <span class="reviews-count"><?= $product['rating'] ?></span>
-                        </div> 
+                        <?php if($moyenne['moyenne'] > 0) : ?>
+                          <div class="reviews">
+                              <!-- Les etoiles pour la note d'un utilisateure -->
+                              <div class="stars_products" data-value="<?= round($moyenne['moyenne'], 1) ?>">
+                                  <i class="bi bi-star" data-value="1"></i>
+                                  <i class="bi bi-star" data-value="2"></i>
+                                  <i class="bi bi-star" data-value="3"></i>
+                                  <i class="bi bi-star" data-value="4"></i>
+                                  <i class="bi bi-star" data-value="5"></i>
+                              </div>
+                              <span class="reviews-count"><?= round($moyenne['moyenne'], 1) ?> <em>sur 5</em></span>
+                          </div>
+                        <?php else: ?>
+                        <div class="new">
+                          <p>Nouveauté</p>
+                        </div>
+                        <?php endif; ?>
                         <a href="./pages/panier.php?product=<?= $product['idProduct'] ?>" class="btn btn-primary"><i class="bi bi-cart-plus"></i></a>
                     </div>
                 </div>
 
             </div>
-        <?php endforeach ?>
+        <?php endif; endforeach ?>
     </div>
 </section>
 

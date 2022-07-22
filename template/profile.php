@@ -21,7 +21,7 @@
             <div class="lds-ellipsis3"></div>
         </div>
     </div>
-    <header class="shadow-1 fixed">
+    <header class="header-nav">
         <?php require('../pages/inc/nav/_nav.php'); ?>
     </header>
     <main class="container mt-3">
@@ -59,30 +59,31 @@
     <footer class="d-flex fx-col primary">
         <div class="container">
             <div class="grix xs3">
-            <div>
-                <h6>Left side of the footer</h6>
-                <p>
-                This is my phone number<br />
-                01 23 45 67 89
-                </p>
-            </div>
-            <div class="text-center">
-                <h6>Middle of the footer</h6>
-                <p>
-                Welcome<br />
-                I'm under "Welcome"
-                </p>
-            </div>
-            <div class="text-right">
-                <h6>Right side of the footer</h6>
-                <p>
-                This is my address<br />
-                Route 12
-                </p>
-            </div>
+                <div>
+                    <h6>A PROPOS</h6>
+                    <a href="#">Qui sommes-nous</a><br>
+                    <a href="#">Notre Boutique Officielle</a><br>
+                    <a href="#">Nos conditions générales</a><br>
+                    <a href="#">Nos conditions d'utilisation</a><br>
+                    <a href="#">Nos conditions de vente</a><br>
+                    <a href="#">Nos services de livraisons</a><br>
+                </div>
+                <div class="text-left">
+                    <h6>ASIISTANCE</h6>
+                    <a href="#">Services client</a><br>
+                    <a href="#">Methodes de paiment</a><br>
+                    <a href="#">Politique de retour</a><br>
+                    <a href="#">Diapali Expresse</a><br>
+                </div>
+                <div class="text-left">
+                    <h6>GAGNEZ DE L'ARGENT</h6>
+                    <a href="#">Devenez vendeur</a><br>
+                    <a href="#">Devenez partenaire</a><br>
+                    <a href="#">Devenez livreur</a><br>
+                </div>
             </div>
         </div>
-        <div class="footer fx-center primary-dark">Copyright © 2022 - Example</div>
+        <div class="footer fx-center primary-dark">Copyright © 2022 - Diapali.com</div>
     </footer>
     <!-- Axentix JS minified version -->
     <script src="../assets/js/main.js"></script>

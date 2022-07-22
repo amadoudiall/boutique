@@ -25,6 +25,7 @@
 
 body{
     background: $primaryLighter;
+    height: 100vh;
     
     .hidden{
         display: none;
@@ -39,9 +40,9 @@ body{
     }
     
     .prices{
-        .prix-vente{
+        .prix-vente,.prix-promo{
             font-size: 1.1em;
-            font-weight: 500;
+            font-weight: bold;
         }
         .prix-norm{
             font-size: 1em;

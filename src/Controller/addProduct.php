@@ -154,7 +154,7 @@ class addProduct{
                         ->setIs_active(0);
                 $product->flushProduct();
                 $this->setSuccess('Tout c\'est bien passée !');
-                //header('location: '.$lien.'?url=product');
+                header('location: '.$lien.'?url=product');
             }else{
                 $this->setErreur('Le prix de vente doit être supérieur au prix d\'achat');
             }
@@ -182,6 +182,12 @@ class addProduct{
             $product->setNom($nom);
         }
         
+        // Price_by
+        if(isset($_POST['price_by']) and !empty($_POST['price_by'])){
+            $price_by = htmlspecialchars($_POST['price_by']);
+            $product->setPrice_by($price_by);
+        }
+        
         // Prix
         if(isset($_POST['price']) and !empty($_POST['price'])){
             $price = htmlspecialchars($_POST['price']);
@@ -193,7 +199,11 @@ class addProduct{
             $price_sell = htmlspecialchars($_POST['price_sell']);
             $product->setPrice_sell($price_sell);
         }else{
-            $product->setPrice_sell($thisProduct['price_sell']);
+            if($thisProduct['price_sell'] == null OR $thisProduct['price_sell'] == 0){
+                $product->setPrice_sell('0');
+            }else{
+                $product->setPrice_sell($thisProduct['price_sell']);
+            }
         }
         
         // Category
@@ -319,7 +329,7 @@ class addProduct{
         if($thisProduct['User_id'] == $_SESSION['user']['id']){
             $product->editProduct($_POST['Pid']);
             $this->setSuccess('Tout c\'est bien passée !');
-            //header('location: '.$lien.'?url=product');
+            header('location: '.$lien.'?url=product');
         }else{
             $this->setErreur('Vous n\'avez pas le droit de modifier ce produit !');
         }

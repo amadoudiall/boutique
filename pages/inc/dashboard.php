@@ -80,7 +80,7 @@ if($_SESSION['user']['roles'] == 'admin'){
                 <tbody>
                     <?php foreach ($commandes as $key => $commande) : $nbrProduct = $getCommande->countSellerProduct($commande['idCommande'],$userId);?>
                         <tr>
-                            <td><?= $commande['id'] ?></td>
+                            <td><?= $commande['idCommande'] ?></td>
                             <td><?= $commande['createdAt'] ?></td>
                             <td><?= $commande['status'] ?></td>
                             <td><?= count($nbrProduct) ?></td>
@@ -119,7 +119,7 @@ if($_SESSION['user']['roles'] == 'admin'){
                 <tfoot>
                     <tr>
                         <td colspan="3"></td>
-                        <td><a href="../pages/admin.php?url=users" class="btn btn-primary">Gérer les utilisateurs</a></td>
+                        <td><a href="../pages/admin.php?url=product" class="btn btn-primary">Gérer les produits</a></td>
                     </tr>
                 </tfoot>
             </table>

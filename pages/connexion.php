@@ -71,7 +71,7 @@ ob_start();
         </form>
         <!-- If user have not acount or forgot password-->
         <div class="mt-3 form-infos">
-            <p>Vous avez pas de compte ? <a href="?page=inscription" class="text-dark-4">S'inscrire</a></p>
+            <p>Vous avez pas de compte ? <a href="inscription.php" class="text-dark-4">S'inscrire</a></p>
             <p>Mot de passe oublié ? <a href="?page=forgot" class="text-dark-4">Récuperer votre mot de passe</a></p>
         </div>
     </div>

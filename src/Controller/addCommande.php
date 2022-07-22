@@ -67,7 +67,7 @@ class addCommande{
             
             $quantity = ($product['quantity'] - $productCommande['quantity']);
             $commande->confirmerProduit($commandeId, $productId, $quantity, $userId);
-            $this->setSuccess('Vous avez validé le produit '.$product['name'].' !');
+            $this->setSuccess('Vous avez validé le produit '.$product['nom'].' !');
         }else{
             $this->setErreur('Le produit n\'est plus disponible');
         }

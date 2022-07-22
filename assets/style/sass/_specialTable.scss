@@ -107,6 +107,24 @@
                 }
                 #lastTd{
                     text-align: right;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .btn{
+                        margin: 3px;
+                        display: flex;
+                        
+                        span{
+                            display: flex;
+                            font-size: .8em;
+                        }
+                    }
+                    
+                    .btn-secondary{
+                        border: 2px solid $primary;
+                        font-size: .9em;
+                    }
+                    
                 }
             }
         }

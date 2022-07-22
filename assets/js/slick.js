@@ -18,8 +18,8 @@
         $('.product-slider').slick({
             dots: false,
             speed: 500,
-            slidesToShow: 5,
-            slidesToScroll: 1,
+            slidesToShow: 6,
+            slidesToScroll: 3,
             autoplay: true,
             autoplaySpeed: 2000,
             arrows: false,

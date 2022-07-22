@@ -2,10 +2,30 @@
 use \App\Entity\Product;
 $getProduct = new Product();
 
-if(isset($_GET['delProduct'])){
-    $thisProduct = $getProduct->getProductById($_GET['delProduct']);
+// Disabling the product
+if(isset($_GET['disableProduct'])){
+    $thisProduct = $getProduct->getProductById($_GET['disableProduct']);
     if($thisProduct['User_id'] == $_SESSION['user']['id'] OR $_SESSION['user']['roles'] == 'admin'){
-        $getProduct->deleteProduct($_GET['delProduct']);
+        $getProduct->desactiveProduct($_GET['disableProduct']);
+        $warning = 'Vous avez désactivé ce produit il ne sera plus disponible sur le site !';
+    }else{
+        $erreur = "Vous n'avez pas le droit de desactiver ce produit";
+    }
+}
+
+// Enabling the product
+if(isset($_GET['enableProduct'])){
+    $thisProduct = $getProduct->getProductById($_GET['enableProduct']);
+    // if stock actuel > 0
+    if($thisProduct['stock_actuel'] > 0){
+        if($thisProduct['User_id'] == $_SESSION['user']['id'] OR $_SESSION['user']['roles'] == 'admin'){
+            $getProduct->activeProduct($_GET['enableProduct']);
+            $success = "Le produit a été publié !";
+        }else{
+            $erreur = "Vous n'avez pas le droit d'activer ce produit";
+        }
+    }else{
+        $erreur = "Vous ne pouvez pas publier ce produit car il n'a pas de stock actuel";
     }
 }
 
@@ -17,6 +37,25 @@ if($_SESSION['user']['roles'] == 'admin'){
 
 ?>
 <div class="shadow-1 rounded-1 admin admin-product mt-3">
+        <!-- If there is an error, display it -->
+        <?php if (isset($erreur)): ?>
+            <div class="p-3 my-2 rounded-1 red light-4 text-red text-dark-4">
+                <?= $erreur ?>
+            </div>
+        <?php endif ?>
+        <!-- If there is an success, display it -->
+        <?php if (isset($success)): ?>
+            <div class="p-3 my-2 rounded-1 green light-4 text-green text-dark-4">
+                <?= $success ?>
+            </div>
+        <?php endif ?>
+        
+        <!-- If there is an warning, display it -->
+        <?php if (isset($warning)): ?>
+            <div class="p-3 my-2 rounded-1 orange light-4 text-orange text-dark-4">
+                <?= $warning ?>
+            </div>
+        <?php endif ?>
         <div class="utils">
             <h2>Produits</h2>
             <!-- Rechercher un produit -->
@@ -62,8 +101,9 @@ if($_SESSION['user']['roles'] == 'admin'){
                         <?php endif ?>
                         <td><?= $product['ventes'] ?></td>
                         <td id="lastTd">
-                            <a href="../pages/admin.php?url=editProduct&id=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Modifier l'utilisateur"><i class="bi bi-pencil"></i></a>
-                            <a href="../pages/admin.php?url=product&delProduct=<?= $product['idProduct'] ?>" class="btn rounded-1 red text-red light-4" title="Supprimer l'utilisateur"><i class="bi bi-trash"></i></a>
+                            <a href="../pages/admin.php?url=product&enableProduct=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Rendre ce produit disponible sur le site" <?php if($product['is_active'] == 1){ echo "disabled"; } ?> >Publier</a>
+                            <a href="../pages/admin.php?url=product&disableProduct=<?= $product['idProduct'] ?>" class="btn rounded-1 red text-red light-4" title="Rendre ce produit indisponible sur le site" <?php if($product['is_active'] == 0){ echo "disabled"; } ?>><i class="bi bi-eye-slash"></i></a>
+                            <a href="../pages/admin.php?url=editProduct&id=<?= $product['idProduct'] ?>" class="btn rounded-1 green text-white" title="Modifier le produit"><i class="bi bi-pencil"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>
