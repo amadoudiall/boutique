@@ -131,7 +131,6 @@ if($productCommande != null): ?>
                             <a href="../pages/admin.php?url=userCommandeDetille&c=<?= $product['Commande_id'] ?>&valider=<?= $product['idProductCommande'] ?>" class="btn btn-secondary text-white" <?php if($product['etat'] == 'Validé'){echo 'disabled';} ?>> Valider <i class="bi bi-check-lg"></i></a>
                             <a href="../pages/admin.phpurl=userCommandeDetille&c=<?= $product['Commande_id'] ?>&refuser=<?= $product['idProductCommande'] ?>" class="btn shadow-1 rounded-1 red" title="Refuser" <?php if($product['etat'] == 'Décliné'){echo 'disabled';} ?>><i class="bi bi-x"></i></a>
                             <a href="../pages/product.php?product=<?= $product['Product_id'] ?>" class="btn btn-primary"><i class="bi bi-eye"></i> Voir</a>
-
                         </td>
                     </tr>
                 <?php endforeach ?>

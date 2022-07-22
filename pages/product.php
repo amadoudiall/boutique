@@ -88,7 +88,7 @@ ob_start();
                 </div>
                 <form action="./panier.php?product=<?= $product['idProduct'] ?>" class="addToCart" method="post">
                     <!-- If product has color -->
-                    <?php if($product['color'] != 'auccun'): ?>
+                    <?php if($product['color'] != 'auccun' and $product['color'] != NULL): ?>
                         <div class="colors form_option mt-3">
                             <div class="color_name">
                                 <span>Couleurs</span>
@@ -105,7 +105,7 @@ ob_start();
                     <?php endif; ?>
                     
                     <!-- If product has shoe size -->
-                    <?php if($product['pointure'] != 'auccun'): ?>
+                    <?php if($product['pointure'] != 'auccun' and $product['pointure'] != null): ?>
                         <div class="pointures form_option mt-3">
                             <div class="pointure_name">
                                 <span>Pointure</span>
@@ -122,7 +122,7 @@ ob_start();
                     <?php endif; ?>
                     
                     <!-- If product has taille -->
-                    <?php if($product['size'] != 'auccun'): ?>
+                    <?php if($product['size'] != 'auccun' and $product['size'] != null): ?>
                         <div class="taille form_option mt-3">
                             <div class="taille_name">
                                 <span>Taille</span>
@@ -173,7 +173,7 @@ ob_start();
                 <div id="tab2" class="p-3">
                     <p>Ici vous pouvez trouver tous les détailles concernant ce produit comme les dimensions, les pointures et les couleurs disponibles pour ce produit.</p>
                     <!-- Color -->
-                    <?php if($product['color'] != 'auccun'): ?>
+                    <?php if($product['color'] != 'auccun' and $product['color'] != null): ?>
                         <p>
                             <strong>Couleur disponibles :</strong>
                             <?php $color = explode('|', $product['color']); foreach($color as $c): ?>
@@ -183,7 +183,7 @@ ob_start();
                     <?php endif; ?>
                     
                     <!-- Size -->
-                    <?php if($product['size'] != 'auccun'): ?>
+                    <?php if($product['size'] != 'auccun' and $product['size'] != null): ?>
                         <p>
                             <strong>Taille disponibles :</strong>
                             <?php $size = explode('|', $product['size']); foreach($size as $s): ?>
@@ -201,7 +201,7 @@ ob_start();
                     <?php endif; ?>
                     
                     <!-- Pointure -->
-                    <?php if($product['pointure'] != 'auccun'): ?>
+                    <?php if($product['pointure'] != 'auccun' and $product['size'] != null): ?>
                         <p>
                             <strong>Pointure disponible:</strong>
                             <?php explode('|', $product['pointure']); foreach($pointure as $p): ?>

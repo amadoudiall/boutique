@@ -4,13 +4,15 @@ class Bdd
 {
     public function connect()
     {
+        $username = 'root';
+        $password = '';
 
         try {
 
             $connect = new \PDO(
                 'mysql:host=localhost;dbname=ecommerce;charset=utf8',
-                'root',
-                ''
+                $username,
+                $password
             );
         } catch (\PDOException $exception) {
 
